@@ -1,4 +1,4 @@
-genesis-simple-share
-====================
+Genesis Simple Share
+==================
 
-Genesis Simple Share plugin
+A simple plugin for sharing posts to various social services via the Sharrre script.
