@@ -1,4 +1,9 @@
 <?php
+
+if( invalid_request() ){
+	die();
+}
+
   header('content-type: application/json');
   //Sharrre by Julien Hany
   $json = array('url'=>'','count'=>0);
@@ -78,3 +83,53 @@
     }
     return $content;
   }
+  
+/**
+* Validates the request by making sure the url and type values are set and are acceptable values
+*
+* @return boolean
+*/
+function invalid_request() {
+
+	if( empty( $_GET['url'] ) || empty( $_GET['type'] ) ) {
+		return true;
+	}
+	
+	elseif( ! strpos( $_GET['url'], sharrre_get_host() ) ) {
+		return true;
+	}
+	
+	elseif( ! in_array( $_GET['type'], array( 'googlePlus', 'stumbleupon' ) ) ) {
+		return true;
+	}
+	
+	return false;
+	
+}
+
+/**
+* Polls different methods for getting the current domain and returns the value
+*
+* @return string
+*/
+function sharrre_get_host() {
+
+    if ( $host = $_SERVER['HTTP_X_FORWARDED_HOST'] ){
+        $elements = explode(',', $host);
+
+        $host = trim(end($elements));
+    }
+    else{
+        if ( ! $host = $_SERVER['HTTP_HOST'] ){
+            if ( ! $host = $_SERVER['SERVER_NAME'] ){
+                $host = ! empty( $_SERVER['SERVER_ADDR'] ) ? $_SERVER['SERVER_ADDR'] : '';
+            }
+        }
+    }
+
+    // Remove port number from host
+    $host = preg_replace( '/:\d+$/', '', $host );
+
+    return trim( $host );
+    
+}
