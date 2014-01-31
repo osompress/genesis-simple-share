@@ -255,8 +255,6 @@ class Genesis_Simple_Share_Boxes extends Genesis_Admin_Boxes {
 		
 		<div class="wrap gss-clear">		
 			
-			<br />
-			
 			<table class="form-table">
 				<tbody>
 					
