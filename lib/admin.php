@@ -287,7 +287,7 @@ class Genesis_Simple_Share_Boxes extends Genesis_Admin_Boxes {
 	
 	function live_preview() {
 		?>
-		<tr valign="top">
+		<tr valign="top" class="share-preview-row">
 			<th scope="row">Live Preview</th>
 			<td>
 			<?php
