@@ -114,17 +114,22 @@ function invalid_request() {
 */
 function sharrre_get_host() {
 
-    if ( $host = $_SERVER['HTTP_X_FORWARDED_HOST'] ){
+	$host = '';
+
+    if( ! empty( $_SERVER['HTTP_X_FORWARDED_HOST'] ) ){
+    	$host = $_SERVER['HTTP_X_FORWARDED_HOST'];
         $elements = explode(',', $host);
 
         $host = trim(end($elements));
     }
-    else{
-        if ( ! $host = $_SERVER['HTTP_HOST'] ){
-            if ( ! $host = $_SERVER['SERVER_NAME'] ){
-                $host = ! empty( $_SERVER['SERVER_ADDR'] ) ? $_SERVER['SERVER_ADDR'] : '';
-            }
-        }
+    elseif( ! empty( $_SERVER['HTTP_HOST'] ) ){
+    	$host = $_SERVER['HTTP_HOST'];
+    }
+    elseif( ! empty( $_SERVER['SERVER_NAME'] ) ){
+    	$host = $_SERVER['SERVER_NAME'];
+    }
+    elseif( ! empty( $_SERVER['SERVER_ADDR'] ) ){
+    	$host = $_SERVER['SERVER_ADDR'];
     }
 
     // Remove port number from host
