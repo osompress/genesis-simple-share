@@ -78,6 +78,11 @@
 	width: 42px;
 }
 
+.share-small .no-count .share {
+	border-top-right-radius: 3px;
+	border-bottom-right-radius: 3px;
+	width: 65px;
+}
 
 /* Medium */
 .share-medium .share,
@@ -106,6 +111,11 @@
 .share-medium .pinterest:hover .share 		{ width: 50px; }
 .share-medium .googlePlus:hover .share 		{ width: 45px; }
 
+.share-medium .no-count .share {
+	border-top-right-radius: 3px;
+	border-bottom-right-radius: 3px;
+	width: 75px;
+}
 
 /* Tall */
 .share-tall .share {
@@ -133,6 +143,12 @@
 	width: 75px;
 }
 
+.share-tall .no-count .share {
+	border-top-left-radius: 3px;
+	border-top-right-radius: 3px;
+	border-bottom-right-radius: 3px;
+	width: 75px;
+}
 
 /* Icons */
 .share-small .share:before,
