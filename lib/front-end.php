@@ -84,8 +84,8 @@ class Gensis_Simple_Share_Front_End {
 		
 		//add other actions as needed to create output
 		
-		add_filter( 'the_content', array( $this, 'icon_output' ) );
-		add_filter( 'the_excerpt', array( $this, 'icon_output' ) );
+		add_filter( 'the_content', array( $this, 'icon_output' ), 15 );
+		add_filter( 'the_excerpt', array( $this, 'icon_output' ), 15 );
 		
 		if( genesis_get_option( 'content_archive_limit' ) && 'full' == genesis_get_option( 'content_archive' ) ){
 			add_action( 'genesis_post_content' , array( $this, 'before_entry_icons' ), 9  );
