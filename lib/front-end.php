@@ -271,7 +271,7 @@ class Gensis_Simple_Share_Front_End {
 	 */
 	function get_icon_output( $location, $icons = array() ){
 	
-		if( empty( $icons ) && ! genesis_get_option( 'general_' . get_post_type(), 'genesis_simple_share' ) )
+		if( empty( $icons ) || ( in_array( $location, array( 'before', 'after' ) ) && ! genesis_get_option( 'general_' . get_post_type(), 'genesis_simple_share' ) ) )
 			return;
 			
 		$icons = empty( $icons ) ? $this->icons : $icons;
