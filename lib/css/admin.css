@@ -26,7 +26,7 @@
 .genesis_page_genesis_simple_share_settings .meta-box-sortables .sortable-placeholder {
 	display: block;
 	float: left;
-	height: 180px;
+	height: 240px;
 	margin: 5px;
 	width: 260px;
 }
@@ -51,6 +51,16 @@
 	font-size: 13px;
 	margin-right: 10px;
 	-webkit-font-smoothing: antialiased;
+}
+
+.genesis_page_genesis_simple_share_settings .meta-box-sortables .postbox .inside {
+	margin: 0px;
+    padding: 20px;
+}
+
+.genesis_page_genesis_simple_share_settings .meta-box-sortables .postbox input[type=text] {
+	margin-top: 5px;
+	width: 100%;
 }
 
 .genesis_page_genesis_simple_share_settings #genesis_simple_share_twitter h3.hndle { background: #09b0ed; }
