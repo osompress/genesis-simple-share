@@ -13,6 +13,14 @@
 	transition: all 0.3s ease-in-out;
 }
 
+.share-before {
+    margin-bottom: 25px;
+}
+
+.share-after {
+    margin-top: 25px;
+}
+
 /* Buttons */
 .sharrre .share,
 .sharrre .count {
