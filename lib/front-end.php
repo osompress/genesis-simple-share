@@ -27,6 +27,7 @@ class Gensis_Simple_Share_Front_End {
 	var $icons;
 	var $appearance;
 	var $size;
+	var $archive;
 	
 	/**
 	 * Create front end output.
@@ -104,9 +105,10 @@ class Gensis_Simple_Share_Front_End {
 	 */
 	function load_scripts() {
 	
-		if( $this->is_archive() && ! genesis_get_option( 'general_show_archive', 'genesis_simple_share' ) )
+		if( $this->is_archive() && ! genesis_get_option( 'general_show_archive', 'genesis_simple_share' ) ) {
+			$this->archive = 'no-load';
 			return;
-			
+		}
 		
 		//use wp_enqueue_script() and wp_enqueue_style() to load scripts and styles
 		wp_enqueue_script( 'genesis-simple-share-plugin-js', 
@@ -149,7 +151,7 @@ class Gensis_Simple_Share_Front_End {
 	 */
 	function icon_output( $content ){
 	
-		if( $this->is_archive() && ! genesis_get_option( 'general_show_archive', 'genesis_simple_share' ) )
+		if( $this->archive === 'no-load' )
 			return $content;
 	
 		if( ! $this->icons )
@@ -188,7 +190,7 @@ class Gensis_Simple_Share_Front_End {
 	 */
 	function before_entry_icons(){
 	
-		if( ! $this->is_archive() || ! genesis_get_option( 'general_show_archive', 'genesis_simple_share' ) )
+		if( $this->archive === 'no-load' )
 			return;
 	
 		if( ! $this->icons )
@@ -217,7 +219,7 @@ class Gensis_Simple_Share_Front_End {
 	 */
 	function after_entry_icons(){
 	
-		if( ! $this->is_archive() || ! genesis_get_option( 'general_show_archive', 'genesis_simple_share' ) )
+		if( $this->archive === 'no-load' )
 			return;
 	
 		if( ! $this->icons )
