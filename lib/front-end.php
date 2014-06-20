@@ -83,17 +83,9 @@ class Gensis_Simple_Share_Front_End {
 		
 		add_action( 'wp_enqueue_scripts', array( $this, 'load_scripts' ) );
 		
-		//add other actions as needed to create output
 		
-		add_filter( 'the_content', array( $this, 'icon_output' ), 15 );
-		add_filter( 'the_excerpt', array( $this, 'icon_output' ), 15 );
-		
-		if( genesis_get_option( 'content_archive_limit' ) && 'full' == genesis_get_option( 'content_archive' ) ){
-			add_action( 'genesis_post_content' , array( $this, 'before_entry_icons' ), 9  );
-			add_action( 'genesis_entry_content', array( $this, 'before_entry_icons' ), 9  );
-			add_action( 'genesis_post_content' , array( $this, 'after_entry_icons'  ), 11 );
-			add_action( 'genesis_entry_content', array( $this, 'after_entry_icons'  ), 11 );
-		}
+		add_action( 'genesis_loop', array( $this, 'start_icon_actions' ), 5  );
+		add_action( 'genesis_loop', array( $this, 'end_icon_actions'   ), 15 );
 		
 	}
 	
@@ -136,6 +128,44 @@ class Gensis_Simple_Share_Front_End {
 							'0.1.0'
 						);
 		
+	}
+	
+	/**
+	 * Load the icon actions/filters only within the genesis_loop hook
+	 *
+	 * @since 0.2.0
+	 *
+	 */
+	function start_icon_actions(){
+	
+		add_filter( 'the_content', array( $this, 'icon_output' ), 15 );
+		add_filter( 'the_excerpt', array( $this, 'icon_output' ), 15 );
+		
+		if( genesis_get_option( 'content_archive_limit' ) && 'full' == genesis_get_option( 'content_archive' ) ){
+			add_action( 'genesis_post_content' , array( $this, 'before_entry_icons' ), 9  );
+			add_action( 'genesis_entry_content', array( $this, 'before_entry_icons' ), 9  );
+			add_action( 'genesis_post_content' , array( $this, 'after_entry_icons'  ), 11 );
+			add_action( 'genesis_entry_content', array( $this, 'after_entry_icons'  ), 11 );
+		}
+		
+	}
+	
+	/**
+	 * Remove the icon actions/filters after the loop has run
+	 *
+	 * @since 0.2.0
+	 *
+	 */
+	function end_icon_actions(){
+	
+		remove_filter( 'the_content', array( $this, 'icon_output' ), 15 );
+		remove_filter( 'the_excerpt', array( $this, 'icon_output' ), 15 );
+	
+		remove_action( 'genesis_post_content' , array( $this, 'before_entry_icons' ), 9  );
+		remove_action( 'genesis_entry_content', array( $this, 'before_entry_icons' ), 9  );
+		remove_action( 'genesis_post_content' , array( $this, 'after_entry_icons'  ), 11 );
+		remove_action( 'genesis_entry_content', array( $this, 'after_entry_icons'  ), 11 );
+	
 	}
 	
 	/**
