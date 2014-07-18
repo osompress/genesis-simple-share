@@ -34,6 +34,7 @@ function genesis_simple_share_init() {
 		
 	if( is_admin() && class_exists( 'Genesis_Admin_Boxes' ) ) {
 		require_once( GENESIS_SIMPLE_SHARE_LIB . 'admin.php' );
+		require_once( GENESIS_SIMPLE_SHARE_LIB . 'post-meta.php' );
 	}
 	else
 		require_once( GENESIS_SIMPLE_SHARE_LIB . 'front-end.php' );
