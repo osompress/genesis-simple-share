@@ -303,6 +303,10 @@ class Gensis_Simple_Share_Front_End {
 	 */
 	function get_icon_output( $location, $icons = array() ){
 	
+		if( is_feed() ) {
+			return;
+		}
+	
 		if( empty( $icons ) || ( in_array( $location, array( 'before', 'after' ) ) && ( ! genesis_get_option( 'general_' . get_post_type(), 'genesis_simple_share' ) || get_post_meta( get_the_ID(), '_disable_gss', true ) ) ) )
 			return;
 			
