@@ -418,10 +418,11 @@ class Gensis_Simple_Share_Front_End {
 				
 			}
 		
-			$buttons[] = sprintf( '<div class="%s" id="%s" data-url="%s" data-text="%s" data-title="%s"></div>',
+			$buttons[] = sprintf( '<div class="%s" id="%s" data-url="%s" data-urlalt="%s" data-text="%s" data-title="%s"></div>',
 				$icon,
 				$div_id,
 				get_permalink( $id ),
+				wp_get_shortlink( $id ),
 				$description,
 				$data_title
 			);
@@ -467,12 +468,13 @@ class Gensis_Simple_Share_Front_End {
 			
 			$div_id = 'share-'. $location .'-' . $id;
 			
-			$div = sprintf( '<div class="share-%s share-%s share-%s" id="%s" data-url="%s" data-text="%s" data-title="share"></div>',
+			$div = sprintf( '<div class="share-%s share-%s share-%s" id="%s" data-url="%s" data-urlalt="%s" data-text="%s" data-title="share"></div>',
 				$location,
 				$this->appearance,
 				$this->size,
 				$div_id,
 				get_permalink( $id ),
+				wp_get_shortlink( $id ),
 				the_title_attribute( array( 'echo' => false ) )
 			);
 			
