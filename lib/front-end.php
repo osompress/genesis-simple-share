@@ -397,16 +397,6 @@ class Gensis_Simple_Share_Front_End {
 					$data_title = 'Tweet';
 					break;
 					
-				case 'googlePlus' :
-				
-					$data_title = '+1';
-					break;
-					
-				case 'facebook' :
-				
-					$data_title = 'Like';
-					break;
-					
 				case 'pinterest' :
 				
 					$data_title = 'Pin';
