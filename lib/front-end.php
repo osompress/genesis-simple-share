@@ -81,7 +81,7 @@ class Gensis_Simple_Share_Front_End {
 		$this->appearance = genesis_get_option( 'general_appearance', 'genesis_simple_share' );
 		$this->size       = genesis_get_option( 'general_size'      , 'genesis_simple_share' );
 		
-		add_action( 'wp_enqueue_scripts', array( $this, 'load_scripts' ) );
+		add_action( 'wp_enqueue_scripts', array( $this, 'load_scripts' ), 5 );
 		
 		
 		add_action( 'genesis_loop', array( $this, 'start_icon_actions' ), 5  );
@@ -97,38 +97,46 @@ class Gensis_Simple_Share_Front_End {
 	 */
 	function load_scripts() {
 	
-		if( $this->is_archive() && ! genesis_get_option( 'general_show_archive', 'genesis_simple_share' ) ) {
-			$this->archive = 'no-load';
-			return;
-		}
-		
-		$url = preg_replace( '/^https?:/', '', plugins_url( '', __FILE__ ) );
-		
+		$url = preg_replace( '/^https?:/', '', plugins_url( '/', __FILE__ ) );
+	
 		//use wp_enqueue_script() and wp_enqueue_style() to load scripts and styles
-		wp_enqueue_script( 'genesis-simple-share-plugin-js', 
+		wp_register_script( 'genesis-simple-share-plugin-js', 
 							$url . 'sharrre/jquery.sharrre.min.js', 
 							array( 'jquery' ), 
 							'0.1.0'
 						);
 						
-		wp_enqueue_style( 	'genesis-simple-share-plugin-css', 
+		wp_register_style( 	'genesis-simple-share-plugin-css', 
 							$url . 'css/share.css', 
 							array(), 
 							'0.1.0' 
 						);
 						
-		wp_enqueue_style( 	'genesis-simple-share-genericons-css', 
+		wp_register_style( 	'genesis-simple-share-genericons-css', 
 							$url . 'css/genericons.css', 
 							array(), 
 							'0.1.0' 
 						);
 						
-		if( $this->is_archive() )
-			wp_enqueue_script( 'genesis-simple-share-waypoint-js', 
+		wp_register_script( 'genesis-simple-share-waypoint-js', 
 							$url . 'jquery-waypoints/waypoints.min.js', 
 							array( 'jquery' ), 
 							'0.1.0'
 						);
+	
+		if( $this->is_archive() && ! genesis_get_option( 'general_show_archive', 'genesis_simple_share' ) ) {
+			$this->archive = 'no-load';
+			return;
+		}
+		
+		//use wp_enqueue_script() and wp_enqueue_style() to load scripts and styles
+		wp_enqueue_script( 'genesis-simple-share-plugin-js'      );	
+		wp_enqueue_style(  'genesis-simple-share-plugin-css'     );	
+		wp_enqueue_style(  'genesis-simple-share-genericons-css' );
+						
+		if( $this->is_archive() ) {
+			wp_enqueue_script( 'genesis-simple-share-waypoint-js' );
+		}
 		
 	}
 	
