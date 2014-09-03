@@ -102,28 +102,30 @@ class Gensis_Simple_Share_Front_End {
 			return;
 		}
 		
+		$url = preg_replace( '/^https?:/', '', plugins_url( '', __FILE__ ) );
+		
 		//use wp_enqueue_script() and wp_enqueue_style() to load scripts and styles
 		wp_enqueue_script( 'genesis-simple-share-plugin-js', 
-							plugins_url( 'sharrre/jquery.sharrre.min.js', __FILE__ ), 
+							$url . 'sharrre/jquery.sharrre.min.js', 
 							array( 'jquery' ), 
 							'0.1.0'
 						);
 						
 		wp_enqueue_style( 	'genesis-simple-share-plugin-css', 
-							plugins_url( 'css/share.css', __FILE__ ), 
+							$url . 'css/share.css', 
 							array(), 
 							'0.1.0' 
 						);
 						
 		wp_enqueue_style( 	'genesis-simple-share-genericons-css', 
-							plugins_url( 'css/genericons.css', __FILE__ ), 
+							$url . 'css/genericons.css', 
 							array(), 
 							'0.1.0' 
 						);
 						
 		if( $this->is_archive() )
 			wp_enqueue_script( 'genesis-simple-share-waypoint-js', 
-							plugins_url( 'jquery-waypoints/waypoints.min.js', __FILE__ ), 
+							$url . 'jquery-waypoints/waypoints.min.js', 
 							array( 'jquery' ), 
 							'0.1.0'
 						);
