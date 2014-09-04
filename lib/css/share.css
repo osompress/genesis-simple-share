@@ -1,6 +1,7 @@
 .sharrre {
 	display: inline-block;
 	font-family: Helvetica, Arial, sans-serif;
+	font-style: normal;
 	font-weight: normal;
 	margin-right: 5px;
 	overflow: hidden;
@@ -42,6 +43,9 @@
 .sharrre .share {
 	color: #fff;
 	float: left;
+	font-family: Helvetica, Arial, sans-serif;
+	font-style: normal;
+	font-weight: normal;
 	text-decoration: none;
 }
 
@@ -53,6 +57,8 @@
 
 .sharrre .count {
 	background-color: #fff;
+	font-family: Helvetica, Arial, sans-serif;
+	font-style: normal;
 	font-weight: bold;
 	position: relative;
 	text-align: center;
@@ -75,9 +81,9 @@
 }
 
 .share-small .sharrre:hover .share 		{ width: 60px; }
-.share-small .facebook:hover .share 	{ width: 50px; }
+.share-small .facebook:hover .share 	{ width: 60px; }
 .share-small .pinterest:hover .share 	{ width: 45px; }
-.share-small .googlePlus:hover .share 	{ width: 40px; }
+.share-small .googlePlus:hover .share 	{ width: 60px; }
 
 .share-small .count {
 	border-top-right-radius: 3px;
@@ -115,9 +121,9 @@
 }
 
 .share-medium .sharrre:hover .share 		{ width: 65px; }
-.share-medium .facebook:hover .share 		{ width: 55px; }
+.share-medium .facebook:hover .share 		{ width: 65px; }
 .share-medium .pinterest:hover .share 		{ width: 50px; }
-.share-medium .googlePlus:hover .share 		{ width: 45px; }
+.share-medium .googlePlus:hover .share 		{ width: 65px; }
 
 .share-medium .no-count .share {
 	border-top-right-radius: 3px;
@@ -223,14 +229,6 @@
 .share-medium .stumbleupon .share:before {
 	font-size: 16px;
 	top: 5px;
-}
-
-.share-tall .facebook .share:before {
-	left: 10px;
-}
-
-.share-tall .googlePlus .share:before {
-	left: 13px;
 }
 
 .share-tall .pinterest .share:before {
