@@ -316,6 +316,10 @@ class Gensis_Simple_Share_Front_End {
 		if( is_feed() ) {
 			return;
 		}
+		
+		if( in_array( $location, $this->locations ){
+			return '<!-- Genesis Simple Share error: This location has already been used. -->';
+		}
 	
 		if( empty( $icons ) || 
 			( 
@@ -448,10 +452,11 @@ class Gensis_Simple_Share_Front_End {
 				});
 		</script>";
 		
+		$this->locations[] = $location; 
+		
 		return $div . $script;
 			
-	}
-	
+	}	
 	/**
 	 * Build output for the icons based on position
 	 *
