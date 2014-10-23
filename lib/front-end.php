@@ -317,7 +317,7 @@ class Gensis_Simple_Share_Front_End {
 			return;
 		}
 		
-		if( in_array( $location, $this->locations ){
+		if( in_array( $location, $this->locations ) ){
 			return '<!-- Genesis Simple Share error: This location has already been used. -->';
 		}
 	
