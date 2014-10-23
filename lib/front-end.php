@@ -28,7 +28,7 @@ class Gensis_Simple_Share_Front_End {
 	var $appearance;
 	var $size;
 	var $archive;
-	var $locations;
+	var $locations = array();
 	
 	/**
 	 * Create front end output.
