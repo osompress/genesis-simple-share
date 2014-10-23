@@ -510,4 +510,6 @@ class Genesis_Simple_Share_Boxes extends Genesis_Admin_Boxes {
 		
 }
 
-new Genesis_Simple_Share_Boxes;
+global $genesis_simple_share;
+
+$genesis_simple_share = new Genesis_Simple_Share_Boxes;

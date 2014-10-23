@@ -81,10 +81,73 @@ class Gensis_Simple_Share_Front_End {
 		$this->appearance = genesis_get_option( 'general_appearance', 'genesis_simple_share' );
 		$this->size       = genesis_get_option( 'general_size'      , 'genesis_simple_share' );
 		
-		add_action( 'wp_enqueue_scripts', array( $this, 'load_scripts' ) );
+		add_action( 'wp_enqueue_scripts', array( $this, 'load_scripts' ), 5 );
 		
-		//add other actions as needed to create output
 		
+		add_action( 'genesis_loop', array( $this, 'start_icon_actions' ), 5  );
+		add_action( 'genesis_loop', array( $this, 'end_icon_actions'   ), 15 );
+		
+	}
+	
+	/**
+	 * Loads required scripts.
+	 *
+	 * @since 0.1.0
+	 *
+	 */
+	function load_scripts() {
+	
+		$url = preg_replace( '/^https?:/', '', plugins_url( '/', __FILE__ ) );
+	
+		//use wp_enqueue_script() and wp_enqueue_style() to load scripts and styles
+		wp_register_script( 'genesis-simple-share-plugin-js', 
+							$url . 'sharrre/jquery.sharrre.min.js', 
+							array( 'jquery' ), 
+							'0.1.0'
+						);
+						
+		wp_register_style( 	'genesis-simple-share-plugin-css', 
+							$url . 'css/share.css', 
+							array(), 
+							'0.1.0' 
+						);
+						
+		wp_register_style( 	'genesis-simple-share-genericons-css', 
+							$url . 'css/genericons.css', 
+							array(), 
+							'0.1.0' 
+						);
+						
+		wp_register_script( 'genesis-simple-share-waypoint-js', 
+							$url . 'jquery-waypoints/waypoints.min.js', 
+							array( 'jquery' ), 
+							'0.1.0'
+						);
+	
+		if( $this->is_archive() && ! genesis_get_option( 'general_show_archive', 'genesis_simple_share' ) ) {
+			$this->archive = 'no-load';
+			return;
+		}
+		
+		//use wp_enqueue_script() and wp_enqueue_style() to load scripts and styles
+		wp_enqueue_script( 'genesis-simple-share-plugin-js'      );	
+		wp_enqueue_style(  'genesis-simple-share-plugin-css'     );	
+		wp_enqueue_style(  'genesis-simple-share-genericons-css' );
+						
+		if( $this->is_archive() ) {
+			wp_enqueue_script( 'genesis-simple-share-waypoint-js' );
+		}
+		
+	}
+	
+	/**
+	 * Load the icon actions/filters only within the genesis_loop hook
+	 *
+	 * @since 0.2.0
+	 *
+	 */
+	function start_icon_actions(){
+	
 		add_filter( 'the_content', array( $this, 'icon_output' ), 15 );
 		add_filter( 'the_excerpt', array( $this, 'icon_output' ), 15 );
 		
@@ -98,44 +161,21 @@ class Gensis_Simple_Share_Front_End {
 	}
 	
 	/**
-	 * Loads required scripts.
+	 * Remove the icon actions/filters after the loop has run
 	 *
-	 * @since 0.1.0
+	 * @since 0.2.0
 	 *
 	 */
-	function load_scripts() {
+	function end_icon_actions(){
 	
-		if( $this->is_archive() && ! genesis_get_option( 'general_show_archive', 'genesis_simple_share' ) ) {
-			$this->archive = 'no-load';
-			return;
-		}
-		
-		//use wp_enqueue_script() and wp_enqueue_style() to load scripts and styles
-		wp_enqueue_script( 'genesis-simple-share-plugin-js', 
-							plugins_url( 'sharrre/jquery.sharrre.min.js', __FILE__ ), 
-							array( 'jquery' ), 
-							'0.1.0'
-						);
-						
-		wp_enqueue_style( 	'genesis-simple-share-plugin-css', 
-							plugins_url( 'css/share.css', __FILE__ ), 
-							array(), 
-							'0.1.0' 
-						);
-						
-		wp_enqueue_style( 	'genesis-simple-share-genericons-css', 
-							plugins_url( 'css/genericons.css', __FILE__ ), 
-							array(), 
-							'0.1.0' 
-						);
-						
-		if( $this->is_archive() )
-			wp_enqueue_script( 'genesis-simple-share-waypoint-js', 
-							plugins_url( 'jquery-waypoints/waypoints.min.js', __FILE__ ), 
-							array( 'jquery' ), 
-							'0.1.0'
-						);
-		
+		remove_filter( 'the_content', array( $this, 'icon_output' ), 15 );
+		remove_filter( 'the_excerpt', array( $this, 'icon_output' ), 15 );
+	
+		remove_action( 'genesis_post_content' , array( $this, 'before_entry_icons' ), 9  );
+		remove_action( 'genesis_entry_content', array( $this, 'before_entry_icons' ), 9  );
+		remove_action( 'genesis_post_content' , array( $this, 'after_entry_icons'  ), 11 );
+		remove_action( 'genesis_entry_content', array( $this, 'after_entry_icons'  ), 11 );
+	
 	}
 	
 	/**
@@ -273,8 +313,21 @@ class Gensis_Simple_Share_Front_End {
 	 */
 	function get_icon_output( $location, $icons = array() ){
 	
-		if( empty( $icons ) || ( in_array( $location, array( 'before', 'after' ) ) && ! genesis_get_option( 'general_' . get_post_type(), 'genesis_simple_share' ) ) )
+		if( is_feed() ) {
 			return;
+		}
+	
+		if( empty( $icons ) || 
+			( 
+				in_array( $location, array( 'before', 'after' ) ) && 
+				( 
+					! genesis_get_option( 'general_' . get_post_type(), 'genesis_simple_share' ) || 
+					get_post_meta( get_the_ID(), '_disable_gss', true ) 
+				) 
+			) 
+		) {
+			return;
+		}
 			
 		$icons = empty( $icons ) ? $this->icons : $icons;
 		
@@ -354,16 +407,6 @@ class Gensis_Simple_Share_Front_End {
 					$data_title = 'Tweet';
 					break;
 					
-				case 'googlePlus' :
-				
-					$data_title = '+1';
-					break;
-					
-				case 'facebook' :
-				
-					$data_title = 'Like';
-					break;
-					
 				case 'pinterest' :
 				
 					$data_title = 'Pin';
@@ -375,10 +418,11 @@ class Gensis_Simple_Share_Front_End {
 				
 			}
 		
-			$buttons[] = sprintf( '<div class="%s" id="%s" data-url="%s" data-text="%s" data-title="%s"></div>',
+			$buttons[] = sprintf( '<div class="%s" id="%s" data-url="%s" data-urlalt="%s" data-text="%s" data-title="%s"></div>',
 				$icon,
 				$div_id,
 				get_permalink( $id ),
+				wp_get_shortlink( $id ),
 				$description,
 				$data_title
 			);
@@ -424,12 +468,13 @@ class Gensis_Simple_Share_Front_End {
 			
 			$div_id = 'share-'. $location .'-' . $id;
 			
-			$div = sprintf( '<div class="share-%s share-%s share-%s" id="%s" data-url="%s" data-text="%s" data-title="share"></div>',
+			$div = sprintf( '<div class="share-%s share-%s share-%s" id="%s" data-url="%s" data-urlalt="%s" data-text="%s" data-title="share"></div>',
 				$location,
 				$this->appearance,
 				$this->size,
 				$div_id,
 				get_permalink( $id ),
+				wp_get_shortlink( $id ),
 				the_title_attribute( array( 'echo' => false ) )
 			);
 			
