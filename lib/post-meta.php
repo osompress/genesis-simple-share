@@ -53,7 +53,7 @@ class Genesis_Simple_Share_Entry_Meta {
 		}
 		
 		// if our current user can't edit this post, bail
-		if( !current_user_can( 'edit_post' ) ) {
+		if( !current_user_can( 'edit_posts' ) ) {
 			return;
 		}
 		
