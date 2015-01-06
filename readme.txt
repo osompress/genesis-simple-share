@@ -1,6 +1,6 @@
 === Genesis Simple Share ===
 Contributors: nathanrice, studiopress, wpmuguru, nick_thegeek
-Tags: genesis, share, share buttons, facebook, twitter, pinterest, stumbleupon, linkdin, social
+Tags: genesis, share, share buttons, facebook, twitter, pinterest, stumbleupon, linkedin, social
 Requires at least: 3.7
 Tested up to: 4.1
 Stable tag: 1.0
