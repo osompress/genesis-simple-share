@@ -318,7 +318,7 @@ class Gensis_Simple_Share_Front_End {
 			return;
 		}
 		
-		if( in_array( $location, $this->locations ) ){
+		if( in_array( $location . '-' . get_the_ID(), $this->locations ) ){
 			return '<!-- Genesis Simple Share error: This location has already been used. -->';
 		}
 	
@@ -453,7 +453,7 @@ class Gensis_Simple_Share_Front_End {
 				});
 		</script>";
 		
-		$this->locations[] = $location; 
+		$this->locations[] = $location . '-' . get_the_ID(); 
 		
 		return $div . $script;
 			
