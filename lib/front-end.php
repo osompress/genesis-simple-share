@@ -152,7 +152,7 @@ class Gensis_Simple_Share_Front_End {
 		add_filter( 'the_content', array( $this, 'icon_output' ), 15 );
 		add_filter( 'the_excerpt', array( $this, 'icon_output' ), 15 );
 		
-		if( genesis_get_option( 'content_archive_limit' ) && 'full' == genesis_get_option( 'content_archive' ) && is_archive() ){
+		if( genesis_get_option( 'content_archive_limit' ) && 'full' == genesis_get_option( 'content_archive' ) && $this->is_archive() ){
 			add_action( 'genesis_post_content' , array( $this, 'before_entry_icons' ), 9  );
 			add_action( 'genesis_entry_content', array( $this, 'before_entry_icons' ), 9  );
 			add_action( 'genesis_post_content' , array( $this, 'after_entry_icons'  ), 11 );
