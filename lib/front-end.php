@@ -28,6 +28,7 @@ class Gensis_Simple_Share_Front_End {
 	var $appearance;
 	var $size;
 	var $archive;
+	var $location_count;
 	var $locations = array();
 	
 	/**
@@ -318,8 +319,8 @@ class Gensis_Simple_Share_Front_End {
 			return;
 		}
 		
-		if( in_array( $location . '-' . get_the_ID(), $this->locations ) ){
-			return '<!-- Genesis Simple Share error: This location has already been used. -->';
+		if( in_array( $location . $this->location_count . '-' . get_the_ID(), $this->locations ) ){
+			$this->location_count = $this->location_count ? $this->location_count++ : 2;
 		}
 	
 		if( empty( $icons ) || 
@@ -348,7 +349,7 @@ class Gensis_Simple_Share_Front_End {
 			
 			$shares[] = $icon .': true';
 			
-			$div_id =  strtolower( $icon .'-'. $location .'-'. $id );
+			$div_id =  strtolower( $icon .'-'. $location . $this->location_count .'-'. $id );
 			
 			$image = ( $image = genesis_get_image( array( 'format' => 'url', 'size' => 'full' ) ) ) ? $image : $this->get_first_image();
 			
@@ -436,7 +437,7 @@ class Gensis_Simple_Share_Front_End {
 		
 		$divs = implode( '', $buttons );
 		
-		$div_id = 'share-'. $location .'-' . $id;
+		$div_id = 'share-'. $location . $this->location_count .'-' . $id;
 		
 		$div = sprintf( '<div class="share-%s share-%s share-%s" id="%s">%s</div>',
 				$location,
@@ -453,7 +454,7 @@ class Gensis_Simple_Share_Front_End {
 				});
 		</script>";
 		
-		$this->locations[] = $location . '-' . get_the_ID(); 
+		$this->locations[] = $location . $this->location_count . '-' . get_the_ID(); 
 		
 		return $div . $script;
 			

@@ -3,7 +3,7 @@
   Plugin Name: Genesis Simple Share
   Plugin URI: 
   Description: A simple sharing plugin using the Share script.
-  Version: 1.0.1
+  Version: 1.0.2
   Author: copyblogger
   Author URI: http://www.copyblogger.com
   Text Domain: genesis-simple-share
