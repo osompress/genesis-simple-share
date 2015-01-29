@@ -28,6 +28,7 @@ class Gensis_Simple_Share_Front_End {
 	var $appearance;
 	var $size;
 	var $archive;
+	var $locations = array();
 	
 	/**
 	 * Create front end output.
@@ -151,7 +152,7 @@ class Gensis_Simple_Share_Front_End {
 		add_filter( 'the_content', array( $this, 'icon_output' ), 15 );
 		add_filter( 'the_excerpt', array( $this, 'icon_output' ), 15 );
 		
-		if( genesis_get_option( 'content_archive_limit' ) && 'full' == genesis_get_option( 'content_archive' ) ){
+		if( genesis_get_option( 'content_archive_limit' ) && 'full' == genesis_get_option( 'content_archive' ) && $this->is_archive() ){
 			add_action( 'genesis_post_content' , array( $this, 'before_entry_icons' ), 9  );
 			add_action( 'genesis_entry_content', array( $this, 'before_entry_icons' ), 9  );
 			add_action( 'genesis_post_content' , array( $this, 'after_entry_icons'  ), 11 );
@@ -316,6 +317,12 @@ class Gensis_Simple_Share_Front_End {
 		if( is_feed() ) {
 			return;
 		}
+		
+		$filter = 'the_excerpt' == current_filter() ? 'excerpt' : '';
+		
+		if( in_array( $location . $filter . '-' . get_the_ID(), $this->locations ) ){
+			return '<!-- Genesis Simple Share error: This location has already been used. -->';
+		}
 	
 		if( empty( $icons ) || 
 			( 
@@ -431,7 +438,7 @@ class Gensis_Simple_Share_Front_End {
 		
 		$divs = implode( '', $buttons );
 		
-		$div_id = 'share-'. $location .'-' . $id;
+		$div_id = 'share-'. $location . '-' . $id;
 		
 		$div = sprintf( '<div class="share-%s share-%s share-%s" id="%s">%s</div>',
 				$location,
@@ -448,10 +455,11 @@ class Gensis_Simple_Share_Front_End {
 				});
 		</script>";
 		
+		$this->locations[] = $location . $filter . '-' . get_the_ID();
+		
 		return $div . $script;
 			
-	}
-	
+	}	
 	/**
 	 * Build output for the icons based on position
 	 *
