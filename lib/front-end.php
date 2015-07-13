@@ -306,13 +306,15 @@ class Gensis_Simple_Share_Front_End {
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param   string $location before or after location
-	 * @param   array  $icons    array of icons to use when building output
+	 * @param   string  $location   before or after location
+	 * @param   array   $icons      array of icons to use when building output
+	 * @param   boolean $force_show forces the output even if it is duplicate ID.
+	 * @param   string  $url        Alternate URL to be used instead of post permalink. This value will be shared and also be the URL checked for social shares.
 	 *
 	 * @returns string           HTML and JS required to build the share icons.
 	 *
 	 */
-	function get_icon_output( $location, $icons = array(), $force_show = false ){
+	function get_icon_output( $location, $icons = array(), $force_show = false, $url ){
 
 		if( is_feed() ) {
 			return;
@@ -342,6 +344,8 @@ class Gensis_Simple_Share_Front_End {
 			return;
 
 		$id = get_the_ID();
+		
+		$url = ( empty( $url ) && $opt = genesis_get_custom_field( '_gss_alternate_url' ) ) ? esc_url( $opt ) : $url;
 
 		$scripts = '';
 		$buttons = array();
@@ -428,7 +432,7 @@ class Gensis_Simple_Share_Front_End {
 			$buttons[] = sprintf( '<div class="%s" id="%s" data-url="%s" data-urlalt="%s" data-text="%s" data-title="%s"></div>',
 				$icon,
 				$div_id,
-				get_permalink( $id ),
+				$url ? $url : get_permalink( $id ),
 				wp_get_shortlink( $id ),
 				$description,
 				$data_title
@@ -584,16 +588,18 @@ genesis_simple_share();
  *
  * @since 0.1.0
  *
- * @param   string $location before or after location
- * @param   array  $icons    array of icons to use when building output
+ * @param   string  $location   before or after location
+ * @param   array   $icons      array of icons to use when building output
+ * @param   boolean $force_show forces the output even if it is duplicate ID.
+ * @param   string  $url        Alternate URL to be used instead of post permalink. This value will be shared and also be the URL checked for social shares.
  *
  * @returns string           HTML and JS required to build the share icons.
  *
  */
-function genesis_share_get_icon_output( $position, $icons = array(), $force_show = false ) {
+function genesis_share_get_icon_output( $position, $icons = array(), $force_show = false, $url = '' ) {
 	global $Genesis_Simple_Share;
 
-	return $Genesis_Simple_Share->get_icon_output( $position, $icons, $force_show );
+	return $Genesis_Simple_Share->get_icon_output( $position, $icons, $force_show, $url );
 
 }
 
@@ -603,14 +609,16 @@ function genesis_share_get_icon_output( $position, $icons = array(), $force_show
  *
  * @since 0.1.0
  *
- * @param   string $location before or after location
- * @param   array  $icons    array of icons to use when building output
+ * @param   string  $location   before or after location
+ * @param   array   $icons      array of icons to use when building output
+ * @param   boolean $force_show forces the output even if it is duplicate ID.
+ * @param   string  $url        Alternate URL to be used instead of post permalink. This value will be shared and also be the URL checked for social shares.
  *
- * @returns string           HTML and JS required to build the share icons.
+ * @returns null
  *
  */
-function genesis_share_icon_output( $position, $icons = array(), $force_show = false ) {
+function genesis_share_icon_output( $position, $icons = array(), $force_show = false, $url = '' ) {
 
-	echo genesis_share_get_icon_output( $position, $icons, $force_show );
+	echo genesis_share_get_icon_output( $position, $icons, $force_show, $url );
 
 }
