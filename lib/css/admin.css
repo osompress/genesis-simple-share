@@ -41,6 +41,7 @@
 
 .genesis_page_genesis_simple_share_settings .meta-box-sortables .postbox h3.hndle {
 	color: #fff;
+	display: block !important;
 	text-shadow: none;
 }
 
