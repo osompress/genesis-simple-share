@@ -84,6 +84,7 @@
 .share-small .facebook:hover .share 	{ width: 60px; }
 .share-small .pinterest:hover .share 	{ width: 45px; }
 .share-small .googlePlus:hover .share 	{ width: 60px; }
+.share-small .twitter:hover .share 		{ width: 65px; }
 
 .share-small .count {
 	border-top-right-radius: 3px;
@@ -124,6 +125,7 @@
 .share-medium .facebook:hover .share 		{ width: 65px; }
 .share-medium .pinterest:hover .share 		{ width: 50px; }
 .share-medium .googlePlus:hover .share 		{ width: 65px; }
+.share-medium .twitter:hover .share 		{ width: 75px; }
 
 .share-medium .no-count .share {
 	border-top-right-radius: 3px;
@@ -145,6 +147,7 @@
 
 .share-tall .googlePlus .share 	{ padding-left: 16px; }
 .share-tall .facebook .share 		{ padding-left: 18px; }
+.share-tall .twitter .share { padding-left: 0; }
 
 .share-tall .count {
 	border-top-left-radius: 3px;
@@ -158,9 +161,6 @@
 }
 
 .share-tall .no-count .share {
-	border-top-left-radius: 3px;
-	border-top-right-radius: 3px;
-	border-bottom-right-radius: 3px;
 	width: 75px;
 }
 
@@ -245,6 +245,41 @@
 	font-size: 16px;
 }
 
+.share-tall .twitter .share:before { display: none; }
+
+.share-tall .twitter .box.no-count {
+	height: 80px;
+	text-align: center;
+}
+
+.share-tall .twitter .box.no-count:before 	{
+	border: 1px solid #09b0ed;
+	border-bottom: none;
+	border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+	content: '\f202';
+	color: #09b0ed;
+	display: block;
+	height: 41px;
+	font-family: 'Genericons';
+	font-size: 20px;
+	padding-top: 13px;
+	position: relative;
+	-webkit-font-smoothing: antialiased;
+
+	-webkit-transition: all 0.3s ease-in-out;
+	-moz-transition: all 0.3s ease-in-out;
+	-ms-transition: all 0.3s ease-in-out;
+	-o-transition: all 0.3s ease-in-out;
+	transition: all 0.3s ease-in-out;
+}
+
+.share-tall .twitter:hover .box.no-count:before {
+	background: #09b0ed;
+	color: #fff;
+	cursor: pointer;
+}
+
 
 /* Appearance - filled */
 .share-filled .twitter .share 			{ background: #09b0ed; }
@@ -318,6 +353,9 @@
 
 .share-outlined.share-small .share,
 .share-outlined.share-medium .share { border-right: none !important; }
+
+.share-outlined.share-small .twitter .share,
+.share-outlined.share-medium .twitter .share { border-right: 1px solid #09b0ed !important; }
 
 .share-outlined.share-tall .share 	{ border-top: none !important; }
 
