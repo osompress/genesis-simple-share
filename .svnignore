@@ -1,4 +1,5 @@
 .git
 .gitignore
 .svnignore
+node_modules
 assets
