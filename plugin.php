@@ -1,19 +1,22 @@
 <?php
 /*
-  Plugin Name: Genesis Simple Share
-  Plugin URI: 
-  Description: A simple sharing plugin using the Share script.
-  Version: 1.0.4
-  Author: copyblogger
-  Author URI: http://www.copyblogger.com
-  Text Domain: genesis-simple-share
-  Domain Path /languages/
+Plugin Name: Genesis Simple Share
+Plugin URI: 
 
+Description: A simple sharing plugin using the Share script.
+
+Version: 1.0.4
+
+Author: copyblogger
+Author URI: http://www.copyblogger.com
+
+Text Domain: genesis-simple-share
+Domain Path /languages/
 */
 
-/* Prevent direct access to the plugin */
+//* Prevent direct access to the plugin
 if ( !defined( 'ABSPATH' ) ) {
-    die( "Sorry, you are not allowed to access this page directly." );
+    die( 'Sorry, you are not allowed to access this page directly.', 'genesis-simple-share' );
 }
 
 define( 'GENESIS_SIMPLE_SHARE_LIB', dirname( __FILE__ ) . '/lib/' );
@@ -29,10 +32,10 @@ add_action( 'genesis_init', 'genesis_simple_share_init', 99 );
  */
 function genesis_simple_share_init() {
 
-	/** Load textdomain for translation */
+	//* Load textdomain for translation
     load_plugin_textdomain( 'genesis-simple-share', false, basename( dirname( __FILE__ ) ) . '/languages/' );
 		
-	if( is_admin() && class_exists( 'Genesis_Admin_Boxes' ) ) {
+	if ( is_admin() && class_exists( 'Genesis_Admin_Boxes' ) ) {
 		require_once( GENESIS_SIMPLE_SHARE_LIB . 'admin.php' );
 		require_once( GENESIS_SIMPLE_SHARE_LIB . 'post-meta.php' );
 	}

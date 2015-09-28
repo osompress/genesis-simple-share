@@ -1,4 +1,4 @@
-
-lib/sharrre/error_log
-
-genesis-simple-share
+.DS_Store
+Thumbs.db
+.svn
+node_modules/
