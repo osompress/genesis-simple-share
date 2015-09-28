@@ -16,7 +16,7 @@ Domain Path /languages/
 
 //* Prevent direct access to the plugin
 if ( !defined( 'ABSPATH' ) ) {
-    die( 'Sorry, you are not allowed to access this page directly.', 'genesis-simple-share' );
+    die( __( 'Sorry, you are not allowed to access this page directly.', 'genesis-simple-share' ) );
 }
 
 define( 'GENESIS_SIMPLE_SHARE_LIB', dirname( __FILE__ ) . '/lib/' );
