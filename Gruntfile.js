@@ -24,12 +24,13 @@ module.exports = function(grunt) {
 		// Add text domain as last argument of i18n functions
 		addtextdomain: {
 			php: {
-				files: {
-					src: [
-						'*.php',
-						'lib/**/*.php'
-					]
-				}
+				options: {
+					updateDomains: true
+				},
+				src: [
+					'*.php',
+					'lib/**/*.php'
+				]
 			}
 		},
 
@@ -68,7 +69,7 @@ module.exports = function(grunt) {
 		makepot: {
 			plugin: {
 				options: {
-					domainPath: '/lib/languages',
+					domainPath: '/languages',
 					processPot: function( pot ) {
 						pot.headers['report-msgid-bugs-to']   = 'StudioPress <translations@studiopress.com>';
 						pot.headers['last-translator']        = 'StudioPress <translations@studiopress.com>';
