@@ -268,7 +268,6 @@
 
 .share-tall .twitter .count:before 	{
 	content: '\f202';
-	color: #09b0ed;
 	display: block;
 	line-height: 1;
 	font-family: 'Genericons';
