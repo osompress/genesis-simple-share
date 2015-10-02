@@ -32,6 +32,7 @@ https://github.com/copyblogger/genesis-simple-share/wiki/Usage-Tips
 == Changelog ==
 
 = 1.0.4 =
+* Include a force to show argument in icon output functions
 * Disabled Twitter counter for now because twitter is removing the ability to get the counts after 10-2015.
 
 = 1.0.3 =
