@@ -1,6 +1,5 @@
 .sharrre {
-	display: block;
-	float: left;
+	display: inline-block;
 	font-family: Helvetica, Arial, sans-serif;
 	font-style: normal;
 	font-weight: normal;
@@ -111,6 +110,10 @@
 	width: 65px;
 }
 
+.share-small .no-count .count {
+	display: none;
+}
+
 /* Medium */
 .share-medium .share,
 .share-medium .count {
@@ -143,6 +146,10 @@
 	border-top-right-radius: 3px;
 	border-bottom-right-radius: 3px;
 	width: 75px;
+}
+
+.share-medium .no-count .count {
+	display: none;
 }
 
 /* Tall */
@@ -259,28 +266,13 @@
 
 .share-tall .twitter .share:before { display: none; }
 
-.share-tall .twitter .box.no-count {
-	background: #fff;
-	cursor: pointer;
-	height: 80px;
-	text-align: center;
-}
-
-.share-tall .twitter .box.no-count:before 	{
-	border: 1px solid #09b0ed;
-	border-top-left-radius: 3px;
-	border-top-right-radius: 3px;
-	box-sizing: border-box;
+.share-tall .twitter .count:before 	{
 	content: '\f202';
-	color: #09b0ed;
-	cursor: pointer;
 	display: block;
 	line-height: 1;
-	height: 55px;
 	font-family: 'Genericons';
 	font-size: 20px;
 	padding-top: 17px;
-	position: relative;
 	-webkit-font-smoothing: antialiased;
 	-webkit-transition: all 0.3s ease-in-out;
 	-moz-transition: all 0.3s ease-in-out;
@@ -289,8 +281,7 @@
 	transition: all 0.3s ease-in-out;
 }
 
-.share-tall .twitter:hover .box.no-count:before {
-	background: #09b0ed;
+.share-tall .twitter:hover .count:before {
 	color: #fff;
 }
 
