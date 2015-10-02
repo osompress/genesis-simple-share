@@ -269,10 +269,11 @@
 .share-tall .twitter .count:before 	{
 	content: '\f202';
 	display: block;
-	line-height: 1;
+	line-height: 44px;
 	font-family: 'Genericons';
 	font-size: 20px;
-	padding-top: 17px;
+	position: relative;
+	top: 5px;
 	-webkit-font-smoothing: antialiased;
 	-webkit-transition: all 0.3s ease-in-out;
 	-moz-transition: all 0.3s ease-in-out;
