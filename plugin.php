@@ -1,11 +1,11 @@
 <?php
 /*
 Plugin Name: Genesis Simple Share
-Plugin URI: 
+Plugin URI:
 
 Description: A simple sharing plugin using the Share script.
 
-Version: 1.0.4
+Version: 1.0.5
 
 Author: copyblogger
 Author URI: http://www.copyblogger.com
@@ -34,14 +34,14 @@ function genesis_simple_share_init() {
 
 	//* Load textdomain for translation
     load_plugin_textdomain( 'genesis-simple-share', false, basename( dirname( __FILE__ ) ) . '/languages/' );
-		
+
 	if ( is_admin() && class_exists( 'Genesis_Admin_Boxes' ) ) {
 		require_once( GENESIS_SIMPLE_SHARE_LIB . 'admin.php' );
 		require_once( GENESIS_SIMPLE_SHARE_LIB . 'post-meta.php' );
 	}
 	else
 		require_once( GENESIS_SIMPLE_SHARE_LIB . 'front-end.php' );
-		
+
 	//require_once( GENESIS_SIMPLE_SHArE_LIB . 'functions.php' );
 
 }
