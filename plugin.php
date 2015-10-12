@@ -5,9 +5,9 @@ Plugin URI:
 
 Description: A simple sharing plugin using the Share script.
 
-Version: 1.0.5
+Version: 1.0.6
 
-Author: copyblogger
+Author: Rainmaker Digital LLC
 Author URI: http://www.copyblogger.com
 
 Text Domain: genesis-simple-share
