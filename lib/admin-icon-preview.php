@@ -37,7 +37,7 @@ class Gensis_Simple_Share_Preview {
 	function __construct() {
 	
 		$icons = get_option( 'genesis_simple_share_sort', array(
-			'main' => 'genesis_simple_share_google_plus,genesis_simple_share_facebook,genesis_simple_share_twitter,genesis_simple_share_pinterest,genesis_simple_share_linkedin,genesis_simple_share_stumbleupon' 
+			'main' => 'genesis_simple_share_google_plus,genesis_simple_share_facebook,genesis_simple_share_twitter,genesis_simple_share_pinterest,genesis_simple_share_linkedin,genesis_simple_share_stumbleupon,genesis_simple_share_love' 
 			) );
 			
 			$icons = explode( ',', $icons['main'] );
@@ -69,6 +69,10 @@ class Gensis_Simple_Share_Preview {
 					
 				case 'genesis_simple_share_stumbleupon':
 					$icon_sort[] = 'stumbleupon';
+					break;
+
+				case 'genesis_simple_share_love':
+					$icon_sort[] = 'love';
 					break;
 				
 			}
@@ -170,6 +174,11 @@ class Gensis_Simple_Share_Preview {
 				case 'pinterest' :
 				
 					$data_title = 'Pin';
+					break;
+
+				case 'love' :
+				
+					$data_title = __('Love', 'genesis');
 					break;
 					
 				default:
