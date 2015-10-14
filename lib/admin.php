@@ -147,7 +147,7 @@ class Genesis_Simple_Share_Boxes extends Genesis_Admin_Boxes {
 	
 		//use wp_enqueue_script() and wp_enqueue_style() to load scripts and styles
 		wp_enqueue_script( 'genesis-simple-share-plugin-js', 
-							plugins_url( 'sharrre/jquery.sharrre.js', __FILE__ ), 
+							plugins_url( 'sharrre/jquery.sharrre.min.js', __FILE__ ), 
 							array( 'jquery' ), 
 							'0.1.0'
 						);
@@ -176,12 +176,12 @@ class Genesis_Simple_Share_Boxes extends Genesis_Admin_Boxes {
 							'0.1.0' 
 						);
 
-		$front_end = array(
+		$atts = array(
 			'nonce' => wp_create_nonce( 'genesis_love' ),
 			'ajaxurl' =>  admin_url('admin-ajax.php'),
 			'love_text' => apply_filters('genesis_simple_love_text', __('Love', 'genesis') )
 		);
-		wp_localize_script( 'genesis-simple-share-plugin-js', 'simple_love', $front_end );
+		wp_localize_script( 'genesis-simple-share-plugin-js', 'simple_love', $atts );
 		
 	}
 	

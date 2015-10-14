@@ -106,7 +106,7 @@ class Gensis_Simple_Share_Front_End {
 
 		//use wp_enqueue_script() and wp_enqueue_style() to load scripts and styles
 		wp_register_script( 'genesis-simple-share-plugin-js',
-			$url . 'sharrre/jquery.sharrre.js',
+			$url . 'sharrre/jquery.sharrre.min.js',
 			array( 'jquery' ),
 			'0.1.0'
 		);
