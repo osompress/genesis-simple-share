@@ -106,7 +106,7 @@ class Gensis_Simple_Share_Front_End {
 
 		//use wp_enqueue_script() and wp_enqueue_style() to load scripts and styles
 		wp_register_script( 'genesis-simple-share-plugin-js',
-			$url . 'sharrre/jquery.sharrre.min.js',
+			$url . 'sharrre/jquery.sharrre.js',
 			array( 'jquery' ),
 			'0.1.0'
 		);
@@ -142,6 +142,13 @@ class Gensis_Simple_Share_Front_End {
 		if( $this->is_archive() ) {
 			wp_enqueue_script( 'genesis-simple-share-waypoint-js' );
 		}
+
+		$atts = array(
+			'nonce' => wp_create_nonce( 'genesis_love' ),
+			'ajaxurl' =>  admin_url('admin-ajax.php'),
+			'love_text' => apply_filters('genesis_simple_love_text', __('Love', 'genesis') )
+		);
+		wp_localize_script( 'genesis-simple-share-plugin-js', 'simple_love', $atts );
 
 	}
 
@@ -434,13 +441,14 @@ class Gensis_Simple_Share_Front_End {
 
 			}
 
-			$buttons[] = sprintf( '<div class="%s" id="%s" data-url="%s" data-urlalt="%s" data-text="%s" data-title="%s"></div>',
+			$buttons[] = sprintf( '<div class="%s" id="%s" data-url="%s" data-urlalt="%s" data-text="%s" data-title="%s" data-id="%s"></div>',
 				$icon,
 				$div_id,
 				get_permalink( $id ),
 				wp_get_shortlink( $id ),
 				$description,
-				$data_title
+				$data_title,
+				$id
 			);
 
 		}
@@ -485,14 +493,15 @@ class Gensis_Simple_Share_Front_End {
 
 		$div_id = 'share-'. $location .'-' . $id;
 
-		$div = sprintf( '<div class="share-%s share-%s share-%s" id="%s" data-url="%s" data-urlalt="%s" data-text="%s" data-title="share"></div>',
+		$div = sprintf( '<div class="share-%s share-%s share-%s" id="%s" data-url="%s" data-urlalt="%s" data-text="%s" data-title="share" data-id="%s"></div>',
 			$location,
 			$this->appearance,
 			$this->size,
 			$div_id,
 			get_permalink( $id ),
 			wp_get_shortlink( $id ),
-			the_title_attribute( array( 'echo' => false ) )
+			the_title_attribute( array( 'echo' => false ) ),
+			$id
 		);
 
 		$shares = array();

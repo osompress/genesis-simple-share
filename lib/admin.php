@@ -175,6 +175,13 @@ class Genesis_Simple_Share_Boxes extends Genesis_Admin_Boxes {
 							array(), 
 							'0.1.0' 
 						);
+
+		$front_end = array(
+			'nonce' => wp_create_nonce( 'genesis_love' ),
+			'ajaxurl' =>  admin_url('admin-ajax.php'),
+			'love_text' => apply_filters('genesis_simple_love_text', __('Love', 'genesis') )
+		);
+		wp_localize_script( 'genesis-simple-share-plugin-js', 'simple_love', $front_end );
 		
 	}
 	
