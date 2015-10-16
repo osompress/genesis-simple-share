@@ -178,7 +178,7 @@ class Gensis_Simple_Share_Preview {
 
 				case 'love' :
 				
-					$data_title = __('Love', 'genesis');
+					$data_title = __('Love', 'genesis-simple-share');
 					break;
 					
 				default:

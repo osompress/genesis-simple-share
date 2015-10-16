@@ -40,7 +40,7 @@ function genesis_simple_share_init() {
 		require_once( GENESIS_SIMPLE_SHARE_LIB . 'admin.php' );
 		require_once( GENESIS_SIMPLE_SHARE_LIB . 'post-meta.php' );
 	}
-	else{
+	else {
 		require_once( GENESIS_SIMPLE_SHARE_LIB . 'front-end.php' );
 	}
 
@@ -48,4 +48,6 @@ function genesis_simple_share_init() {
 
 }
 
-require_once( GENESIS_SIMPLE_SHARE_LIB . 'ajax.php' );
+if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
+    require_once( GENESIS_SIMPLE_SHARE_LIB . 'ajax.php' );
+}

@@ -54,7 +54,7 @@ class Genesis_Simple_Share_Boxes extends Genesis_Admin_Boxes {
 				'pinterest'          => 1,
 				'linkedin'           => 1,
 				'stumbleupon'        => 1,
-				'love'        		 => 1,
+				'love'				=> 1,
 			)
 		);
 		
@@ -177,9 +177,9 @@ class Genesis_Simple_Share_Boxes extends Genesis_Admin_Boxes {
 						);
 
 		$atts = array(
-			'nonce' => wp_create_nonce( 'genesis_love' ),
-			'ajaxurl' =>  admin_url('admin-ajax.php'),
-			'love_text' => apply_filters('genesis_simple_love_text', __('Love', 'genesis') )
+			'nonce'			=> wp_create_nonce( 'genesis_love' ),
+			'ajaxurl'		=>  admin_url( 'admin-ajax.php' ),
+			'love_text'		=> apply_filters( 'genesis_simple_love_text', __( 'Love', 'genesis-simple-share' ) )
 		);
 		wp_localize_script( 'genesis-simple-share-plugin-js', 'simple_love', $atts );
 		
@@ -431,8 +431,6 @@ class Genesis_Simple_Share_Boxes extends Genesis_Admin_Boxes {
 		$id = 'love';
 		
 		$this->checkbox( $id , __( 'Use this button?', 'genesis-simple-share' ) );
-		
-		//echo $this->sort_text;
 		
 	}
 	
