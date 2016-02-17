@@ -9,9 +9,9 @@
  * @license  http://www.opensource.org/licenses/gpl-license.php GPL-2.0+
  */
  
-/* Prevent direct access to the plugin */
-if ( !defined( 'ABSPATH' ) ) {
-    die( "Sorry, you are not allowed to access this page directly." );
+//* Prevent direct access to the plugin
+if ( ! defined( 'ABSPATH' ) ) {
+    die( __( 'Sorry, you are not allowed to access this page directly.', 'genesis-simple-share' ) );
 }
 
 /**

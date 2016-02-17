@@ -7,7 +7,7 @@ if( invalid_request() ){
   header('content-type: application/json');
   //Sharrre by Julien Hany
   $json = array('url'=>'','count'=>0);
-  $json['url'] = $_GET['url'];
+  //$json['url'] = $_GET['url'];
   $url = urlencode($_GET['url']);
   $type = urlencode($_GET['type']);
   
