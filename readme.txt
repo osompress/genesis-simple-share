@@ -3,7 +3,7 @@ Contributors: nathanrice, studiopress, wpmuguru, nick_thegeek, bgardner
 Tags: genesis, share, share buttons, facebook, twitter, pinterest, stumbleupon, linkedin, social
 Requires at least: 3.7
 Tested up to: 4.3.1
-Stable tag: 1.0.4
+Stable tag: 1.0.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -31,20 +31,27 @@ https://github.com/copyblogger/genesis-simple-share/wiki/Usage-Tips
 
 == Changelog ==
 
+= 1.0.6 =
+* Fixed: styling tweeks for twitter button without count.
+
+= 1.0.5 =
+* Fixed: styling issues following removal of tweet count.
+
 = 1.0.4 =
+* Include a force to show argument in icon output functions.
 * Disabled Twitter counter for now because twitter is removing the ability to get the counts after 10-2015.
 
 = 1.0.3 =
-* Fix error resulting in double icon output
+* Fix error resulting in double icon output.
 
 = 1.0.2 =
-* Fix error where icons do not show in archives when showing the excerpt
+* Fix error where icons do not show in archives when showing the excerpt.
 
 = 1.0.1 =
-* Fixes potential error where only first post in archive will show share buttons
+* Fixes potential error where only first post in archive will show share buttons.
 
 = 1.0 =
-* Initial WordPress.org release
+* Initial WordPress.org release.
 
 == Upgrade Notice ==
 
