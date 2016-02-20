@@ -70,6 +70,7 @@
 .genesis_page_genesis_simple_share_settings #genesis_simple_share_pinterest h3.hndle { background: #cb2127; }
 .genesis_page_genesis_simple_share_settings #genesis_simple_share_linkedin h3.hndle { background: #035a87; }
 .genesis_page_genesis_simple_share_settings #genesis_simple_share_stumbleupon h3.hndle { background: #eb4923; }
+.genesis_page_genesis_simple_share_settings #genesis_simple_share_love h3.hndle { background: #ae1319; }
 
 .genesis_page_genesis_simple_share_settings #genesis_simple_share_twitter h3.hndle:before { content: '\f202'; }
 .genesis_page_genesis_simple_share_settings #genesis_simple_share_facebook h3.hndle:before { content: '\f204'; }
@@ -77,3 +78,4 @@
 .genesis_page_genesis_simple_share_settings #genesis_simple_share_pinterest h3.hndle:before { content: '\f209'; }
 .genesis_page_genesis_simple_share_settings #genesis_simple_share_linkedin h3.hndle:before { content: '\f207'; }
 .genesis_page_genesis_simple_share_settings #genesis_simple_share_stumbleupon h3.hndle:before { content: '\f223'; }
+.genesis_page_genesis_simple_share_settings #genesis_simple_share_love h3.hndle:before { content: '\f461'; }

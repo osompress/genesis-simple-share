@@ -54,6 +54,7 @@ class Genesis_Simple_Share_Boxes extends Genesis_Admin_Boxes {
 				'pinterest'          => 1,
 				'linkedin'           => 1,
 				'stumbleupon'        => 1,
+				'love'				=> 1,
 			)
 		);
 		
@@ -174,6 +175,13 @@ class Genesis_Simple_Share_Boxes extends Genesis_Admin_Boxes {
 							array(), 
 							'0.1.0' 
 						);
+
+		$atts = array(
+			'nonce'			=> wp_create_nonce( 'genesis_love' ),
+			'ajaxurl'		=>  admin_url( 'admin-ajax.php' ),
+			'love_text'		=> apply_filters( 'genesis_simple_love_text', __( 'Love', 'genesis-simple-share' ) )
+		);
+		wp_localize_script( 'genesis-simple-share-plugin-js', 'simple_love', $atts );
 		
 	}
 	
@@ -235,6 +243,7 @@ class Genesis_Simple_Share_Boxes extends Genesis_Admin_Boxes {
 		add_meta_box( 'genesis_simple_share_pinterest', __( 'Pinterest', 'genesis-simple-share' ), array( $this, 'pinterest' ), $this->pagehook, 'main' );
 		add_meta_box( 'genesis_simple_share_linkedin', __( 'Linkedin', 'genesis-simple-share' ), array( $this, 'linkedin' ), $this->pagehook, 'main' );
 		add_meta_box( 'genesis_simple_share_stumbleupon', __( 'StumbleUpon', 'genesis-simple-share' ), array( $this, 'stumbleupon' ), $this->pagehook, 'main' );
+		add_meta_box( 'genesis_simple_share_love', __( 'Love', 'genesis-simple-share' ), array( $this, 'love' ), $this->pagehook, 'main' );
 		
 		
 		
@@ -408,6 +417,21 @@ class Genesis_Simple_Share_Boxes extends Genesis_Admin_Boxes {
 		
 		$this->checkbox( $id , __( 'Use this button?', 'genesis-simple-share' ) );
 
+	}
+
+	/**
+ 	 * Create Love settings metabox output
+ 	 *
+ 	 *
+ 	 * @since 0.1.0
+ 	 *
+ 	 */
+	function love() {
+	
+		$id = 'love';
+		
+		$this->checkbox( $id , __( 'Use this button?', 'genesis-simple-share' ) );
+		
 	}
 	
 	/**

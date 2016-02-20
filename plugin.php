@@ -22,6 +22,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 define( 'GENESIS_SIMPLE_SHARE_LIB', dirname( __FILE__ ) . '/lib/' );
 
 add_action( 'genesis_init', 'genesis_simple_share_init', 99 );
+
 /**
  * Loads plugin text domain and required files. Uses genesis_init to ensure Genesis functions are available
  *
@@ -39,9 +40,14 @@ function genesis_simple_share_init() {
 		require_once( GENESIS_SIMPLE_SHARE_LIB . 'admin.php' );
 		require_once( GENESIS_SIMPLE_SHARE_LIB . 'post-meta.php' );
 	}
-	else
+	else {
 		require_once( GENESIS_SIMPLE_SHARE_LIB . 'front-end.php' );
+	}
 
 	//require_once( GENESIS_SIMPLE_SHArE_LIB . 'functions.php' );
 
+}
+
+if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
+    require_once( GENESIS_SIMPLE_SHARE_LIB . 'ajax.php' );
 }

@@ -220,6 +220,7 @@
 .pinterest .share:before 	{ content: '\f209'; }
 .linkedin .share:before 	{ content: '\f207'; }
 .stumbleupon .share:before 	{ content: '\f223'; }
+.love .share:before 		{ content: '\f461'; }
 
 .share-small .pinterest .share:before {
 	font-size: 12px;
@@ -316,6 +317,10 @@
 .share-filled .stumbleupon .count,
 .share-filled .stumbleupon .count:hover 	{ color: #eb4923; border: 1px solid #eb4923; }
 
+.share-filled .love .share 		{ background: #ae1319; }
+.share-filled .love .count,
+.share-filled .love .count:hover 	{ color: #ae1319; border: 1px solid #ae1319; }
+
 .share-filled .twitter:hover .count 		{ background: #09b0ed !important; }
 .share-filled .facebook:hover .count 		{ background: #3d5a98 !important; }
 .share-filled .googlePlus:hover .count 	{ background: #dd4c39 !important; }
@@ -323,6 +328,7 @@
 .share-filled .youtube:hover .count 		{ background: #cc181e !important; }
 .share-filled .pinterest:hover .count 	{ background: #cb2127 !important; }
 .share-filled .stumbleupon:hover .count 	{ background: #eb4923 !important; }
+.share-filled .love:hover .count 	{ background: #ae1319 !important; }
 
 .share-filled .sharrre:hover .count {
 	color: #fff;
@@ -357,6 +363,10 @@
 .share-outlined .stumbleupon .count,
 .share-outlined .stumbleupon .count:hover	{ border: 1px solid #eb4923; color: #eb4923; }
 
+.share-outlined .love .share,
+.share-outlined .love .count,
+.share-outlined .love .count:hover		{ border: 1px solid #ae1319; color: #ae1319; }
+
 .share-outlined.share-small .share,
 .share-outlined.share-medium .share { border-right: none !important; }
 
@@ -385,6 +395,9 @@
 
 .share-outlined .stumbleupon:hover .share,
 .share-outlined .stumbleupon:hover .count { background: #eb4923; }
+
+.share-outlined .love:hover .share,
+.share-outlined .love:hover .count { background: #ae1319; color: #fff; }
 
 .share-outlined .sharrre:hover .count,
 .share-outlined .sharrre:hover .share {

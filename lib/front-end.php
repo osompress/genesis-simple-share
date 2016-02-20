@@ -39,7 +39,7 @@ class Gensis_Simple_Share_Front_End {
 	function __construct() {
 
 		$icons = get_option( 'genesis_simple_share_sort', array(
-				'main' => 'genesis_simple_share_google_plus,genesis_simple_share_facebook,genesis_simple_share_twitter,genesis_simple_share_pinterest,genesis_simple_share_linkedin,genesis_simple_share_stumbleupon'
+				'main' => 'genesis_simple_share_google_plus,genesis_simple_share_facebook,genesis_simple_share_twitter,genesis_simple_share_pinterest,genesis_simple_share_linkedin,genesis_simple_share_stumbleupon,genesis_simple_share_love'
 			) );
 
 		$icons = explode( ',', $icons['main'] );
@@ -71,6 +71,10 @@ class Gensis_Simple_Share_Front_End {
 
 			case 'genesis_simple_share_stumbleupon':
 				$icon_sort[] = 'stumbleupon';
+				break;
+
+			case 'genesis_simple_share_love':
+				$icon_sort[] = 'love';
 				break;
 
 			}
@@ -138,6 +142,13 @@ class Gensis_Simple_Share_Front_End {
 		if( $this->is_archive() ) {
 			wp_enqueue_script( 'genesis-simple-share-waypoint-js' );
 		}
+
+		$atts = array(
+			'nonce' 	=> wp_create_nonce( 'genesis_love' ),
+			'ajaxurl' 	=>  admin_url( 'admin-ajax.php' ),
+			'love_text' => apply_filters( 'genesis_simple_love_text', __( 'Love', 'genesis' ) )
+		);
+		wp_localize_script( 'genesis-simple-share-plugin-js', 'simple_love', $atts );
 
 	}
 
@@ -417,6 +428,11 @@ class Gensis_Simple_Share_Front_End {
 			case 'pinterest' :
 
 				$data_title = 'Pin';
+				break;
+
+			case 'love' :
+
+				$data_title = __( 'Love', 'genesis-simple-share' );
 				break;
 
 			default:
