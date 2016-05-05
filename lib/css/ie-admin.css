@@ -1,0 +1,7 @@
+/* IE 9 and below */
+.genesis_page_genesis_simple_share_settings .meta-box-sortables .postbox,
+.genesis_page_genesis_simple_share_settings .meta-box-sortables .sortable-placeholder {
+	display: block;
+	float: left;
+	height: 240px;
+}

@@ -139,6 +139,8 @@ class Genesis_Simple_Share_Boxes extends Genesis_Admin_Boxes {
 	 *
 	 */
 	function scripts() {
+
+		global $wp_styles;
 	
 		wp_enqueue_script( 'common' );
 		wp_enqueue_script( 'wp-lists' );
@@ -174,6 +176,14 @@ class Genesis_Simple_Share_Boxes extends Genesis_Admin_Boxes {
 							array(), 
 							'0.1.0' 
 						);
+
+		wp_enqueue_style( 	'genesis-simple-share-admin-css-ie',
+							plugins_url( 'css/admin-ie.css', __FILE__ ),
+							array( 'genesis-simple-share-admin-css' ),
+							'0.1.0'
+						);
+		//* Add IE Styles
+		$wp_styles->add_data( 'genesis-simple-share-admin-css-ie', 'conditional', 'lt IE 10' );
 		
 	}
 	
