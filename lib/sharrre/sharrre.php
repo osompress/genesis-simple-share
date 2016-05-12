@@ -38,6 +38,15 @@ if( invalid_request() ){
       }
 
     }
+    else if($type == 'linkedin'){
+      $content = parse("https://www.linkedin.com/countserv/count/share?format=jsonp&url=$url");
+      
+      if ( strpos( $content, '"count":' ) !== false ) {
+	       preg_match( '/"count":([^,]+),/', $content, $matches );
+	       $json['count'] = $matches[1];
+      }
+
+    }
   }
   
   //*
@@ -90,6 +99,8 @@ if( invalid_request() ){
 * @return boolean
 */
 function invalid_request() {
+	
+	//die( json_encode( $_GET ) ); 
 
 	if( empty( $_GET['url'] ) || empty( $_GET['type'] ) ) {
 		return true;
@@ -99,7 +110,7 @@ function invalid_request() {
 		return true;
 	}
 	
-	elseif( ! in_array( $_GET['type'], array( 'googlePlus', 'stumbleupon' ) ) ) {
+	elseif( ! in_array( $_GET['type'], array( 'googlePlus', 'stumbleupon', 'linkedin' ) ) ) {
 		return true;
 	}
 	
