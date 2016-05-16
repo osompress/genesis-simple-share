@@ -3,7 +3,7 @@ Contributors: nathanrice, studiopress, wpmuguru, nick_thegeek, bgardner
 Tags: genesis, share, share buttons, facebook, twitter, pinterest, stumbleupon, linkedin, social
 Requires at least: 3.7
 Tested up to: 4.5.2
-Stable tag: 1.0.7
+Stable tag: 1.0.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -31,8 +31,11 @@ https://github.com/copyblogger/genesis-simple-share/wiki/Usage-Tips
 
 == Changelog ==
 
-= 1.0.7 =
+= 1.0.8 =
 * Fixed: LinkedIn button works with recent change to LinkedIn API. Note, the button now uses the sharrre.php file to fetch results, which can cause problems accessing share counts with some hosts depending on settings.
+
+= 1.0.7 =
+* Fixed: potential xss vector
 
 = 1.0.6 =
 * Fixed: styling tweeks for twitter button without count.
@@ -58,7 +61,7 @@ https://github.com/copyblogger/genesis-simple-share/wiki/Usage-Tips
 
 == Upgrade Notice ==
 
-= 1.0.7 =
+= 1.0.8 =
 * Fixes LinkedIn button so that it works with recent change to LinkedIn API. Note, the button now uses the sharrre.php file to fetch results, which can cause problems accessing share counts with some hosts depending on settings.
 
 = 1.0.1 =
