@@ -358,12 +358,12 @@
 .share-outlined .stumbleupon .count:hover	{ border: 1px solid #eb4923; color: #eb4923; }
 
 .share-outlined.share-small .share,
-.share-outlined.share-medium .share { border-right: none !important; }
+.share-outlined.share-medium .share { border-right: none; }
 
 .share-outlined.share-small .twitter .share,
-.share-outlined.share-medium .twitter .share { border-right: 1px solid #09b0ed !important; }
+.share-outlined.share-medium .twitter .share { border-right: 1px solid #09b0ed; }
 
-.share-outlined.share-tall .share 	{ border-top: none !important; }
+.share-outlined.share-tall .share 	{ border-top: none; }
 
 .share-outlined .twitter:hover .share,
 .share-outlined .twitter:hover .count 	{ background: #09b0ed; }
