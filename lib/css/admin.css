@@ -24,8 +24,18 @@
 
 .genesis_page_genesis_simple_share_settings .meta-box-sortables .postbox,
 .genesis_page_genesis_simple_share_settings .meta-box-sortables .sortable-placeholder {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
 	display: flex;
-	flex-wrap: wrap;
+	-webkit-flex-wrap: wrap;
+	    -ms-flex-wrap: wrap;
+	        flex-wrap: wrap;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: row;
+	    -ms-flex-direction: row;
+	        flex-direction: row;
 	min-height: 240px;
 	margin: 5px;
 	width: 260px;
