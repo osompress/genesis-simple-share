@@ -22,8 +22,7 @@
 	margin-bottom: 20px;
 }
 
-.genesis_page_genesis_simple_share_settings .meta-box-sortables .postbox,
-.genesis_page_genesis_simple_share_settings .meta-box-sortables .sortable-placeholder {
+#main-sortables {
 	display: -webkit-box;
 	display: -webkit-flex;
 	display: -ms-flexbox;
@@ -36,7 +35,12 @@
 	-webkit-flex-direction: row;
 	    -ms-flex-direction: row;
 	        flex-direction: row;
+}
+
+.genesis_page_genesis_simple_share_settings .meta-box-sortables .postbox,
+.genesis_page_genesis_simple_share_settings .meta-box-sortables .sortable-placeholder {
 	min-height: 240px;
+	float: left;
 	margin: 5px;
 	width: 260px;
 }
