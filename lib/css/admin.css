@@ -22,11 +22,25 @@
 	margin-bottom: 20px;
 }
 
+#main-sortables {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-flex-wrap: wrap;
+	    -ms-flex-wrap: wrap;
+	        flex-wrap: wrap;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: row;
+	    -ms-flex-direction: row;
+	        flex-direction: row;
+}
+
 .genesis_page_genesis_simple_share_settings .meta-box-sortables .postbox,
 .genesis_page_genesis_simple_share_settings .meta-box-sortables .sortable-placeholder {
-	display: block;
+	min-height: 240px;
 	float: left;
-	height: 240px;
 	margin: 5px;
 	width: 260px;
 }
