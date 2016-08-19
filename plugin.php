@@ -5,7 +5,7 @@ Plugin URI:
 
 Description: A simple sharing plugin using the Share script.
 
-Version: 1.0.8
+Version: 1.0.9
 
 Author: Rainmaker Digital LLC
 Author URI: http://www.copyblogger.com
