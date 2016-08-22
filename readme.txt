@@ -2,8 +2,8 @@
 Contributors: nathanrice, studiopress, wpmuguru, nick_thegeek, bgardner
 Tags: genesis, share, share buttons, facebook, twitter, pinterest, stumbleupon, linkedin, social
 Requires at least: 3.7
-Tested up to: 4.5.2
-Stable tag: 1.0.8
+Tested up to: 4.6
+Stable tag: 1.0.9
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -30,6 +30,9 @@ https://github.com/copyblogger/genesis-simple-share/wiki/Usage-Tips
 
 
 == Changelog ==
+
+= 1.0.9 =
+* Fixed: Facebook count continues to work after recent Facebook API changes.
 
 = 1.0.8 =
 * Fixed: LinkedIn button works with recent change to LinkedIn API. Note, the button now uses the sharrre.php file to fetch results, which can cause problems accessing share counts with some hosts depending on settings.
