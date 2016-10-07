@@ -9,9 +9,27 @@ class Genesis_Simple_Share_Entry_Meta {
 		
 	}
 	
+	/**
+	 * Callback on the `admin_menu` action.
+	 * Adds the post meta boxes for supported post types.
+	 * 
+	 * @access public
+	 * @return void
+	 */
 	function add_meta_box() {
-		
-		foreach ( (array) get_post_types( array( 'public' => true ) ) as $type ) {
+
+		$post_types = (array) get_post_types( array( 'public' => true ) );
+
+		/**
+		 * Allows filtering the $post_types that are supported.
+		 * 
+		 * @access public
+		 * @param  array $post_types supported post types
+		 * @return void
+		 */
+		$post_types = apply_filters( 'genesis_simple_share_post_types_support', $post_types );
+
+		foreach ( $post_types as $type ) {
 			if ( genesis_get_option( 'general_' . $type, 'genesis_simple_share' ) ) {
 				add_meta_box( 
 					'genesis-simple-share-entry-meta', 
