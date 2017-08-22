@@ -362,7 +362,8 @@ class Gensis_Simple_Share_Front_End {
 			$button = 'pinterest' == $icon && $image ?  " pinterest: { media: '$image', description: '$description' }" : $button;
 
 			if( $this->is_archive() )
-				$scripts .= sprintf( "$('#%s').waypoint( function() {
+				$scripts .= sprintf( "if ( $.fn.waypoint ) {
+										$('#%s').waypoint( function() {
 										$('#%s').sharrre({
 										  share: {
 										    %s: true
@@ -377,7 +378,22 @@ class Gensis_Simple_Share_Front_End {
 										  }
 										});
 										},
-										{ offset: 'bottom-in-view' });\n",
+										{ offset: 'bottom-in-view' });
+									} else {
+										$('#%s').sharrre({
+										  share: {
+										    %s: true
+										  },
+										  urlCurl: '%s',
+										  enableHover: false,
+										  enableTracking: true,
+										  buttons: { %s },
+										  click: function(api, options){
+										    api.simulateClick();
+										    api.openPopup('%s');
+										  }
+										});
+									}\n",
 					$div_id,
 					$div_id,
 					$icon,
@@ -533,9 +549,21 @@ class Gensis_Simple_Share_Front_End {
 	 *
 	 */
 	function is_archive() {
-
-		if( is_home() || is_archive() || is_search() || is_page_template('page_blog.php') )
+		
+		/**
+		 * Allows plugins and themes to define archive pages which may not normally be caught by the plugin logic.
+		 * Default is false, return a true value to cause the archive options, e.g. waypoints script, to load.
+		 *
+		 * @since 0.1.0
+		 *
+		 */
+		if ( apply_filters( 'genesis_simple_share_is_archive', false ) ) {
 			return true;
+		}
+
+		if ( is_home() || is_archive() || is_search() || is_page_template( 'page_blog.php' ) || is_front_page() || is_customize_preview() ) {
+			return true;
+		}
 
 		return false;
 	}

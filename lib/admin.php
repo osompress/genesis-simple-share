@@ -491,6 +491,15 @@ class Genesis_Simple_Share_Boxes extends Genesis_Admin_Boxes {
 
 		$post_types = get_post_types( array( 'public' => true, ) );
 
+		/**
+		 * Allows filtering the $post_types that are supported.
+		 * 
+		 * @access public
+		 * @param  array $post_types supported post types
+		 * @return void
+		 */
+		$post_types = apply_filters( 'genesis_simple_share_post_types_support', $post_types );
+
 		printf( '<tr valign="top"><th scope="row">%s</th>', __( 'Enable on:', 'genesis-simple-share' ) );
 
 		echo '<td>';
