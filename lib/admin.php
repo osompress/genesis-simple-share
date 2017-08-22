@@ -44,16 +44,17 @@ class Genesis_Simple_Share_Boxes extends Genesis_Admin_Boxes {
 		$default_settings = apply_filters(
 			'genesis_simple_share_defaults',
 			array(
-				'general_size'       => 'small',
-				'general_appearance' => 'filled',
-				'general_position'   => 'before_content',
-				'general_post'       => 1,
-				'googlePlus'         => 1,
-				'facebook'           => 1,
-				'twitter'            => 1,
-				'pinterest'          => 1,
-				'linkedin'           => 1,
-				'stumbleupon'        => 1,
+				'general_size'         => 'small',
+				'general_appearance'   => 'filled',
+				'general_position'     => 'before_content',
+				'general_post'         => 1,
+				'general_disble_count' => 0,
+				'googlePlus'           => 1,
+				'facebook'             => 1,
+				'twitter'              => 1,
+				'pinterest'            => 1,
+				'linkedin'             => 1,
+				'stumbleupon'          => 1,
 			)
 		);
 
@@ -101,7 +102,7 @@ class Genesis_Simple_Share_Boxes extends Genesis_Admin_Boxes {
 
 		$post_types = get_post_types( array( 'public' => true, ) );
 
-		foreach( $post_types as $post_type ){
+		foreach ( $post_types as $post_type ) {
 			$one_zero[] = 'general_' . $post_type;
 		}
 
@@ -149,42 +150,42 @@ class Genesis_Simple_Share_Boxes extends Genesis_Admin_Boxes {
 		//use wp_enqueue_script() and wp_enqueue_style() to load scripts and styles
 		wp_enqueue_script(
 			'genesis-simple-share-plugin-js',
-			plugins_url( 'sharrre/jquery.sharrre.min.js', __FILE__ ),
+			plugins_url( 'assets/js/sharrre/jquery.sharrre.min.js', __FILE__ ),
 			array( 'jquery' ),
 			'0.1.0'
 		);
 
 		wp_enqueue_style(
 			'genesis-simple-share-plugin-css',
-			plugins_url( 'css/share.css', __FILE__ ),
+			plugins_url( 'assets/css/share.min.css', __FILE__ ),
 			array(),
 			'0.1.0'
 		);
 
 		wp_enqueue_style(
 			'genesis-simple-share-genericons-css',
-			plugins_url( 'css/genericons.css', __FILE__ ),
+			plugins_url( 'assets/css/genericons.min.css', __FILE__ ),
 			array(),
 			'0.1.0'
 		);
 
 		wp_enqueue_script(
 			'genesis-simple-share-admin-js',
-			plugins_url( 'js/admin.js', __FILE__ ),
+			plugins_url( 'assets/js/admin.min.js', __FILE__ ),
 			array( 'jquery' ),
 			'0.1.0'
 		);
 
 		wp_enqueue_style(
 			'genesis-simple-share-admin-css',
-			plugins_url( 'css/admin.css', __FILE__ ),
+			plugins_url( 'assets/css/admin.min.css', __FILE__ ),
 			array(),
 			'0.1.0'
 		);
 
 		wp_enqueue_style(
 			'genesis-simple-share-admin-css-ie',
-			plugins_url( 'css/admin-ie.css', __FILE__ ),
+			plugins_url( 'assets/css/admin-ie.min.css', __FILE__ ),
 			array( 'genesis-simple-share-admin-css' ),
 			'0.1.0'
 		);
@@ -208,8 +209,9 @@ class Genesis_Simple_Share_Boxes extends Genesis_Admin_Boxes {
 	 */
 	function user_meta_save( $check, $object_id, $meta_key, $meta_value ) {
 
-		if( 'meta-box-order_genesis_page_genesis_simple_share_settings' == $meta_key )
+		if ( 'meta-box-order_genesis_page_genesis_simple_share_settings' == $meta_key ) {
 			return update_option( 'genesis_simple_share_sort', $meta_value );
+		}
 
 		return $check;
 	}
@@ -225,8 +227,9 @@ class Genesis_Simple_Share_Boxes extends Genesis_Admin_Boxes {
 	 */
 	function user_meta_return( $result ) {
 
-		if( $new_result = get_option( 'genesis_simple_share_sort' ) )
+		if ( $new_result = get_option( 'genesis_simple_share_sort' ) ) {
 			return $new_result;
+		}
 
 		return $result;
 	}
@@ -290,6 +293,9 @@ class Genesis_Simple_Share_Boxes extends Genesis_Admin_Boxes {
 			) );
 
 		$this->position( $id );
+
+		$this->disable_count( $id );
+
 		$this->post_type_checkbox( $id );
 
 		do_action( 'genesis_simple_share_admin_table_after_rows' );
@@ -435,7 +441,7 @@ class Genesis_Simple_Share_Boxes extends Genesis_Admin_Boxes {
 	 * @param string  $id        ID base to use when building select box.
 	 *
 	 */
-	function position( $id ){
+	function position( $id ) {
 
 		$this->select_field( $id . '_position', __( 'Icon Display Position'   , 'genesis-simple-share' ), array(
 				'off'            => __( 'Select display position to enable icons.', 'genesis-simple-share' ),
@@ -444,6 +450,17 @@ class Genesis_Simple_Share_Boxes extends Genesis_Admin_Boxes {
 				'both'           => __( 'Before and After the Content'            , 'genesis-simple-share' ),
 			) );
 
+	}
+
+	/**
+	 * Outputs the checkbox to disable the count.
+	 *
+	 * @access public
+	 * @param mixed $id
+	 * @return void
+	 */
+	function disable_count( $id ) {
+		$this->checkbox_table( $id . '_disable_count', __( 'Hide Count', 'genesis-simple-share' ) );
 	}
 
 	/**
@@ -456,7 +473,7 @@ class Genesis_Simple_Share_Boxes extends Genesis_Admin_Boxes {
 	 * @param array   $option    Array key $option=>$title used to build select options.
 	 *
 	 */
-	function select_field( $id, $name, $options = array() ){
+	function select_field( $id, $name, $options = array() ) {
 		$current = $this->get_field_value( $id );
 ?>
 		<tr valign="top">
@@ -487,13 +504,13 @@ class Genesis_Simple_Share_Boxes extends Genesis_Admin_Boxes {
 	 * @param string  $id        ID base to use when building checkbox.
 	 *
 	 */
-	function post_type_checkbox( $id ){
+	function post_type_checkbox( $id ) {
 
 		$post_types = get_post_types( array( 'public' => true, ) );
 
 		/**
 		 * Allows filtering the $post_types that are supported.
-		 * 
+		 *
 		 * @access public
 		 * @param  array $post_types supported post types
 		 * @return void
@@ -504,7 +521,7 @@ class Genesis_Simple_Share_Boxes extends Genesis_Admin_Boxes {
 
 		echo '<td>';
 
-		foreach( $post_types as $post_type )
+		foreach ( $post_types as $post_type )
 			$this->checkbox( $id . '_' . $post_type, $post_type );
 
 		$this->checkbox( $id . '_show_archive', __( 'Show on Archive Pages', 'genesis-simple-share' ) );
@@ -522,7 +539,7 @@ class Genesis_Simple_Share_Boxes extends Genesis_Admin_Boxes {
 	 * @param string  $name      Label text for the checkbox.
 	 *
 	 */
-	function checkbox( $id, $name ){
+	function checkbox( $id, $name ) {
 		printf( '<label for="%s"><input type="checkbox" name="%s" id="%s" value="1"%s /> %s </label> ',
 			$this->get_field_id( $id ),
 			$this->get_field_name( $id ),
@@ -531,6 +548,21 @@ class Genesis_Simple_Share_Boxes extends Genesis_Admin_Boxes {
 			$name
 		);
 		echo '<br />';
+	}
+
+	function checkbox_table( $id, $name, $description = '' ) {
+
+		$description = $description ? sprintf( '<p class="description">%s</p>', $description ) : '';
+
+		printf( '<tr valign="top"><th scope="row"><label for="%1$s">%4$s</th><td><input type="checkbox" class="genesis_simple_share_%3$s" name="%2$s" id="%1$s" value="1"%5$s />%6$s</td></tr>',
+			$this->get_field_id( $id ),
+			$this->get_field_name( $id ),
+			$id,
+			$name,
+			checked( $this->get_field_value( $id ), 1, false ),
+			$description
+		);
+
 	}
 
 

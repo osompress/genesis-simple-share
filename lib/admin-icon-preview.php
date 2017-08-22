@@ -155,7 +155,7 @@ class Gensis_Simple_Share_Preview {
 									});\n",
 									$div_id,
 									$icon,
-									plugins_url( 'sharrre/sharrre.php', __FILE__ ),
+									plugins_url( 'assets/js/sharrre/sharrre.php', __FILE__ ),
 									$button,
 									$icon
 									);

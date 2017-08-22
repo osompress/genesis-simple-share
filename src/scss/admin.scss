@@ -1,0 +1,114 @@
+// Dependencies.
+@import '_variables/_variables';
+
+.gss-clear {
+	clear: both;
+}
+
+.genesis_page_genesis_simple_share_settings .genesis-metaboxes {
+	width: auto;
+	.top-buttons {
+		float: left;
+	}
+	.bottom-buttons {
+		clear: both;
+		float: left;
+	}
+}
+
+#main-sortables {
+	&:after {
+		content: "";
+		clear: both;
+		display: block;
+		margin-bottom: 20px;
+	}
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-flex-wrap: wrap;
+	-ms-flex-wrap: wrap;
+	flex-wrap: wrap;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: row;
+	-ms-flex-direction: row;
+	flex-direction: row;
+}
+
+.genesis_page_genesis_simple_share_settings {
+	.meta-box-sortables {
+		.postbox, .sortable-placeholder {
+			min-height: 240px;
+			float: left;
+			margin: 5px;
+			width: 260px;
+		}
+		.postbox {
+			&.closed {
+				height: 30px;
+			}
+			.handlediv {
+				display: none;
+			}
+			h3.hndle {
+				color: #fff;
+				display: block !important;
+				text-shadow: none;
+				&:before {
+					line-height: 1;
+					display: inline-block;
+					font-family: 'Genericons';
+					font-size: 13px;
+					margin-right: 10px;
+					-webkit-font-smoothing: antialiased;
+				}
+			}
+			.inside {
+				margin: 0px;
+				padding: 20px;
+			}
+			input[type=text] {
+				margin-top: 5px;
+				width: 100%;
+			}
+		}
+	}
+	#genesis_simple_share_twitter h3.hndle {
+		background: $twitter;
+	}
+	#genesis_simple_share_facebook h3.hndle {
+		background: $facebook;
+	}
+	#genesis_simple_share_google_plus h3.hndle {
+		background: $googlePlus;
+	}
+	#genesis_simple_share_pinterest h3.hndle {
+		background: $pinterest;
+	}
+	#genesis_simple_share_linkedin h3.hndle {
+		background: $linkedin;
+	}
+	#genesis_simple_share_stumbleupon h3.hndle {
+		background: $stumbleupon;
+	}
+	#genesis_simple_share_twitter h3.hndle:before {
+		content: $twitter_i;
+	}
+	#genesis_simple_share_facebook h3.hndle:before {
+		content: $facebook_i;
+	}
+	#genesis_simple_share_google_plus h3.hndle:before {
+		content: $googlePlus_i;
+	}
+	#genesis_simple_share_pinterest h3.hndle:before {
+		content: $pinterest_i;
+	}
+	#genesis_simple_share_linkedin h3.hndle:before {
+		content: $linkedin_i;
+	}
+	#genesis_simple_share_stumbleupon h3.hndle:before {
+		content: $stumbleupon_i;
+	}
+}

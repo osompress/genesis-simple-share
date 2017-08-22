@@ -102,25 +102,25 @@ class Gensis_Simple_Share_Front_End {
 
 		//use wp_enqueue_script() and wp_enqueue_style() to load scripts and styles
 		wp_register_script( 'genesis-simple-share-plugin-js',
-			$url . 'sharrre/jquery.sharrre.min.js',
+			$url . 'assets/js/sharrre/jquery.sharrre.min.js',
 			array( 'jquery' ),
 			'0.1.0'
 		);
 
 		wp_register_style(  'genesis-simple-share-plugin-css',
-			$url . 'css/share.css',
+			$url . 'assets/css/share.min.css',
 			array(),
 			'0.1.0'
 		);
 
 		wp_register_style(  'genesis-simple-share-genericons-css',
-			$url . 'css/genericons.css',
+			$url . 'assets/css/genericons.min.css',
 			array(),
 			'0.1.0'
 		);
 
 		wp_register_script( 'genesis-simple-share-waypoint-js',
-			$url . 'jquery-waypoints/waypoints.min.js',
+			$url . 'assets/js/waypoints.min.js',
 			array( 'jquery' ),
 			'0.1.0'
 		);
@@ -134,10 +134,7 @@ class Gensis_Simple_Share_Front_End {
 		wp_enqueue_script( 'genesis-simple-share-plugin-js'      );
 		wp_enqueue_style(  'genesis-simple-share-plugin-css'     );
 		wp_enqueue_style(  'genesis-simple-share-genericons-css' );
-
-		if( $this->is_archive() ) {
-			wp_enqueue_script( 'genesis-simple-share-waypoint-js' );
-		}
+		wp_enqueue_script( 'genesis-simple-share-waypoint-js'    );
 
 	}
 
@@ -344,7 +341,7 @@ class Gensis_Simple_Share_Front_End {
 			return;
 
 		$id = get_the_ID();
-		
+
 		$url = ( empty( $url ) && $opt = genesis_get_custom_field( '_gss_alternate_url' ) ) ? esc_url( $opt ) : $url;
 
 		$scripts = '';
@@ -365,45 +362,50 @@ class Gensis_Simple_Share_Front_End {
 			$button = 'twitter'   == $icon && ( $via = genesis_get_option( 'twitter_id', 'genesis_simple_share' ) ) ?  " twitter: { via: '". str_replace( '@', '', $via ) ."' }" : '';
 			$button = 'pinterest' == $icon && $image ?  " pinterest: { media: '$image', description: '$description' }" : $button;
 
+			$disable_count = genesis_get_option( 'general_disable_count', 'genesis_simple_share' ) ? 'disableCount: true,' : '';
+
 			if( $this->is_archive() )
-				$scripts .= sprintf( "if ( $.fn.waypoint ) {
-										$('#%s').waypoint( function() {
-										$('#%s').sharrre({
+				$scripts .= sprintf( 'if ( $.fn.waypoint ) {
+										$("#%1$s").waypoint( function() {
+										$("#%1$s").sharrre({
 										  share: {
-										    %s: true
+										    %2$s: true
 										  },
-										  urlCurl: '%s',
+										  urlCurl: "%3$s",
 										  enableHover: false,
 										  enableTracking: true,
-										  buttons: { %s },
+										  %4$s
+										  buttons: { %5$s },
 										  click: function(api, options){
 										    api.simulateClick();
-										    api.openPopup('%s');
+										    api.openPopup("%6$s");
 										  }
 										});
 										},
-										{ offset: 'bottom-in-view' });
+										{ offset: "bottom-in-view" });
 									} else {
-										$('#%s').sharrre({
+										$("#%1$s").sharrre({
 										  share: {
-										    %s: true
+										    %2$s: true
 										  },
-										  urlCurl: '%s',
+										  urlCurl: "%3$s",
 										  enableHover: false,
 										  enableTracking: true,
-										  buttons: { %s },
+										  %4$s
+										  buttons: { %5$s },
 										  click: function(api, options){
 										    api.simulateClick();
-										    api.openPopup('%s');
+										    api.openPopup("%6$s");
 										  }
 										});
-									}\n",
-					$div_id,
+									}%7$s',
 					$div_id,
 					$icon,
-					plugins_url( 'sharrre/sharrre.php', __FILE__ ),
+					plugins_url( 'assets/js/sharrre/sharrre.php', __FILE__ ),
+					$disable_count,
 					$button,
-					$icon
+					$icon,
+					PHP_EOL
 				);
 
 			else
@@ -414,6 +416,7 @@ class Gensis_Simple_Share_Front_End {
 										  urlCurl: '%s',
 										  enableHover: false,
 										  enableTracking: true,
+										  %s
 										  buttons: { %s },
 										  click: function(api, options){
 										    api.simulateClick();
@@ -422,7 +425,8 @@ class Gensis_Simple_Share_Front_End {
 										});\n",
 					$div_id,
 					$icon,
-					plugins_url( 'sharrre/sharrre.php', __FILE__ ),
+					plugins_url( 'assets/js/sharrre/sharrre.php', __FILE__ ),
+					$disable_count,
 					$button,
 					$icon
 				);
@@ -553,7 +557,7 @@ class Gensis_Simple_Share_Front_End {
 	 *
 	 */
 	function is_archive() {
-		
+
 		/**
 		 * Allows plugins and themes to define archive pages which may not normally be caught by the plugin logic.
 		 * Default is false, return a true value to cause the archive options, e.g. waypoints script, to load.
