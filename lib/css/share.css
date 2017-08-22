@@ -91,11 +91,12 @@
 	width: 20px;
 }
 
-.share-small .sharrre:hover .share 		{ width: 60px; }
-.share-small .facebook:hover .share 	{ width: 60px; }
-.share-small .pinterest:hover .share 	{ width: 45px; }
-.share-small .googlePlus:hover .share 	{ width: 60px; }
-.share-small .twitter:hover .share 		{ width: 65px; }
+.share-small .sharrre:hover .share     { width: 60px; }
+.share-small .facebook:hover .share    { width: 60px; }
+.share-small .pinterest:hover .share   { width: 45px; }
+.share-small .googlePlus:hover .share,
+.share-small .twitter:hover .share     { width: 65px; }
+
 
 .share-small .count {
 	border-top-right-radius: 3px;
@@ -139,7 +140,7 @@
 .share-medium .sharrre:hover .share 		{ width: 65px; }
 .share-medium .facebook:hover .share 		{ width: 65px; }
 .share-medium .pinterest:hover .share 		{ width: 50px; }
-.share-medium .googlePlus:hover .share 		{ width: 65px; }
+.share-medium .googlePlus:hover .share 		{ width: 75px; }
 .share-medium .twitter:hover .share 		{ width: 75px; }
 
 .share-medium .no-count .share {
@@ -166,7 +167,7 @@
 
 .share-tall .googlePlus .share 	{ padding-left: 16px; }
 .share-tall .facebook .share 		{ padding-left: 18px; }
-.share-tall .twitter .share { padding-left: 0; }
+.share-tall .no-count .share { padding-left: 0; }
 
 .share-tall .count {
 	border-top-left-radius: 3px;
@@ -264,10 +265,9 @@
 	font-size: 16px;
 }
 
-.share-tall .twitter .share:before { display: none; }
+.share-tall .no-count .share:before { display: none; }
 
-.share-tall .twitter .count:before 	{
-	content: '\f202';
+.share-tall .no-count .count:before 	{
 	display: block;
 	line-height: 44px;
 	font-family: 'Genericons';
@@ -282,9 +282,22 @@
 	transition: all 0.3s ease-in-out;
 }
 
+.share-tall .twitter .count:before 	{
+	content: '\f202';
+}
+
 .share-tall .twitter:hover .count:before {
 	color: #fff;
 }
+
+.share-tall .googlePlus .count:before 	{
+	content: '\f218';
+}
+
+.share-tall .googlePlus:hover .count:before {
+	color: #fff;
+}
+
 
 
 /* Appearance - filled */
