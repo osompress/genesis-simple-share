@@ -374,6 +374,9 @@
     if(typeof $(this.element).data('title') !== 'undefined'){
       this.options.title = $(this.element).attr('data-title');
     }
+    if(typeof $(this.element).data('reader') !== 'undefined' && '' != $(this.element).data('reader')){
+		this.options.title = this.options.title + '<span class="screen-reader-text">' + $(this.element).data('reader') + '</span>';
+	}
     if(typeof $(this.element).data('url') !== 'undefined'){
       this.options.url = $(this.element).data('url');
     }

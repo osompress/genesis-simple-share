@@ -364,7 +364,8 @@ class Gensis_Simple_Share_Front_End {
 
 			$disable_count = genesis_get_option( 'general_disable_count', 'genesis_simple_share' ) ? 'disableCount: true,' : '';
 
-			if( $this->is_archive() )
+			if ( $this->is_archive() ) {
+
 				$scripts .= sprintf( 'if ( $.fn.waypoint ) {
 										$("#%1$s").waypoint( function() {
 										$("#%1$s").sharrre({
@@ -408,7 +409,8 @@ class Gensis_Simple_Share_Front_End {
 					PHP_EOL
 				);
 
-			else
+			} else {
+
 				$scripts .= sprintf( "$('#%s').sharrre({
 										  share: {
 										    %s: true
@@ -431,31 +433,37 @@ class Gensis_Simple_Share_Front_End {
 					$icon
 				);
 
+			}
+
+			$data_reader = '';
+
 			switch( $icon ){
 
 			case 'twitter' :
 
-				$data_title = 'Tweet';
+				$data_title = __( 'Tweet', 'genesis-simple-share' );
 				break;
 
 			case 'pinterest' :
 
-				$data_title = 'Pin';
+				$data_title = __( 'Pin', 'genesis-simple-share' );
 				break;
 
 			default:
 
-				$data_title = 'Share';
+				$data_title  = __( 'Share', 'genesis-simple-share' );
+				$data_reader = sprintf( __( 'on %s', 'genesis-simple-share' ), $icon );
 
 			}
 
-			$buttons[] = sprintf( '<div class="%s" id="%s" data-url="%s" data-urlalt="%s" data-text="%s" data-title="%s"></div>',
+			$buttons[] = sprintf( '<div class="%s" id="%s" data-url="%s" data-urlalt="%s" data-text="%s" data-title="%s" data-reader="%s"></div>',
 				$icon,
 				$div_id,
 				$url ? $url : get_permalink( $id ),
 				wp_get_shortlink( $id ),
 				$description,
-				$data_title
+				$data_title,
+				$data_reader
 			);
 
 		}
