@@ -311,7 +311,7 @@ class Gensis_Simple_Share_Front_End {
 	 * @returns string           HTML and JS required to build the share icons.
 	 *
 	 */
-	function get_icon_output( $location, $icons = array(), $force_show = false, $url ){
+	function get_icon_output( $location, $icons = array(), $force_show = false, $url = '' ){
 
 		if( is_feed() ) {
 			return;
