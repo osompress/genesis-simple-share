@@ -622,7 +622,7 @@
     if( disableCount ){
 	    $(this.element).html(
                             '<div class="box no-count"><a class="count" href="#"></a>' +
-                            (this.options.title !== '' ? '<a class="share" href="#">' + this.options.title + '</a>' : '') +
+                            (this.options.title !== '' ? '<a class="share" href="#" onclick="return false;">' + this.options.title + '</a>' : '') +
                             '</div>'
                           );
     }
@@ -638,7 +638,7 @@
 	    else{ //template by defaults
 	      $(this.element).html(
 	                            '<div class="box"><a class="count" href="#"><span>' + total + '</span></a>' +
-	                            (this.options.title !== '' ? '<a class="share" href="#">' + this.options.title + '</a>' : '') +
+	                            (this.options.title !== '' ? '<a class="share" href="#" onclick="return false;">' + this.options.title + '</a>' : '') +
 	                            '</div>'
 	                          );
 	    }
@@ -660,7 +660,7 @@
   ================================================== */
   Plugin.prototype.openPopup = function (site) {
     popup[site](this.options);  //open
-    if(this.options.enableTracking === true){ //tracking!
+    if(this.options.enableTracking === true && typeof _gaq !== 'undefined'){ //tracking!
       var tracking = {
         googlePlus: {site: 'Google', action: '+1'},
         facebook: {site: 'facebook', action: 'like'},
