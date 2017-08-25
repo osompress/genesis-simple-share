@@ -5,6 +5,8 @@
     "type": "git",
     "url": "https://github.com/copyblogger/genesis-simple-share"
   },
+  "author": "StudioPress",
+  "license": "GPL-2.0",
   "dependencies": {},
   "devDependencies": {
     "grunt": "*",
@@ -21,7 +23,15 @@
     "grunt-phplint": "*",
     "grunt-styledocco": "*",
     "grunt-wp-i18n": "*",
-    "load-grunt-tasks": "*"
+    "load-grunt-tasks": "*",
+    "autoprefixer": "^7.1.1",
+    "gulp": "^3.9.1",
+    "gulp-postcss": "latest",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^3.1.0",
+    "gulp-sourcemaps": "^2.6.0",
+    "gulp-uglify": "^3.0.0",
+    "postcss-functions": "^2.1.1"
   },
   "plugin": {
     "name": "Genesis Simple Share",
