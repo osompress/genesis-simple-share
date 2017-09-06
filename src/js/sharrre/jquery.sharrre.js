@@ -25,6 +25,7 @@
     shareTotal: 0,
     template: '',
     title: '',
+    labeledBy: '',
     url: document.location.href,
     text: document.title,
     urlCurl: 'sharrre.php',  //PHP script for google plus...
@@ -374,8 +375,9 @@
     if(typeof $(this.element).data('title') !== 'undefined'){
       this.options.title = $(this.element).attr('data-title');
     }
-    if(typeof $(this.element).data('reader') !== 'undefined' && '' != $(this.element).data('reader')){
-		this.options.title = this.options.title + '<span class="screen-reader-text">' + $(this.element).data('reader') + '</span>';
+    if ( typeof $( this.element ).data( 'reader' ) !== 'undefined' && '' != $( this.element ).data( 'reader' ) ) {
+	    this.options.labeledBy = $( this.element ).attr( 'id' ) + '-label';
+		this.options.title = this.options.title + '<span class="screen-reader-text" id="' + this.options.labeledBy + '">' + $(this.element).attr('data-title') + ' ' + $(this.element).data('reader') + '</span>';
 	}
     if(typeof $(this.element).data('url') !== 'undefined'){
       this.options.url = $(this.element).data('url');
@@ -615,14 +617,19 @@
   /* render methode
   ================================================== */
   Plugin.prototype.renderer = function () {
-    var total = this.options.total,
-    template = this.options.template
-    disableCount = this.options.disableCount;
+    var total    = this.options.total,
+    template     = this.options.template
+    disableCount = this.options.disableCount,
+    labeledBy    = '';
+
+    if ( this.options.labeledBy ) {
+	    labeledBy = ' aria-labeledBy="' + this.options.labeledBy + '"';
+    }
 
     if( disableCount ){
 	    $(this.element).html(
                             '<div class="box no-count"><a class="count" href="#"></a>' +
-                            (this.options.title !== '' ? '<a class="share" href="#" onclick="return false;">' + this.options.title + '</a>' : '') +
+                            (this.options.title !== '' ? '<a class="share" href="#" onclick="return false;"' + labeledBy +'>' + this.options.title + '</a>' : '') +
                             '</div>'
                           );
     }
@@ -638,7 +645,7 @@
 	    else{ //template by defaults
 	      $(this.element).html(
 	                            '<div class="box"><a class="count" href="#"><span>' + total + '</span></a>' +
-	                            (this.options.title !== '' ? '<a class="share" href="#" onclick="return false;">' + this.options.title + '</a>' : '') +
+	                            (this.options.title !== '' ? '<a class="share" href="#" onclick="return false;"' + labeledBy +'>' + this.options.title + '</a>' : '') +
 	                            '</div>'
 	                          );
 	    }
