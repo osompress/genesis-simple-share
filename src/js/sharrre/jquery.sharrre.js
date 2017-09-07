@@ -471,6 +471,7 @@
 	      url = urlJson[name].replace('{url}', this.options.buttons[name].url);
 	    }
 	    //console.log('name : ' + name + ' - url : '+url); //debug
+	    //console.log('name : ' + name + ' - url2 : '+url2); //debug
 	    if(url != '' && self.options.urlCurl !== ''){  //urlCurl = '' if you don't want to used PHP script but used social button
 	      $.getJSON(url, function(json) {
 	      	if( null != json ){
@@ -492,7 +493,7 @@
 		        self.options.count[name] += count;
 		        self.options.total += count;
 
-		        if ( url2 != '' && url2 != url ) {
+		        if ( ( 'pinterest' == name || 'stumbleupon' == name ) && url2 != '' && url2 != url ) {
 			        $.getJSON(url2, function(json) {
 				      	if( null != json ){
 
@@ -623,7 +624,7 @@
     labeledBy    = '';
 
     if ( this.options.labeledBy ) {
-	    labeledBy = ' aria-labeledBy="' + this.options.labeledBy + '"';
+	    labeledBy = ' aria-labelledby="' + this.options.labeledBy + '"';
     }
 
     if( disableCount ){
