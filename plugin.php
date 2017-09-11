@@ -8,7 +8,7 @@ Description: A simple sharing plugin using the Share script.
 Version: 1.1
 
 Author: StudioPress
-Author URI: http://www.copyblogger.com
+Author URI: http://www.studiopress.com
 
 Text Domain: genesis-simple-share
 Domain Path /languages/
