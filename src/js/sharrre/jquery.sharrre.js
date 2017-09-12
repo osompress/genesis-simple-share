@@ -500,6 +500,8 @@
 		        self.options.count[name] += count;
 		        self.options.total += count;
 
+				//console.log(json); //debug
+				
 		        if ( url2 != '' && url2 != url ) {
 			        $.getJSON(url2, function(json) {
 				      	if( null != json ){
@@ -537,7 +539,7 @@
 			        self.renderer();
 			        self.rendererPerso();
 			    }
-			    //console.log(json); //debug
+			    
 	      }
 	      else {
 		      self.renderer();
@@ -646,14 +648,14 @@
     }
     else{
 
+		if(this.options.shorterTotal === true){  //format number like 1.2k or 5M
+	      total = this.shorterTotal(total);
+	    }
+
 	    if ( this.options.countLabeledBy ) {
 		    countLabeledBy = ' aria-labelledby="' + this.options.countLabeledBy + '"';
 		    countLabel     = countLabel.replace( '%s', total );
 		    total          = '<span aria-hidden="true"' + countLabeledBy + '>' + total + '</span>';
-	    }
-
-	    if(this.options.shorterTotal === true){  //format number like 1.2k or 5M
-	      total = this.shorterTotal(total);
 	    }
 
 	    if(template !== ''){  //if there is a template
