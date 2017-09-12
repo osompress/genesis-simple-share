@@ -493,7 +493,7 @@
 		        self.options.count[name] += count;
 		        self.options.total += count;
 
-		        if ( ( 'pinterest' == name || 'stumbleupon' == name ) && url2 != '' && url2 != url ) {
+		        if ( url2 != '' && url2 != url ) {
 			        $.getJSON(url2, function(json) {
 				      	if( null != json ){
 
@@ -511,10 +511,12 @@
 					        }
 					        else if(typeof json[0] !== "undefined"){  //Stumbleupon
 					        }
-					        self.options.count[name] += count2;
-					        self.options.total += count2;
+					        if ( count2 !== count ) {
+						        self.options.count[name] += count2;
+						        self.options.total += count2;
+					        }
 					        self.renderer();
-					        self.rendererPerso();
+						    self.rendererPerso();
 					        //console.log(json); //debug
 				      }
 				      else {
