@@ -25,6 +25,7 @@ if ( !defined( 'ABSPATH' ) ) {
 class Gensis_Simple_Share_Front_End {
 
 	var $icons;
+	var $icon_text = array();
 	var $appearance;
 	var $size;
 	var $archive;
@@ -76,7 +77,32 @@ class Gensis_Simple_Share_Front_End {
 			}
 		}
 
-		//echo '<pre><code>'; var_dump($icon_sort); echo '</code></pre>';
+		$this->icon_text = array(
+			'googlePlus' => array(
+				'label' => __( 'Share on Google Plus'    , 'genesis-simple-share' ),
+				'count' => __( '%s shares on Google Plus', 'genesis-simple-share' ),
+			),
+			'facebook' => array(
+				'label' => __( 'Share on Facebook'    , 'genesis-simple-share' ),
+				'count' => __( '%s shares on Facebook', 'genesis-simple-share' ),
+			),
+			'twitter' => array(
+				'label' => __( 'Tweet this', 'genesis-simple-share' ),
+				'count' => __( '%s Tweets' , 'genesis-simple-share' ),
+			),
+			'pinterest' => array(
+				'label' => __( 'Pin this', 'genesis-simple-share' ),
+				'count' => __( '%s Pins' , 'genesis-simple-share' ),
+			),
+			'linkedin' => array(
+				'label' => __( 'Share on LinkedIn'    , 'genesis-simple-share' ),
+				'count' => __( '%s shares on LinkedIn', 'genesis-simple-share' ),
+			),
+			'stumbleupon' => array(
+				'label' => __( 'Share on StumbleUpon'    , 'genesis-simple-share' ),
+				'count' => __( '%s shares on StumbleUpon', 'genesis-simple-share' ),
+			),
+		);
 
 		$this->icons      = $this->get_display_icons( $icon_sort );
 		$this->appearance = genesis_get_option( 'general_appearance', 'genesis_simple_share' );
@@ -452,18 +478,18 @@ class Gensis_Simple_Share_Front_End {
 			default:
 
 				$data_title  = __( 'Share', 'genesis-simple-share' );
-				$data_reader = sprintf( __( 'on %s', 'genesis-simple-share' ), $icon );
 
 			}
 
-			$buttons[] = sprintf( '<div class="%s" id="%s" data-url="%s" data-urlalt="%s" data-text="%s" data-title="%s" data-reader="%s"></div>',
+			$buttons[] = sprintf( '<div class="%s" id="%s" data-url="%s" data-urlalt="%s" data-text="%s" data-title="%s" data-reader="%s" data-count="%s"></div>',
 				$icon,
 				$div_id,
 				$url ? $url : get_permalink( $id ),
 				wp_get_shortlink( $id ),
 				$description,
 				$data_title,
-				$data_reader
+				$this->icon_text[$icon]['label'],
+				$this->icon_text[$icon]['count']
 			);
 
 		}

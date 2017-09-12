@@ -26,6 +26,9 @@
     template: '',
     title: '',
     labeledBy: '',
+    label: '',
+    countLabeledBy: '',
+    countLabel: '',
     url: document.location.href,
     text: document.title,
     urlCurl: 'sharrre.php',  //PHP script for google plus...
@@ -377,7 +380,11 @@
     }
     if ( typeof $( this.element ).data( 'reader' ) !== 'undefined' && '' != $( this.element ).data( 'reader' ) ) {
 	    this.options.labeledBy = $( this.element ).attr( 'id' ) + '-label';
-		this.options.title = this.options.title + '<span class="screen-reader-text" id="' + this.options.labeledBy + '">' + $(this.element).attr('data-title') + ' ' + $(this.element).data('reader') + '</span>';
+		this.options.label     = '<span aria-hidden="true" class="screen-reader-text" id="' + this.options.labeledBy + '">' + $(this.element).data('reader') + '</span>';
+	}
+	if ( typeof $( this.element ).data( 'count' ) !== 'undefined' && '' != $( this.element ).data( 'count' ) ) {
+	    this.options.countLabeledBy = $( this.element ).attr( 'id' ) + '-count-label';
+		this.options.countLabel     = '<span aria-hidden="true" class="screen-reader-text" id="' + this.options.countLabeledBy + '">' + $(this.element).data('count') + '</span>';
 	}
     if(typeof $(this.element).data('url') !== 'undefined'){
       this.options.url = $(this.element).data('url');
@@ -620,23 +627,31 @@
   /* render methode
   ================================================== */
   Plugin.prototype.renderer = function () {
-    var total    = this.options.total,
-    template     = this.options.template
-    disableCount = this.options.disableCount,
-    labeledBy    = '';
+    var total      = this.options.total,
+    template       = this.options.template
+    disableCount   = this.options.disableCount,
+    labeledBy      = '',
+    verb           = this.options.title,
+    label          = this.options.label,
+    countLabeledBy = '',
+    countLabel     = this.options.countLabel;
 
     if ( this.options.labeledBy ) {
 	    labeledBy = ' aria-labelledby="' + this.options.labeledBy + '"';
+	    verb      = '<span aria-hidden="true"' + labeledBy + '>' + verb + '</span>';
     }
 
     if( disableCount ){
-	    $(this.element).html(
-                            '<div class="box no-count"><a class="count" href="#"></a>' +
-                            (this.options.title !== '' ? '<a class="share" href="#" onclick="return false;"' + labeledBy +'>' + this.options.title + '</a>' : '') +
-                            '</div>'
-                          );
+	    $(this.element).html( '<div class="box no-count"><a class="count" href="#"></a><a class="share" href="#" onclick="return false;">' + verb + label + '</a></div>' );
     }
     else{
+
+	    if ( this.options.countLabeledBy ) {
+		    countLabeledBy = ' aria-labelledby="' + this.options.countLabeledBy + '"';
+		    countLabel     = countLabel.replace( '%s', total );
+		    total          = '<span aria-hidden="true"' + countLabeledBy + '>' + total + '</span>';
+	    }
+
 	    if(this.options.shorterTotal === true){  //format number like 1.2k or 5M
 	      total = this.shorterTotal(total);
 	    }
@@ -646,11 +661,7 @@
 	      $(this.element).html(template);
 	    }
 	    else{ //template by defaults
-	      $(this.element).html(
-	                            '<div class="box"><a class="count" href="#"><span>' + total + '</span></a>' +
-	                            (this.options.title !== '' ? '<a class="share" href="#" onclick="return false;"' + labeledBy +'>' + this.options.title + '</a>' : '') +
-	                            '</div>'
-	                          );
+	      $(this.element).html( '<div class="box"><a class="count" href="#" onclick="return false;"><span>' + total + countLabel + '</span></a><a class="share" href="#" onclick="return false;">' + verb + label +  '</a></div>' );
 	    }
     }
   };
