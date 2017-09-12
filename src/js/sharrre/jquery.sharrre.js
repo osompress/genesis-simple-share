@@ -380,11 +380,11 @@
     }
     if ( typeof $( this.element ).data( 'reader' ) !== 'undefined' && '' != $( this.element ).data( 'reader' ) ) {
 	    this.options.labeledBy = $( this.element ).attr( 'id' ) + '-label';
-		this.options.label     = '<span aria-hidden="true" class="screen-reader-text" id="' + this.options.labeledBy + '">' + $(this.element).data('reader') + '</span>';
+		this.options.label     = '<span class="hidden" id="' + this.options.labeledBy + '">' + $(this.element).data('reader') + '</span>';
 	}
 	if ( typeof $( this.element ).data( 'count' ) !== 'undefined' && '' != $( this.element ).data( 'count' ) ) {
 	    this.options.countLabeledBy = $( this.element ).attr( 'id' ) + '-count-label';
-		this.options.countLabel     = '<span aria-hidden="true" class="screen-reader-text" id="' + this.options.countLabeledBy + '">' + $(this.element).data('count') + '</span>';
+		this.options.countLabel     = '<span class="hidden" id="' + this.options.countLabeledBy + '">' + $(this.element).data('count') + '</span>';
 	}
     if(typeof $(this.element).data('url') !== 'undefined'){
       this.options.url = $(this.element).data('url');
@@ -640,11 +640,11 @@
 
     if ( this.options.labeledBy ) {
 	    labeledBy = ' aria-labelledby="' + this.options.labeledBy + '"';
-	    verb      = '<span aria-hidden="true"' + labeledBy + '>' + verb + '</span>';
+	    verb      = '<span aria-hidden="true">' + verb + '</span>';
     }
 
     if( disableCount ){
-	    $(this.element).html( '<div class="box no-count"><a class="count" href="#"></a><a class="share" href="#" onclick="return false;">' + verb + label + '</a></div>' );
+	    $(this.element).html( '<div class="box no-count"><a class="count" href="#"></a><a class="share" href="#" onclick="return false;"' + labeledBy + '>' + verb + '</a></div>' + label );
     }
     else{
 
@@ -655,7 +655,7 @@
 	    if ( this.options.countLabeledBy ) {
 		    countLabeledBy = ' aria-labelledby="' + this.options.countLabeledBy + '"';
 		    countLabel     = countLabel.replace( '%s', total );
-		    total          = '<span aria-hidden="true"' + countLabeledBy + '>' + total + '</span>';
+		    total          = '<span aria-hidden="true">' + total + '</span>';
 	    }
 
 	    if(template !== ''){  //if there is a template
@@ -663,7 +663,7 @@
 	      $(this.element).html(template);
 	    }
 	    else{ //template by defaults
-	      $(this.element).html( '<div class="box"><a class="count" href="#" onclick="return false;"><span>' + total + countLabel + '</span></a><a class="share" href="#" onclick="return false;">' + verb + label +  '</a></div>' );
+	      $(this.element).html( '<div class="box"><a class="count" href="#" onclick="return false;"' + countLabeledBy + '><span>' + total + '</span></a><a class="share" href="#" onclick="return false;"' + labeledBy + '>' + verb +  '</a></div>' + label + countLabel );
 	    }
     }
   };
