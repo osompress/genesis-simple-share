@@ -39,74 +39,10 @@ class Gensis_Simple_Share_Front_End {
 	 */
 	function __construct() {
 
-		$icons = get_option( 'genesis_simple_share_sort', array(
-				'main' => 'genesis_simple_share_google_plus,genesis_simple_share_facebook,genesis_simple_share_twitter,genesis_simple_share_pinterest,genesis_simple_share_linkedin,genesis_simple_share_stumbleupon'
-			) );
-
-		$icons = explode( ',', $icons['main'] );
-
-		$icon_sort = array();
-
-		foreach( $icons as $icon ){
-			switch( $icon ){
-
-			case 'genesis_simple_share_google_plus':
-				$icon_sort[] = 'googlePlus';
-				break;
-
-			case 'genesis_simple_share_facebook':
-				$icon_sort[] = 'facebook';
-				break;
-
-			case 'genesis_simple_share_twitter':
-				$icon_sort[] = 'twitter';
-				break;
-
-			case 'genesis_simple_share_pinterest':
-				$icon_sort[] = 'pinterest';
-				break;
-
-			case 'genesis_simple_share_linkedin':
-				$icon_sort[] = 'linkedin';
-				break;
-
-			case 'genesis_simple_share_stumbleupon':
-				$icon_sort[] = 'stumbleupon';
-				break;
-
-			}
-		}
-
-		$this->icon_text = array(
-			'googlePlus' => array(
-				'label' => __( 'Share on Google Plus'    , 'genesis-simple-share' ),
-				'count' => __( '%s shares on Google Plus', 'genesis-simple-share' ),
-			),
-			'facebook' => array(
-				'label' => __( 'Share on Facebook'    , 'genesis-simple-share' ),
-				'count' => __( '%s shares on Facebook', 'genesis-simple-share' ),
-			),
-			'twitter' => array(
-				'label' => __( 'Tweet this', 'genesis-simple-share' ),
-				'count' => __( '%s Tweets' , 'genesis-simple-share' ),
-			),
-			'pinterest' => array(
-				'label' => __( 'Pin this', 'genesis-simple-share' ),
-				'count' => __( '%s Pins' , 'genesis-simple-share' ),
-			),
-			'linkedin' => array(
-				'label' => __( 'Share on LinkedIn'    , 'genesis-simple-share' ),
-				'count' => __( '%s shares on LinkedIn', 'genesis-simple-share' ),
-			),
-			'stumbleupon' => array(
-				'label' => __( 'Share on StumbleUpon'    , 'genesis-simple-share' ),
-				'count' => __( '%s shares on StumbleUpon', 'genesis-simple-share' ),
-			),
-		);
-
-		$this->icons      = $this->get_display_icons( $icon_sort );
-		$this->appearance = genesis_get_option( 'general_appearance', 'genesis_simple_share' );
-		$this->size       = genesis_get_option( 'general_size'      , 'genesis_simple_share' );
+		$this->set_icons();
+		$this->set_icon_text();
+		$this->set_appearance();
+		$this->set_size();
 
 		add_action( 'wp_enqueue_scripts', array( $this, 'load_scripts' ), 5 );
 
@@ -300,6 +236,136 @@ class Gensis_Simple_Share_Front_End {
 	}
 
 	/**
+	 * Sets the $icon_text property.
+	 * If the $icon_text attribute it set it will use that,
+	 * otherwise it will use the default value.
+	 *
+	 * @since 1.1.0
+	 *
+	 * @access public
+	 * @param array $icon_text (default: array())
+	 * @return void
+	 */
+	function set_icon_text( $icon_text = array() ) {
+		$this->icon_text = $icon_text ? $icon_text : array(
+			'googlePlus' => array(
+				'label' => __( 'Share on Google Plus'    , 'genesis-simple-share' ),
+				'count' => __( '%s shares on Google Plus', 'genesis-simple-share' ),
+			),
+			'facebook' => array(
+				'label' => __( 'Share on Facebook'    , 'genesis-simple-share' ),
+				'count' => __( '%s shares on Facebook', 'genesis-simple-share' ),
+			),
+			'twitter' => array(
+				'label' => __( 'Tweet this', 'genesis-simple-share' ),
+				'count' => __( '%s Tweets' , 'genesis-simple-share' ),
+			),
+			'pinterest' => array(
+				'label' => __( 'Pin this', 'genesis-simple-share' ),
+				'count' => __( '%s Pins' , 'genesis-simple-share' ),
+			),
+			'linkedin' => array(
+				'label' => __( 'Share on LinkedIn'    , 'genesis-simple-share' ),
+				'count' => __( '%s shares on LinkedIn', 'genesis-simple-share' ),
+			),
+			'stumbleupon' => array(
+				'label' => __( 'Share on StumbleUpon'    , 'genesis-simple-share' ),
+				'count' => __( '%s shares on StumbleUpon', 'genesis-simple-share' ),
+			),
+		);
+	}
+	/**
+	 * Sets the $appearance property.
+	 * If the $appearance attribute it set it will use that,
+	 * otherwise it will use the option value.
+	 *
+	 * @since 1.1.0
+	 *
+	 * @access public
+	 * @param  string $apeparance (default: '')
+	 * @return void
+	 */
+	function set_appearance( $appearance = '' ) {
+		$this->appearance = $appearance ? $appearance : genesis_get_option( 'general_appearance', 'genesis_simple_share' );
+	}
+
+	/**
+	 * Sets the $size property.
+	 * If the $size attribute it set it will use that,
+	 * otherwise it will use the option value.
+	 *
+	 * @since 1.1.0
+	 *
+	 * @access public
+	 * @param  string $apeparance (default: '')
+	 * @return void
+	 */
+	function set_size( $size = '' ) {
+		$this->size = $size ? $size : genesis_get_option( 'general_size'      , 'genesis_simple_share' );
+	}
+
+	/**
+	 * Sets the $icons property.
+	 * If the $icons attribute it set it will use that,
+	 * otherwise it will check options then sort the order and get the icon display
+	 * using the get_display_icons() method.
+	 *
+	 * @since 1.1.0
+	 *
+	 * @access public
+	 * @param array $icon_text (default: array())
+	 * @return void
+	 */
+	function set_icons( $icons = array() ) {
+
+		if ( $icons ) {
+			$this->icons = $icons;
+			return;
+		}
+
+		$icons = get_option( 'genesis_simple_share_sort', array(
+				'main' => 'genesis_simple_share_google_plus,genesis_simple_share_facebook,genesis_simple_share_twitter,genesis_simple_share_pinterest,genesis_simple_share_linkedin,genesis_simple_share_stumbleupon'
+			) );
+
+		$icons = explode( ',', $icons['main'] );
+
+		$icon_sort = array();
+
+		foreach ( $icons as $icon ) {
+			switch( $icon ) {
+
+			case 'genesis_simple_share_google_plus':
+				$icon_sort[] = 'googlePlus';
+				break;
+
+			case 'genesis_simple_share_facebook':
+				$icon_sort[] = 'facebook';
+				break;
+
+			case 'genesis_simple_share_twitter':
+				$icon_sort[] = 'twitter';
+				break;
+
+			case 'genesis_simple_share_pinterest':
+				$icon_sort[] = 'pinterest';
+				break;
+
+			case 'genesis_simple_share_linkedin':
+				$icon_sort[] = 'linkedin';
+				break;
+
+			case 'genesis_simple_share_stumbleupon':
+				$icon_sort[] = 'stumbleupon';
+				break;
+
+			}
+		}
+
+		$this->icons = $this->get_display_icons( $icon_sort );
+
+	}
+
+	/**
 	 * Check to see if any icons are set to show for the post type and return array of icons or false
 	 *
 	 * @since 0.1.0
@@ -322,6 +388,18 @@ class Gensis_Simple_Share_Front_End {
 
 			return false;
 
+	}
+
+	/**
+	 * Gets the $icons property.
+	 *
+	 * @since 1.1.0
+	 *
+	 * @access public
+	 * @return void
+	 */
+	function get_icons() {
+		return $this->icons;
 	}
 
 	/**
@@ -642,7 +720,13 @@ class Gensis_Simple_Share_Front_End {
 function genesis_simple_share() {
 	global $Genesis_Simple_Share;
 
-	$Genesis_Simple_Share = new Gensis_Simple_Share_Front_End;
+	if ( empty( $Genesis_Simple_Share ) ) {
+
+		$Genesis_Simple_Share = new Gensis_Simple_Share_Front_End;
+
+	}
+
+	return $Genesis_Simple_Share;
 
 }
 
@@ -663,9 +747,8 @@ genesis_simple_share();
  *
  */
 function genesis_share_get_icon_output( $position, $icons = array(), $force_show = false, $url = '' ) {
-	global $Genesis_Simple_Share;
 
-	return $Genesis_Simple_Share->get_icon_output( $position, $icons, $force_show, $url );
+	return genesis_simple_share()->get_icon_output( $position, $icons, $force_show, $url );
 
 }
 
