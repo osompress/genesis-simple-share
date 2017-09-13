@@ -107,7 +107,8 @@
 		border-top-right-radius: 3px;
 		border-bottom-right-radius: 3px;
 		float: right;
-		width: 42px;
+		min-width: 42px;
+		padding: 0 5px;
 	}
 	.no-count {
 		.share {
