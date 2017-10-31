@@ -5,7 +5,7 @@ Plugin URI:
 
 Description: A simple sharing plugin using the Share script.
 
-Version: 1.1
+Version: 1.1.0
 
 Author: StudioPress
 Author URI: http://www.studiopress.com
