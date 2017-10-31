@@ -1,0 +1,650 @@
+// Dependencies.
+@import '_variables/_variables';
+
+.sharrre {
+	display: inline-block;
+	font-family: Helvetica, Arial, sans-serif;
+	font-style: normal;
+	font-weight: normal;
+	margin-right: 5px;
+	overflow: hidden;
+	position: relative;
+	-webkit-transition: all 0.3s ease-in-out;
+	-moz-transition: all 0.3s ease-in-out;
+	-ms-transition: all 0.3s ease-in-out;
+	-o-transition: all 0.3s ease-in-out;
+	transition: all 0.3s ease-in-out;
+}
+
+.share-before {
+	margin-bottom: 25px;
+}
+
+.share-after {
+	margin: 25px 0;
+}
+
+.share-before:after, .share-after:after {
+	visibility: hidden;
+	display: block;
+	font-size: 0;
+	content: " ";
+	clear: both;
+	height: 0;
+}
+
+/* Buttons */
+
+.sharrre {
+	.hidden {
+		display: none;
+	}
+	.share, .count {
+		-moz-box-sizing: border-box;
+		-webkit-box-sizing: border-box;
+		box-sizing: border-box;
+		border: none;
+		display: inline-block;
+		padding: 0;
+		text-decoration: none !important;
+		-webkit-transition: all 0.3s ease-in-out;
+		-moz-transition: all 0.3s ease-in-out;
+		-ms-transition: all 0.3s ease-in-out;
+		-o-transition: all 0.3s ease-in-out;
+		transition: all 0.3s ease-in-out;
+	}
+	.share {
+		background-color: #fff;
+		color: #fff;
+		float: left;
+		font-family: Helvetica, Arial, sans-serif;
+		font-style: normal;
+		font-weight: normal;
+		text-decoration: none;
+	}
+	&:hover .share {
+		border: none;
+		color: #fff;
+		text-decoration: none;
+	}
+	.count {
+		background-color: #fff;
+		font-family: Helvetica, Arial, sans-serif;
+		font-style: normal;
+		font-weight: bold;
+		position: relative;
+		text-align: center;
+	}
+	.no-count .count span {
+		display: none;
+	}
+}
+
+/* Small */
+
+.share-small {
+	.share, .count {
+		font-size: 12px;
+		height: 20px;
+		line-height: 20px;
+	}
+	.share {
+		border-top-left-radius: 3px;
+		border-bottom-left-radius: 3px;
+		padding: 0 0 0 24px;
+		width: 20px;
+	}
+	.sharrre:hover .share, .facebook:hover .share {
+		width: 60px;
+	}
+	.pinterest:hover .share {
+		width: 45px;
+	}
+	.sharrre:hover .no-count .share {
+		width: 65px;
+	}
+	.count {
+		border-top-right-radius: 3px;
+		border-bottom-right-radius: 3px;
+		float: right;
+		min-width: 42px;
+		padding: 0 5px;
+	}
+	.no-count {
+		.share {
+			border-top-right-radius: 3px;
+			border-bottom-right-radius: 3px;
+			width: 65px;
+		}
+		.count {
+			display: none;
+		}
+	}
+}
+
+/* Medium */
+
+.share-medium {
+	.share, .count {
+		font-size: 13px;
+		height: 25px;
+		line-height: 25px;
+	}
+	.share {
+		border-top-left-radius: 3px;
+		border-bottom-left-radius: 3px;
+		padding: 0 0 0 28px;
+		width: 28px;
+	}
+	.count {
+		border-top-right-radius: 3px;
+		border-bottom-right-radius: 3px;
+		float: right;
+		width: 42px;
+	}
+	.sharrre:hover .share, .facebook:hover .share {
+		width: 65px;
+	}
+	.pinterest:hover .share {
+		width: 50px;
+	}
+	.sharrre:hover .no-count .share {
+		width: 75px;
+	}
+	.no-count {
+		.share {
+			border-top-right-radius: 3px;
+			border-bottom-right-radius: 3px;
+			width: 75px;
+		}
+		.count {
+			display: none;
+		}
+	}
+}
+
+/* Tall */
+
+.share-tall {
+	.share {
+		border-bottom-left-radius: 3px;
+		border-bottom-right-radius: 3px;
+		font-size: 13px;
+		height: 25px;
+		line-height: 25px;
+		padding-left: 20px;
+		text-align: center;
+		width: 100%;
+	}
+	.googlePlus .share {
+		padding-left: 16px;
+	}
+	.facebook .share {
+		padding-left: 18px;
+	}
+	.no-count .share {
+		padding-left: 0;
+	}
+	.count {
+		border-top-left-radius: 3px;
+		border-top-right-radius: 3px;
+		display: block;
+		float: none;
+		font-size: 16px;
+		height: 55px;
+		line-height: 55px;
+		width: 75px;
+	}
+	.no-count .share {
+		width: 75px;
+	}
+}
+
+/* Icons */
+
+.share-small .share:before, .share-medium .share:before, .share-tall .share:before {
+	line-height: 1;
+	display: block;
+	font-family: 'Genericons';
+	font-size: 13px;
+	height: 20px;
+	top: 4px;
+	left: 6px;
+	text-indent: 0;
+	-webkit-font-smoothing: antialiased;
+	position: absolute;
+	width: 20px;
+}
+
+.share-medium .share:before {
+	font-size: 14px;
+	top: 5px;
+	left: 7px;
+}
+
+.share-tall .share:before {
+	bottom: 0px;
+	top: auto;
+}
+
+.twitter .share:before {
+	content: $twitter_i;
+}
+
+.facebook .share:before {
+	content: $facebook_i;
+}
+
+.googlePlus .share:before {
+	content: $googlePlus_i;
+}
+
+.youtube .share:before {
+	content: '\f213';
+}
+
+.digg .share:before {
+	content: '\f221';
+}
+
+.delicious .share:before {
+	content: $twitter_i;
+}
+
+.pinterest .share:before {
+	content: $pinterest_i;
+}
+
+.linkedin .share:before {
+	content: $linkedin_i;
+}
+
+.stumbleupon .share:before {
+	content: $stumbleupon_i;
+}
+
+.share-small {
+	.pinterest .share:before {
+		font-size: 12px;
+	}
+	.linkedin .share:before {
+		font-size: 16px;
+		top: 1px;
+	}
+	.stumbleupon .share:before {
+		font-size: 16px;
+		top: 3px;
+	}
+}
+
+.share-medium {
+	.pinterest .share:before {
+		font-size: 13px;
+		top: 6px;
+	}
+	.linkedin .share:before {
+		font-size: 17px;
+		top: 3px;
+	}
+	.stumbleupon .share:before {
+		font-size: 16px;
+		top: 5px;
+	}
+}
+
+.share-tall {
+	.pinterest .share:before {
+		font-size: 13px;
+		bottom: -1px;
+	}
+	.linkedin .share:before {
+		font-size: 17px;
+		bottom: 2px;
+	}
+	.stumbleupon .share:before {
+		font-size: 16px;
+	}
+	.no-count {
+		.share:before {
+			display: none;
+		}
+		.count:before {
+			display: block;
+			line-height: 44px;
+			font-family: 'Genericons';
+			font-size: 20px;
+			position: relative;
+			top: 5px;
+			-webkit-font-smoothing: antialiased;
+			-webkit-transition: all 0.3s ease-in-out;
+			-moz-transition: all 0.3s ease-in-out;
+			-ms-transition: all 0.3s ease-in-out;
+			-o-transition: all 0.3s ease-in-out;
+			transition: all 0.3s ease-in-out;
+		}
+		&:hover .count:before {
+			color: #fff;
+		}
+	}
+
+	.twitter {
+		.count:before {
+			content: $twitter_i;
+		}
+	}
+	.googlePlus {
+		.count:before {
+			content: $googlePlus_i;
+		}
+	}
+	.facebook .no-count {
+		.count:before {
+			content: $facebook_i;
+		}
+	}
+	.linkedin .no-count {
+		.count:before {
+			content: $linkedin_i;
+		}
+	}
+	.pinterest .no-count {
+		.count:before {
+			content: $pinterest_i;
+		}
+	}
+	.stumbleupon .no-count {
+		.count:before {
+			content: $stumbleupon_i;
+		}
+	}
+}
+
+/* Appearance - filled */
+
+.share-filled {
+	.twitter {
+		.share {
+			background: $twitter;
+		}
+		.count {
+			color: $twitter;
+			border: 1px solid $twitter;
+			&:hover {
+				color: $twitter;
+				border: 1px solid $twitter;
+			}
+		}
+	}
+	.facebook {
+		.share {
+			background: $facebook;
+		}
+		.count {
+			color: $facebook;
+			border: 1px solid $facebook;
+			&:hover {
+				color: $facebook;
+				border: 1px solid $facebook;
+			}
+		}
+	}
+	.googlePlus {
+		.share {
+			background: $googlePlus;
+		}
+		.count {
+			color: $googlePlus;
+			border: 1px solid $googlePlus;
+			&:hover {
+				color: $googlePlus;
+				border: 1px solid $googlePlus;
+			}
+		}
+	}
+	.linkedin {
+		.share {
+			background: $linkedin;
+		}
+		.count {
+			color: $linkedin;
+			border: 1px solid $linkedin;
+			&:hover {
+				color: $linkedin;
+				border: 1px solid $linkedin;
+			}
+		}
+	}
+	.youtube {
+		.share {
+			background: $youtube;
+		}
+		.count {
+			color: $youtube;
+			border: 1px solid $youtube;
+			&:hover {
+				color: $youtube;
+				border: 1px solid $youtube;
+			}
+		}
+	}
+	.pinterest {
+		.share {
+			background: $pinterest;
+		}
+		.count {
+			color: $pinterest;
+			border: 1px solid $pinterest;
+			&:hover {
+				color: $pinterest;
+				border: 1px solid $pinterest;
+			}
+		}
+	}
+	.stumbleupon {
+		.share {
+			background: $stumbleupon;
+		}
+		.count {
+			color: $stumbleupon;
+			border: 1px solid $stumbleupon;
+			&:hover {
+				color: $stumbleupon;
+				border: 1px solid $stumbleupon;
+			}
+		}
+	}
+	.twitter:hover .count {
+		background: $twitter !important;
+	}
+	.facebook:hover .count {
+		background: $facebook !important;
+	}
+	.googlePlus:hover .count {
+		background: $googlePlus !important;
+	}
+	.linkedin:hover .count {
+		background: $linkedin !important;
+	}
+	.youtube:hover .count {
+		background: $youtube !important;
+	}
+	.pinterest:hover .count {
+		background: $pinterest !important;
+	}
+	.stumbleupon:hover .count {
+		background: $stumbleupon !important;
+	}
+	.sharrre:hover .count {
+		color: #fff;
+	}
+}
+
+/* Appearance - outlined */
+
+.share-outlined {
+	.twitter {
+		.share {
+			border: 1px solid $twitter;
+			color: $twitter;
+		}
+		.count {
+			border: 1px solid $twitter;
+			color: $twitter;
+			&:hover {
+				border: 1px solid $twitter;
+				color: $twitter;
+			}
+		}
+	}
+	.facebook {
+		.share {
+			border: 1px solid $facebook;
+			color: $facebook;
+		}
+		.count {
+			border: 1px solid $facebook;
+			color: $facebook;
+			&:hover {
+				border: 1px solid $facebook;
+				color: $facebook;
+			}
+		}
+	}
+	.googlePlus {
+		.share {
+			border: 1px solid $googlePlus;
+			color: $googlePlus;
+		}
+		.count {
+			border: 1px solid $googlePlus;
+			color: $googlePlus;
+			&:hover {
+				border: 1px solid $googlePlus;
+				color: $googlePlus;
+			}
+		}
+	}
+	.linkedin {
+		.share {
+			border: 1px solid $linkedin;
+			color: $linkedin;
+		}
+		.count {
+			border: 1px solid $linkedin;
+			color: $linkedin;
+			&:hover {
+				border: 1px solid $linkedin;
+				color: $linkedin;
+			}
+		}
+	}
+	.youtube {
+		.share {
+			border: 1px solid $youtube;
+			color: $youtube;
+		}
+		.count {
+			border: 1px solid $youtube;
+			color: $youtube;
+			&:hover {
+				border: 1px solid $youtube;
+				color: $youtube;
+			}
+		}
+	}
+	.pinterest {
+		.share {
+			border: 1px solid $pinterest;
+			color: $pinterest;
+		}
+		.count {
+			border: 1px solid $pinterest;
+			color: $pinterest;
+			&:hover {
+				border: 1px solid $pinterest;
+				color: $pinterest;
+			}
+		}
+	}
+	.stumbleupon {
+		.share {
+			border: 1px solid $stumbleupon;
+			color: $stumbleupon;
+		}
+		.count {
+			border: 1px solid $stumbleupon;
+			color: $stumbleupon;
+			&:hover {
+				border: 1px solid $stumbleupon;
+				color: $stumbleupon;
+			}
+		}
+	}
+	&.share-small .share, &.share-medium .share {
+		border-right: none;
+	}
+	&.share-small .twitter .no-count .share, &.share-medium .twitter .no-count .share {
+		border-right: 1px solid $twitter;
+	}
+	&.share-small .facebook .no-count .share, &.share-medium .facebook .no-count .share {
+		border-right: 1px solid $facebook;
+	}
+	&.share-small .googlePlus .no-count .share, &.share-medium .googlePlus .no-count .share {
+		border-right: 1px solid $googlePlus;
+	}
+	&.share-small .pinterest .no-count .share, &.share-medium .pinterest .no-count .share {
+		border-right: 1px solid $pinterest;
+	}
+	&.share-small .linkedin .no-count .share, &.share-medium .linkedin .no-count .share {
+		border-right: 1px solid $linkedin;
+	}
+	&.share-small .stumbleupon .no-count .share, &.share-medium .stumbleupon .no-count .share {
+		border-right: 1px solid $stumbleupon;
+	}
+	&.share-small .youtube .no-count .share, &.share-medium .youtube .no-count .share {
+		border-right: 1px solid $youtube;
+	}
+	&.share-tall .share {
+		border-top: none;
+	}
+	.twitter:hover {
+		.share, .count {
+			background: $twitter;
+		}
+	}
+	.facebook:hover {
+		.share, .count {
+			background: $facebook;
+		}
+	}
+	.googlePlus:hover {
+		.share, .count {
+			background: $googlePlus;
+		}
+	}
+	.linkedin:hover {
+		.share, .count {
+			background: $linkedin;
+		}
+	}
+	.youtube:hover {
+		.share, .count {
+			background: $youtube;
+		}
+	}
+	.pinterest:hover {
+		.share, .count {
+			background: $pinterest;
+		}
+	}
+	.stumbleupon:hover {
+		.share, .count {
+			background: $stumbleupon;
+		}
+	}
+	.sharrre:hover {
+		.count, .share {
+			color: #fff;
+		}
+	}
+}

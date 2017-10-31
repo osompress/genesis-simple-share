@@ -155,35 +155,39 @@ class Gensis_Simple_Share_Preview {
 									});\n",
 									$div_id,
 									$icon,
-									plugins_url( 'sharrre/sharrre.php', __FILE__ ),
+									plugins_url( 'assets/js/sharrre/sharrre.php', __FILE__ ),
 									$button,
 									$icon
 									);
 									
+			$data_reader = '';
+									
 			switch( $icon ){
-				
-				case 'twitter' :
-				
-					$data_title = 'Tweet';
-					break;
-					
-				case 'pinterest' :
-				
-					$data_title = 'Pin';
-					break;
-					
-				default:
-				
-					$data_title = 'Share';
-				
+
+			case 'twitter' :
+
+				$data_title = __( 'Tweet', 'genesis-simple-share' );
+				break;
+
+			case 'pinterest' :
+
+				$data_title = __( 'Pin', 'genesis-simple-share' );
+				break;
+
+			default:
+
+				$data_title  = __( 'Share', 'genesis-simple-share' );
+				$data_reader = sprintf( __( 'on %s', 'genesis-simple-share' ), $icon );
+
 			}
 		
-			$buttons[] = sprintf( '<div class="%s" id="%s" data-url="%s" data-text="%s" data-title="%s"></div>',
+			$buttons[] = sprintf( '<div class="%s" id="%s" data-url="%s" data-text="%s" data-title="%s" data-reader="%s"></div>',
 				$icon,
 				$div_id,
 				get_site_url(),
 				get_bloginfo( 'name' ),
-				$data_title
+				$data_title,
+				$data_reader
 			);
 				
 		}

@@ -25,6 +25,7 @@ if ( !defined( 'ABSPATH' ) ) {
 class Gensis_Simple_Share_Front_End {
 
 	var $icons;
+	var $icon_text = array();
 	var $appearance;
 	var $size;
 	var $archive;
@@ -38,49 +39,10 @@ class Gensis_Simple_Share_Front_End {
 	 */
 	function __construct() {
 
-		$icons = get_option( 'genesis_simple_share_sort', array(
-				'main' => 'genesis_simple_share_google_plus,genesis_simple_share_facebook,genesis_simple_share_twitter,genesis_simple_share_pinterest,genesis_simple_share_linkedin,genesis_simple_share_stumbleupon'
-			) );
-
-		$icons = explode( ',', $icons['main'] );
-
-		$icon_sort = array();
-
-		foreach( $icons as $icon ){
-			switch( $icon ){
-
-			case 'genesis_simple_share_google_plus':
-				$icon_sort[] = 'googlePlus';
-				break;
-
-			case 'genesis_simple_share_facebook':
-				$icon_sort[] = 'facebook';
-				break;
-
-			case 'genesis_simple_share_twitter':
-				$icon_sort[] = 'twitter';
-				break;
-
-			case 'genesis_simple_share_pinterest':
-				$icon_sort[] = 'pinterest';
-				break;
-
-			case 'genesis_simple_share_linkedin':
-				$icon_sort[] = 'linkedin';
-				break;
-
-			case 'genesis_simple_share_stumbleupon':
-				$icon_sort[] = 'stumbleupon';
-				break;
-
-			}
-		}
-
-		//echo '<pre><code>'; var_dump($icon_sort); echo '</code></pre>';
-
-		$this->icons      = $this->get_display_icons( $icon_sort );
-		$this->appearance = genesis_get_option( 'general_appearance', 'genesis_simple_share' );
-		$this->size       = genesis_get_option( 'general_size'      , 'genesis_simple_share' );
+		$this->set_icons();
+		$this->set_icon_text();
+		$this->set_appearance();
+		$this->set_size();
 
 		add_action( 'wp_enqueue_scripts', array( $this, 'load_scripts' ), 5 );
 
@@ -102,25 +64,25 @@ class Gensis_Simple_Share_Front_End {
 
 		//use wp_enqueue_script() and wp_enqueue_style() to load scripts and styles
 		wp_register_script( 'genesis-simple-share-plugin-js',
-			$url . 'sharrre/jquery.sharrre.min.js',
+			$url . 'assets/js/sharrre/jquery.sharrre.min.js',
 			array( 'jquery' ),
 			'0.1.0'
 		);
 
 		wp_register_style(  'genesis-simple-share-plugin-css',
-			$url . 'css/share.css',
+			$url . 'assets/css/share.min.css',
 			array(),
 			'0.1.0'
 		);
 
 		wp_register_style(  'genesis-simple-share-genericons-css',
-			$url . 'css/genericons.css',
+			$url . 'assets/css/genericons.min.css',
 			array(),
 			'0.1.0'
 		);
 
 		wp_register_script( 'genesis-simple-share-waypoint-js',
-			$url . 'jquery-waypoints/waypoints.min.js',
+			$url . 'assets/js/waypoints.min.js',
 			array( 'jquery' ),
 			'0.1.0'
 		);
@@ -134,10 +96,7 @@ class Gensis_Simple_Share_Front_End {
 		wp_enqueue_script( 'genesis-simple-share-plugin-js'      );
 		wp_enqueue_style(  'genesis-simple-share-plugin-css'     );
 		wp_enqueue_style(  'genesis-simple-share-genericons-css' );
-
-		if( $this->is_archive() ) {
-			wp_enqueue_script( 'genesis-simple-share-waypoint-js' );
-		}
+		wp_enqueue_script( 'genesis-simple-share-waypoint-js'    );
 
 	}
 
@@ -277,6 +236,136 @@ class Gensis_Simple_Share_Front_End {
 	}
 
 	/**
+	 * Sets the $icon_text property.
+	 * If the $icon_text attribute it set it will use that,
+	 * otherwise it will use the default value.
+	 *
+	 * @since 1.1.0
+	 *
+	 * @access public
+	 * @param array $icon_text (default: array())
+	 * @return void
+	 */
+	function set_icon_text( $icon_text = array() ) {
+		$this->icon_text = $icon_text ? $icon_text : array(
+			'googlePlus' => array(
+				'label' => __( 'Share on Google Plus'    , 'genesis-simple-share' ),
+				'count' => __( '%s shares on Google Plus', 'genesis-simple-share' ),
+			),
+			'facebook' => array(
+				'label' => __( 'Share on Facebook'    , 'genesis-simple-share' ),
+				'count' => __( '%s shares on Facebook', 'genesis-simple-share' ),
+			),
+			'twitter' => array(
+				'label' => __( 'Tweet this', 'genesis-simple-share' ),
+				'count' => __( '%s Tweets' , 'genesis-simple-share' ),
+			),
+			'pinterest' => array(
+				'label' => __( 'Pin this', 'genesis-simple-share' ),
+				'count' => __( '%s Pins' , 'genesis-simple-share' ),
+			),
+			'linkedin' => array(
+				'label' => __( 'Share on LinkedIn'    , 'genesis-simple-share' ),
+				'count' => __( '%s shares on LinkedIn', 'genesis-simple-share' ),
+			),
+			'stumbleupon' => array(
+				'label' => __( 'Share on StumbleUpon'    , 'genesis-simple-share' ),
+				'count' => __( '%s shares on StumbleUpon', 'genesis-simple-share' ),
+			),
+		);
+	}
+	/**
+	 * Sets the $appearance property.
+	 * If the $appearance attribute it set it will use that,
+	 * otherwise it will use the option value.
+	 *
+	 * @since 1.1.0
+	 *
+	 * @access public
+	 * @param  string $apeparance (default: '')
+	 * @return void
+	 */
+	function set_appearance( $appearance = '' ) {
+		$this->appearance = $appearance ? $appearance : genesis_get_option( 'general_appearance', 'genesis_simple_share' );
+	}
+
+	/**
+	 * Sets the $size property.
+	 * If the $size attribute it set it will use that,
+	 * otherwise it will use the option value.
+	 *
+	 * @since 1.1.0
+	 *
+	 * @access public
+	 * @param  string $apeparance (default: '')
+	 * @return void
+	 */
+	function set_size( $size = '' ) {
+		$this->size = $size ? $size : genesis_get_option( 'general_size'      , 'genesis_simple_share' );
+	}
+
+	/**
+	 * Sets the $icons property.
+	 * If the $icons attribute it set it will use that,
+	 * otherwise it will check options then sort the order and get the icon display
+	 * using the get_display_icons() method.
+	 *
+	 * @since 1.1.0
+	 *
+	 * @access public
+	 * @param array $icon_text (default: array())
+	 * @return void
+	 */
+	function set_icons( $icons = array() ) {
+
+		if ( $icons ) {
+			$this->icons = $icons;
+			return;
+		}
+
+		$icons = get_option( 'genesis_simple_share_sort', array(
+				'main' => 'genesis_simple_share_google_plus,genesis_simple_share_facebook,genesis_simple_share_twitter,genesis_simple_share_pinterest,genesis_simple_share_linkedin,genesis_simple_share_stumbleupon'
+			) );
+
+		$icons = explode( ',', $icons['main'] );
+
+		$icon_sort = array();
+
+		foreach ( $icons as $icon ) {
+			switch( $icon ) {
+
+			case 'genesis_simple_share_google_plus':
+				$icon_sort[] = 'googlePlus';
+				break;
+
+			case 'genesis_simple_share_facebook':
+				$icon_sort[] = 'facebook';
+				break;
+
+			case 'genesis_simple_share_twitter':
+				$icon_sort[] = 'twitter';
+				break;
+
+			case 'genesis_simple_share_pinterest':
+				$icon_sort[] = 'pinterest';
+				break;
+
+			case 'genesis_simple_share_linkedin':
+				$icon_sort[] = 'linkedin';
+				break;
+
+			case 'genesis_simple_share_stumbleupon':
+				$icon_sort[] = 'stumbleupon';
+				break;
+
+			}
+		}
+
+		$this->icons = $this->get_display_icons( $icon_sort );
+
+	}
+
+	/**
 	 * Check to see if any icons are set to show for the post type and return array of icons or false
 	 *
 	 * @since 0.1.0
@@ -302,6 +391,18 @@ class Gensis_Simple_Share_Front_End {
 	}
 
 	/**
+	 * Gets the $icons property.
+	 *
+	 * @since 1.1.0
+	 *
+	 * @access public
+	 * @return void
+	 */
+	function get_icons() {
+		return $this->icons;
+	}
+
+	/**
 	 * Build output for the icons based on position
 	 *
 	 * @since 0.1.0
@@ -314,7 +415,7 @@ class Gensis_Simple_Share_Front_End {
 	 * @returns string           HTML and JS required to build the share icons.
 	 *
 	 */
-	function get_icon_output( $location, $icons = array(), $force_show = false, $url ){
+	function get_icon_output( $location, $icons = array(), $force_show = false, $url = '' ){
 
 		if( is_feed() ) {
 			return;
@@ -344,7 +445,7 @@ class Gensis_Simple_Share_Front_End {
 			return;
 
 		$id = get_the_ID();
-		
+
 		$url = ( empty( $url ) && $opt = genesis_get_custom_field( '_gss_alternate_url' ) ) ? esc_url( $opt ) : $url;
 
 		$scripts = '';
@@ -365,48 +466,55 @@ class Gensis_Simple_Share_Front_End {
 			$button = 'twitter'   == $icon && ( $via = genesis_get_option( 'twitter_id', 'genesis_simple_share' ) ) ?  " twitter: { via: '". str_replace( '@', '', $via ) ."' }" : '';
 			$button = 'pinterest' == $icon && $image ?  " pinterest: { media: '$image', description: '$description' }" : $button;
 
-			if( $this->is_archive() )
-				$scripts .= sprintf( "if ( $.fn.waypoint ) {
-										$('#%s').waypoint( function() {
-										$('#%s').sharrre({
+			$disable_count = genesis_get_option( 'general_disable_count', 'genesis_simple_share' ) ? 'disableCount: true,' : '';
+
+			if ( $this->is_archive() ) {
+
+				$scripts .= sprintf( 'if ( $.fn.waypoint ) {
+										$("#%1$s").waypoint( function() {
+										$("#%1$s").sharrre({
 										  share: {
-										    %s: true
+										    %2$s: true
 										  },
-										  urlCurl: '%s',
+										  urlCurl: "%3$s",
 										  enableHover: false,
 										  enableTracking: true,
-										  buttons: { %s },
+										  %4$s
+										  buttons: { %5$s },
 										  click: function(api, options){
 										    api.simulateClick();
-										    api.openPopup('%s');
+										    api.openPopup("%6$s");
 										  }
 										});
 										},
-										{ offset: 'bottom-in-view' });
+										{ offset: "bottom-in-view" });
 									} else {
-										$('#%s').sharrre({
+										$("#%1$s").sharrre({
 										  share: {
-										    %s: true
+										    %2$s: true
 										  },
-										  urlCurl: '%s',
+										  urlCurl: "%3$s",
 										  enableHover: false,
 										  enableTracking: true,
-										  buttons: { %s },
+										  %4$s
+										  buttons: { %5$s },
 										  click: function(api, options){
 										    api.simulateClick();
-										    api.openPopup('%s');
+										    api.openPopup("%6$s");
 										  }
 										});
-									}\n",
-					$div_id,
+									}%7$s',
 					$div_id,
 					$icon,
-					plugins_url( 'sharrre/sharrre.php', __FILE__ ),
+					plugins_url( 'assets/js/sharrre/sharrre.php', __FILE__ ),
+					$disable_count,
 					$button,
-					$icon
+					$icon,
+					PHP_EOL
 				);
 
-			else
+			} else {
+
 				$scripts .= sprintf( "$('#%s').sharrre({
 										  share: {
 										    %s: true
@@ -414,6 +522,7 @@ class Gensis_Simple_Share_Front_End {
 										  urlCurl: '%s',
 										  enableHover: false,
 										  enableTracking: true,
+										  %s
 										  buttons: { %s },
 										  click: function(api, options){
 										    api.simulateClick();
@@ -422,36 +531,43 @@ class Gensis_Simple_Share_Front_End {
 										});\n",
 					$div_id,
 					$icon,
-					plugins_url( 'sharrre/sharrre.php', __FILE__ ),
+					plugins_url( 'assets/js/sharrre/sharrre.php', __FILE__ ),
+					$disable_count,
 					$button,
 					$icon
 				);
+
+			}
+
+			$data_reader = '';
 
 			switch( $icon ){
 
 			case 'twitter' :
 
-				$data_title = 'Tweet';
+				$data_title = __( 'Tweet', 'genesis-simple-share' );
 				break;
 
 			case 'pinterest' :
 
-				$data_title = 'Pin';
+				$data_title = __( 'Pin', 'genesis-simple-share' );
 				break;
 
 			default:
 
-				$data_title = 'Share';
+				$data_title  = __( 'Share', 'genesis-simple-share' );
 
 			}
 
-			$buttons[] = sprintf( '<div class="%s" id="%s" data-url="%s" data-urlalt="%s" data-text="%s" data-title="%s"></div>',
+			$buttons[] = sprintf( '<div class="%s" id="%s" data-url="%s" data-urlalt="%s" data-text="%s" data-title="%s" data-reader="%s" data-count="%s"></div>',
 				$icon,
 				$div_id,
 				$url ? $url : get_permalink( $id ),
 				wp_get_shortlink( $id ),
 				$description,
-				$data_title
+				$data_title,
+				$this->icon_text[$icon]['label'],
+				$this->icon_text[$icon]['count']
 			);
 
 		}
@@ -553,7 +669,7 @@ class Gensis_Simple_Share_Front_End {
 	 *
 	 */
 	function is_archive() {
-		
+
 		/**
 		 * Allows plugins and themes to define archive pages which may not normally be caught by the plugin logic.
 		 * Default is false, return a true value to cause the archive options, e.g. waypoints script, to load.
@@ -604,7 +720,13 @@ class Gensis_Simple_Share_Front_End {
 function genesis_simple_share() {
 	global $Genesis_Simple_Share;
 
-	$Genesis_Simple_Share = new Gensis_Simple_Share_Front_End;
+	if ( empty( $Genesis_Simple_Share ) ) {
+
+		$Genesis_Simple_Share = new Gensis_Simple_Share_Front_End;
+
+	}
+
+	return $Genesis_Simple_Share;
 
 }
 
@@ -625,9 +747,8 @@ genesis_simple_share();
  *
  */
 function genesis_share_get_icon_output( $position, $icons = array(), $force_show = false, $url = '' ) {
-	global $Genesis_Simple_Share;
 
-	return $Genesis_Simple_Share->get_icon_output( $position, $icons, $force_show, $url );
+	return genesis_simple_share()->get_icon_output( $position, $icons, $force_show, $url );
 
 }
 

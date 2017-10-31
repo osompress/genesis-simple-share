@@ -5,10 +5,10 @@ Plugin URI:
 
 Description: A simple sharing plugin using the Share script.
 
-Version: 1.0.9
+Version: 1.1
 
-Author: Rainmaker Digital LLC
-Author URI: http://www.copyblogger.com
+Author: StudioPress
+Author URI: http://www.studiopress.com
 
 Text Domain: genesis-simple-share
 Domain Path /languages/
@@ -39,9 +39,8 @@ function genesis_simple_share_init() {
 		require_once( GENESIS_SIMPLE_SHARE_LIB . 'admin.php' );
 		require_once( GENESIS_SIMPLE_SHARE_LIB . 'post-meta.php' );
 	}
-	else
+	else {
 		require_once( GENESIS_SIMPLE_SHARE_LIB . 'front-end.php' );
-
-	//require_once( GENESIS_SIMPLE_SHArE_LIB . 'functions.php' );
+	}
 
 }
