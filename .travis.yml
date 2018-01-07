@@ -1,0 +1,13 @@
+language: php
+sudo: false
+
+matrix:
+  include:
+    - php: 7.1
+
+before_script:
+  - composer install -q
+  - vendor/bin/phpcs --config-set installed_paths vendor/wp-coding-standards/wpcs/
+
+script:
+  - vendor/bin/phpcs
