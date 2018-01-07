@@ -16,7 +16,7 @@ Domain Path /languages/
 
 //* Prevent direct access to the plugin
 if ( ! defined( 'ABSPATH' ) ) {
-    die( __( 'Sorry, you are not allowed to access this page directly.', 'genesis-simple-share' ) );
+	die( __( 'Sorry, you are not allowed to access this page directly.', 'genesis-simple-share' ) );
 }
 
 define( 'GENESIS_SIMPLE_SHARE_LIB', dirname( __FILE__ ) . '/lib/' );
@@ -33,13 +33,12 @@ add_action( 'genesis_init', 'genesis_simple_share_init', 99 );
 function genesis_simple_share_init() {
 
 	//* Load textdomain for translation
-    load_plugin_textdomain( 'genesis-simple-share', false, basename( dirname( __FILE__ ) ) . '/languages/' );
+	load_plugin_textdomain( 'genesis-simple-share', false, basename( dirname( __FILE__ ) ) . '/languages/' );
 
 	if ( is_admin() && class_exists( 'Genesis_Admin_Boxes' ) ) {
 		require_once( GENESIS_SIMPLE_SHARE_LIB . 'admin.php' );
 		require_once( GENESIS_SIMPLE_SHARE_LIB . 'post-meta.php' );
-	}
-	else {
+	} else {
 		require_once( GENESIS_SIMPLE_SHARE_LIB . 'front-end.php' );
 	}
 

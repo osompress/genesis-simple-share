@@ -8,10 +8,10 @@
  * @author   copyblogger
  * @license  http://www.opensource.org/licenses/gpl-license.php GPL-2.0+
  */
- 
- //add functions that are used in admin and front end of the site
- 
+
+//add functions that are used in admin and front end of the site
+
 //* Prevent direct access to the plugin
 if ( ! defined( 'ABSPATH' ) ) {
-    die( __( 'Sorry, you are not allowed to access this page directly.', 'genesis-simple-share' ) );
+	die( __( 'Sorry, you are not allowed to access this page directly.', 'genesis-simple-share' ) );
 }

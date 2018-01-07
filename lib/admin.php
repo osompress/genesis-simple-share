@@ -39,7 +39,7 @@ class Genesis_Simple_Share_Boxes extends Genesis_Admin_Boxes {
 
 		$this->sort_text = sprintf( '%s', __( 'You can change button position by reordering these boxes:', 'genesis-simple-share' ) );
 
-		$settings_field   = 'genesis_simple_share';
+		$settings_field = 'genesis_simple_share';
 
 		$default_settings = apply_filters(
 			'genesis_simple_share_defaults',
@@ -63,8 +63,8 @@ class Genesis_Simple_Share_Boxes extends Genesis_Admin_Boxes {
 				/** Do not use without 'main_menu' */
 				'parent_slug' => 'genesis',
 				'page_title'  => __( 'Genesis Simple Share Settings', 'genesis-simple-share' ),
-				'menu_title'  => __( 'Simple Share', 'genesis-simple-share' )
-			)
+				'menu_title'  => __( 'Simple Share', 'genesis-simple-share' ),
+			),
 		);
 
 		$page_ops = array();
@@ -74,8 +74,8 @@ class Genesis_Simple_Share_Boxes extends Genesis_Admin_Boxes {
 
 		add_action( 'genesis_settings_sanitizer_init', array( $this, 'sanitizer_filters' ) );
 
-		add_filter( "update_user_metadata", array( $this, 'user_meta_save'   ), 10, 4 );
-		add_filter( "get_user_option_meta-box-order_genesis_page_genesis_simple_share_settings", array( $this, 'user_meta_return' ) );
+		add_filter( 'update_user_metadata', array( $this, 'user_meta_save' ), 10, 4 );
+		add_filter( 'get_user_option_meta-box-order_genesis_page_genesis_simple_share_settings', array( $this, 'user_meta_return' ) );
 
 	}
 
@@ -100,7 +100,9 @@ class Genesis_Simple_Share_Boxes extends Genesis_Admin_Boxes {
 			'general_show_archive',
 		);
 
-		$post_types = get_post_types( array( 'public' => true, ) );
+		$post_types = get_post_types( array(
+			'public' => true,
+		) );
 
 		foreach ( $post_types as $post_type ) {
 			$one_zero[] = 'general_' . $post_type;
@@ -200,10 +202,10 @@ class Genesis_Simple_Share_Boxes extends Genesis_Admin_Boxes {
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param null   $check        default null value if other value returned the meta is not saved
-	 * @param string $object_id    ID of the object being edited
-	 * @param string $meta_key     key being edited
-	 * @param string $meta_value   value being assigned to the key
+	 * @param null   $check      default null value if other value returned the meta is not saved
+	 * @param string $object_id  ID of the object being edited
+	 * @param string $meta_key   key being edited
+	 * @param string $meta_value value being assigned to the key
 	 *
 	 * return boolean
 	 */
@@ -221,13 +223,14 @@ class Genesis_Simple_Share_Boxes extends Genesis_Admin_Boxes {
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param mixed   $result   old value
+	 * @param mixed $result old value
 	 *
 	 * return array
 	 */
 	function user_meta_return( $result ) {
+		$new_result = get_option( 'genesis_simple_share_sort' );
 
-		if ( $new_result = get_option( 'genesis_simple_share_sort' ) ) {
+		if ( $new_result ) {
 			return $new_result;
 		}
 
@@ -242,12 +245,11 @@ class Genesis_Simple_Share_Boxes extends Genesis_Admin_Boxes {
 	 *
 	 */
 	function metaboxes() {
-
 		//var_dump( $current_screen );
 
-		add_action( 'genesis_simple_share_admin_table_before_rows', array( $this, 'live_preview'     )    );
-		add_action( $this->pagehook . '_settings_page_boxes'      , array( $this, 'general_settings' ), 0 );
-		add_action( $this->pagehook . '_settings_page_boxes'      , array( $this, 'sort_text'        ), 0 );
+		add_action( 'genesis_simple_share_admin_table_before_rows', array( $this, 'live_preview' ) );
+		add_action( $this->pagehook . '_settings_page_boxes', array( $this, 'general_settings' ), 0 );
+		add_action( $this->pagehook . '_settings_page_boxes', array( $this, 'sort_text' ), 0 );
 
 		add_meta_box( 'genesis_simple_share_google_plus', __( 'Google+', 'genesis-simple-share' ), array( $this, 'google_plus' ), $this->pagehook, 'main' );
 		add_meta_box( 'genesis_simple_share_facebook', __( 'Facebook', 'genesis-simple-share' ), array( $this, 'facebook' ), $this->pagehook, 'main' );
@@ -255,8 +257,6 @@ class Genesis_Simple_Share_Boxes extends Genesis_Admin_Boxes {
 		add_meta_box( 'genesis_simple_share_pinterest', __( 'Pinterest', 'genesis-simple-share' ), array( $this, 'pinterest' ), $this->pagehook, 'main' );
 		add_meta_box( 'genesis_simple_share_linkedin', __( 'Linkedin', 'genesis-simple-share' ), array( $this, 'linkedin' ), $this->pagehook, 'main' );
 		add_meta_box( 'genesis_simple_share_stumbleupon', __( 'StumbleUpon', 'genesis-simple-share' ), array( $this, 'stumbleupon' ), $this->pagehook, 'main' );
-
-
 
 	}
 
@@ -278,19 +278,19 @@ class Genesis_Simple_Share_Boxes extends Genesis_Admin_Boxes {
 			<table class="form-table">
 				<tbody>
 
-					<?php
+		<?php
 		do_action( 'genesis_simple_share_admin_table_before_rows' );
 
 		$this->select_field( $id . '_size', __( 'Icon Size', 'genesis-simple-share' ), array(
-				'small'  => __( 'Small Bar' , 'genesis-simple-share' ),
-				'medium' => __( 'Medium Bar', 'genesis-simple-share' ),
-				'tall'   => __( 'Box'       , 'genesis-simple-share' ),
-			) );
+			'small'  => __( 'Small Bar', 'genesis-simple-share' ),
+			'medium' => __( 'Medium Bar', 'genesis-simple-share' ),
+			'tall'   => __( 'Box', 'genesis-simple-share' ),
+		) );
 
 		$this->select_field( $id . '_appearance', __( 'Icon Appearance', 'genesis-simple-share' ), array(
-				'outlined' => __( 'Outlined', 'genesis-simple-share' ),
-				'filled'   => __( 'Filled'  , 'genesis-simple-share' ),
-			) );
+			'outlined' => __( 'Outlined', 'genesis-simple-share' ),
+			'filled'   => __( 'Filled', 'genesis-simple-share' ),
+		) );
 
 		$this->position( $id );
 
@@ -313,12 +313,10 @@ class Genesis_Simple_Share_Boxes extends Genesis_Admin_Boxes {
 		<tr valign="top" class="share-preview-row">
 			<th scope="row">Live Preview</th>
 			<td>
-			<?php
-
-		require_once( GENESIS_SIMPLE_SHARE_LIB . 'admin-icon-preview.php' );
-		genesis_share_icon_preview_output( 'preview' );
-
-?>
+				<?php
+				require_once( GENESIS_SIMPLE_SHARE_LIB . 'admin-icon-preview.php' );
+				genesis_share_icon_preview_output( 'preview' );
+				?>
 			</td>
 		</tr>
 		<?php
@@ -339,7 +337,7 @@ class Genesis_Simple_Share_Boxes extends Genesis_Admin_Boxes {
 
 		$id = 'googlePlus';
 
-		$this->checkbox( $id , __( 'Use this button?', 'genesis-simple-share' ) );
+		$this->checkbox( $id, __( 'Use this button?', 'genesis-simple-share' ) );
 
 		//echo $this->sort_text;
 
@@ -356,7 +354,7 @@ class Genesis_Simple_Share_Boxes extends Genesis_Admin_Boxes {
 
 		$id = 'facebook';
 
-		$this->checkbox( $id , __( 'Use this button?', 'genesis-simple-share' ) );
+		$this->checkbox( $id, __( 'Use this button?', 'genesis-simple-share' ) );
 
 		//echo $this->sort_text;
 
@@ -373,14 +371,14 @@ class Genesis_Simple_Share_Boxes extends Genesis_Admin_Boxes {
 
 		$id = 'twitter';
 
-		$this->checkbox( $id , __( 'Use this button?', 'genesis-simple-share' ) );
+		$this->checkbox( $id, __( 'Use this button?', 'genesis-simple-share' ) );
 
-		?><p>
+		?>
+		<p>
 			<label for="<?php echo $this->get_field_id( 'twitter_id' ); ?>"><?php _e( 'Enter Twitter ID for @via to be added to default tweet text:', 'genesis-simple-share' ); ?></label>
 			<input type="text" name="<?php echo $this->get_field_name( 'twitter_id' ); ?>" id="<?php echo $this->get_field_id( 'twitter_id' ); ?>" value="<?php echo esc_attr( str_replace( '@', '', $this->get_field_value( 'twitter_id' ) ) ); ?>" size="27" />
-		</p><?php
-
-
+		</p>
+	<?php
 	}
 
 	/**
@@ -394,7 +392,7 @@ class Genesis_Simple_Share_Boxes extends Genesis_Admin_Boxes {
 
 		$id = 'stumbleupon';
 
-		$this->checkbox( $id , __( 'Use this button?', 'genesis-simple-share' ) );
+		$this->checkbox( $id, __( 'Use this button?', 'genesis-simple-share' ) );
 
 	}
 
@@ -409,13 +407,14 @@ class Genesis_Simple_Share_Boxes extends Genesis_Admin_Boxes {
 
 		$id = 'pinterest';
 
-		$this->checkbox( $id , __( 'Use this button?', 'genesis-simple-share' ) );
+		$this->checkbox( $id, __( 'Use this button?', 'genesis-simple-share' ) );
 
-		?><p>
+		?>
+		<p>
 			<label for="<?php echo $this->get_field_id( 'image_url' ); ?>"><?php _e( 'Enter Default Image URL if there is no image available in content being shared:', 'genesis-simple-share' ); ?></label>
 			<input type="text" name="<?php echo $this->get_field_name( 'image_url' ); ?>" id="<?php echo $this->get_field_id( 'image_url' ); ?>" value="<?php echo esc_attr( $this->get_field_value( 'image_url' ) ); ?>" size="27" />
-		</p><?php
-
+		</p>
+		<?php
 	}
 
 	/**
@@ -429,7 +428,7 @@ class Genesis_Simple_Share_Boxes extends Genesis_Admin_Boxes {
 
 		$id = 'linkedin';
 
-		$this->checkbox( $id , __( 'Use this button?', 'genesis-simple-share' ) );
+		$this->checkbox( $id, __( 'Use this button?', 'genesis-simple-share' ) );
 
 	}
 
@@ -438,17 +437,17 @@ class Genesis_Simple_Share_Boxes extends Genesis_Admin_Boxes {
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param string  $id        ID base to use when building select box.
+	 * @param string $id ID base to use when building select box.
 	 *
 	 */
 	function position( $id ) {
 
-		$this->select_field( $id . '_position', __( 'Icon Display Position'   , 'genesis-simple-share' ), array(
-				'off'            => __( 'Select display position to enable icons.', 'genesis-simple-share' ),
-				'before_content' => __( 'Before the Content'                      , 'genesis-simple-share' ),
-				'after_content'  => __( 'After the Content'                       , 'genesis-simple-share' ),
-				'both'           => __( 'Before and After the Content'            , 'genesis-simple-share' ),
-			) );
+		$this->select_field( $id . '_position', __( 'Icon Display Position', 'genesis-simple-share' ), array(
+			'off'            => __( 'Select display position to enable icons.', 'genesis-simple-share' ),
+			'before_content' => __( 'Before the Content', 'genesis-simple-share' ),
+			'after_content'  => __( 'After the Content', 'genesis-simple-share' ),
+			'both'           => __( 'Before and After the Content', 'genesis-simple-share' ),
+		) );
 
 	}
 
@@ -468,32 +467,33 @@ class Genesis_Simple_Share_Boxes extends Genesis_Admin_Boxes {
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param string  $id        ID to use when building select box.
-	 * @param string  $name      Label text for the select field.
-	 * @param array   $option    Array key $option=>$title used to build select options.
+	 * @param string $id     ID to use when building select box.
+	 * @param string $name   Label text for the select field.
+	 * @param array  $option Array key $option=>$title used to build select options.
 	 *
 	 */
 	function select_field( $id, $name, $options = array() ) {
 		$current = $this->get_field_value( $id );
 ?>
 		<tr valign="top">
-			<th scope="row"><label for="<?php echo $this->get_field_id( $name ); ?>"><?php echo $name ?></label></th>
+			<th scope="row"><label for="<?php echo $this->get_field_id( $name ); ?>"><?php echo $name; ?></label></th>
 			<td><select name="<?php echo $this->get_field_name( $id ); ?>" class="<?php echo 'genesis_simple_share_' . $id; ?>" id="<?php echo $this->get_field_id( $id ); ?>">
-				<?php
-		if ( ! empty( $options ) ) {
-			foreach ( (array) $options as $option => $title ) {
+			<?php
+			if ( ! empty( $options ) ) {
+				foreach ( (array) $options as $option => $title ) {
 
-				printf( '<option value="%s"%s>%s</option>',
-					esc_attr( $option ),
-					selected( $current, $option, false ),
-					esc_html( $title )
-				);
+					printf( '<option value="%s"%s>%s</option>',
+						esc_attr( $option ),
+						selected( $current, $option, false ),
+						esc_html( $title )
+					);
 
+				}
 			}
-		}
-?>
+			?>
 			</select></td>
-		</tr><?php
+		</tr>
+	<?php
 	}
 
 	/**
@@ -501,12 +501,14 @@ class Genesis_Simple_Share_Boxes extends Genesis_Admin_Boxes {
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param string  $id        ID base to use when building checkbox.
+	 * @param string $id ID base to use when building checkbox.
 	 *
 	 */
 	function post_type_checkbox( $id ) {
 
-		$post_types = get_post_types( array( 'public' => true, ) );
+		$post_types = get_post_types( array(
+			'public' => true,
+		) );
 
 		/**
 		 * Allows filtering the $post_types that are supported.
@@ -521,8 +523,9 @@ class Genesis_Simple_Share_Boxes extends Genesis_Admin_Boxes {
 
 		echo '<td>';
 
-		foreach ( $post_types as $post_type )
+		foreach ( $post_types as $post_type ) {
 			$this->checkbox( $id . '_' . $post_type, $post_type );
+		}
 
 		$this->checkbox( $id . '_show_archive', __( 'Show on Archive Pages', 'genesis-simple-share' ) );
 
@@ -535,8 +538,8 @@ class Genesis_Simple_Share_Boxes extends Genesis_Admin_Boxes {
 	 *
 	 * @since 0.1.0
 	 *
-	 * @param string  $id        ID to use when building  checkbox.
-	 * @param string  $name      Label text for the checkbox.
+	 * @param string $id   ID to use when building checkbox.
+	 * @param string $name Label text for the checkbox.
 	 *
 	 */
 	function checkbox( $id, $name ) {

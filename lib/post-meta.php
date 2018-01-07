@@ -5,14 +5,14 @@ class Genesis_Simple_Share_Entry_Meta {
 	function __construct() {
 
 		add_action( 'admin_menu', array( $this, 'add_meta_box' ) );
-		add_action( 'save_post' , array( $this, 'save_meta'    ) );
+		add_action( 'save_post', array( $this, 'save_meta' ) );
 
 	}
-	
+
 	/**
 	 * Callback on the `admin_menu` action.
 	 * Adds the post meta boxes for supported post types.
-	 * 
+	 *
 	 * @access public
 	 * @return void
 	 */
@@ -22,7 +22,7 @@ class Genesis_Simple_Share_Entry_Meta {
 
 		/**
 		 * Allows filtering the $post_types that are supported.
-		 * 
+		 *
 		 * @access public
 		 * @param  array $post_types supported post types
 		 * @return void
@@ -56,7 +56,7 @@ class Genesis_Simple_Share_Entry_Meta {
 		</p>
 		<p>
 			<label for="_gss_alternate_url"><?php _e( 'Alternate URL', 'genesis-simple-share' ); ?></label>
-			<input type="text" id="_gss_alternate_url" name="_gss_alternate_url" value="<?php echo esc_url ( get_post_meta( get_the_ID(), '_gss_alternate_url', true ) ); ?>" />
+			<input type="text" id="_gss_alternate_url" name="_gss_alternate_url" value="<?php echo esc_url( get_post_meta( get_the_ID(), '_gss_alternate_url', true ) ); ?>" />
 			<span class="description"><?php _e( 'The alternate URL is used in place of the default link. This is the URL that will be shared and checked for social shares.', 'genesis-simple-share' ); ?></span>
 		</p>
 		<?php
@@ -66,17 +66,17 @@ class Genesis_Simple_Share_Entry_Meta {
 	function save_meta( $post_id ) {
 
 		// Bail if we're doing an auto save
-		if( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
 			return;
 		}
 
 		// if our nonce isn't there, or we can't verify it, bail
-		if( ! isset( $_POST['genesis_simple_share_inpost_nonce'] ) || ! wp_verify_nonce( $_POST['genesis_simple_share_inpost_nonce'], 'genesis_simple_share_inpost_save' ) ) {
+		if ( ! isset( $_POST['genesis_simple_share_inpost_nonce'] ) || ! wp_verify_nonce( $_POST['genesis_simple_share_inpost_nonce'], 'genesis_simple_share_inpost_save' ) ) {
 			return;
 		}
 
 		// if our current user can't edit this post, bail
-		if( ! current_user_can( 'edit_posts' ) ) {
+		if ( ! current_user_can( 'edit_posts' ) ) {
 			return;
 		}
 
@@ -85,17 +85,19 @@ class Genesis_Simple_Share_Entry_Meta {
 			'_gss_alternate_url',
 		);
 
-		foreach( $keys as $key ){
-			if( isset( $_POST[$key] ) ){
-
-				switch( $key ){
-					case '_disable_gss'       : $value = 1;                       break;
-					case '_gss_alternate_url' : $value = esc_url( $_POST[$key] ); break;
+		foreach ( $keys as $key ) {
+			if ( isset( $_POST[ $key ] ) ) {
+				switch ( $key ) {
+					case '_disable_gss':
+						$value = 1;
+						break;
+					case '_gss_alternate_url':
+						$value = esc_url( $_POST[ $key ] );
+						break;
 				}
 
 				update_post_meta( $post_id, $key, $value );
-			}
-			else {
+			} else {
 				delete_post_meta( $post_id, $key );
 			}
 		}
