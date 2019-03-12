@@ -36,7 +36,7 @@ function genesis_simple_share_init() {
 
 	if ( is_admin() && class_exists( 'Genesis_Admin_Boxes' ) ) {
 		require_once GENESIS_SIMPLE_SHARE_INC . 'class-genesis-simple-share-boxes.php';
-		require_once GENESIS_SIMPLE_SHARE_INC . 'post-meta.php';
+		require_once GENESIS_SIMPLE_SHARE_INC . 'class-genesis-simple-share-entry-meta.php';
 	} else {
 		require_once GENESIS_SIMPLE_SHARE_INC . 'front-end.php';
 	}
