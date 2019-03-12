@@ -3,9 +3,10 @@
  * Creates the plugin front end output.
  *
  * @category Genesis Simple Share
- * @package  Output
  * @author   copyblogger
  * @license  http://www.opensource.org/licenses/gpl-license.php GPL-2.0+
+ *
+ * @package genesis-simple-share
  */
 
 /* Prevent direct access to the plugin */
@@ -23,12 +24,47 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class Gensis_Simple_Share_Front_End {
 
-	var $icons;
-	var $icon_text = array();
-	var $appearance;
-	var $size;
-	var $archive;
-	var $locations = array();
+	/**
+	 * Icons.
+	 *
+	 * @var array
+	 */
+	public $icons;
+
+	/**
+	 * Icon text.
+	 *
+	 * @var array
+	 */
+	public $icon_text = array();
+
+	/**
+	 * Appearance.
+	 *
+	 * @var string
+	 */
+	public $appearance;
+
+	/**
+	 * Size.
+	 *
+	 * @var string
+	 */
+	public $size;
+
+	/**
+	 * Archive.
+	 *
+	 * @var string
+	 */
+	public $archive;
+
+	/**
+	 * Location.
+	 *
+	 * @var array
+	 */
+	public $locations = array();
 
 	/**
 	 * Create front end output.
@@ -198,7 +234,7 @@ class Gensis_Simple_Share_Front_End {
 
 		if ( 'before_content' === $position || 'both' === $position ) {
 
-			echo $this->get_icon_output( 'before', $this->icons );
+			echo wp_kses( $this->get_icon_output( 'before', $this->icons ) );
 
 		}
 
@@ -224,7 +260,7 @@ class Gensis_Simple_Share_Front_End {
 
 		if ( 'after_content' === $position || 'both' === $position ) {
 
-			echo $this->get_icon_output( 'after', $this->icons );
+			echo wp_kses( $this->get_icon_output( 'after', $this->icons ) );
 
 		}
 
@@ -247,26 +283,32 @@ class Gensis_Simple_Share_Front_End {
 		$this->icon_text = $icon_text ? $icon_text : array(
 			'googlePlus'  => array(
 				'label' => __( 'Share on Google Plus', 'genesis-simple-share' ),
+				// translators: Number of shares.
 				'count' => __( '%s shares on Google Plus', 'genesis-simple-share' ),
 			),
 			'facebook'    => array(
 				'label' => __( 'Share on Facebook', 'genesis-simple-share' ),
+				// translators: Number of shares.
 				'count' => __( '%s shares on Facebook', 'genesis-simple-share' ),
 			),
 			'twitter'     => array(
 				'label' => __( 'Tweet this', 'genesis-simple-share' ),
+				// translators: Number of shares.
 				'count' => __( '%s Tweets', 'genesis-simple-share' ),
 			),
 			'pinterest'   => array(
 				'label' => __( 'Pin this', 'genesis-simple-share' ),
+				// translators: Number of shares.
 				'count' => __( '%s Pins', 'genesis-simple-share' ),
 			),
 			'linkedin'    => array(
 				'label' => __( 'Share on LinkedIn', 'genesis-simple-share' ),
+				// translators: Number of shares.
 				'count' => __( '%s shares on LinkedIn', 'genesis-simple-share' ),
 			),
 			'stumbleupon' => array(
 				'label' => __( 'Share on StumbleUpon', 'genesis-simple-share' ),
+				// translators: Number of shares.
 				'count' => __( '%s shares on StumbleUpon', 'genesis-simple-share' ),
 			),
 		);
@@ -283,7 +325,7 @@ class Gensis_Simple_Share_Front_End {
 	 * @param string $appearance (default: '').
 	 * @return void
 	 */
-	publi function set_appearance( $appearance = '' ) {
+	public function set_appearance( $appearance = '' ) {
 		$this->appearance = $appearance ? $appearance : genesis_get_option( 'general_appearance', 'genesis_simple_share' );
 	}
 
@@ -470,7 +512,9 @@ class Gensis_Simple_Share_Front_End {
 			$description = the_title_attribute( array( 'echo' => false ) );
 
 			// media.
-			$button = 'twitter' === $icon && ( $via = genesis_get_option( 'twitter_id', 'genesis_simple_share' ) ) ? " twitter: { via: '" . str_replace( '@', '', $via ) . "' }" : '';
+			$via = genesis_get_option( 'twitter_id', 'genesis_simple_share' );
+
+			$button = ( 'twitter' === $icon && $via ) ? " twitter: { via: '" . str_replace( '@', '', $via ) . "' }" : '';
 			$button = 'pinterest' === $icon && $image ? " pinterest: { media: '$image', description: '$description' }" : $button;
 
 			$disable_count = genesis_get_option( 'general_disable_count', 'genesis_simple_share' ) ? 'disableCount: true,' : '';
@@ -719,15 +763,15 @@ class Gensis_Simple_Share_Front_End {
  * @since 0.1.0
  */
 function genesis_simple_share() {
-	global $Genesis_Simple_Share;
+	global $genesis_simple_share;
 
-	if ( empty( $Genesis_Simple_Share ) ) {
+	if ( empty( $genesis_simple_share ) ) {
 
-		$Genesis_Simple_Share = new Gensis_Simple_Share_Front_End();
+		$genesis_simple_share = new Gensis_Simple_Share_Front_End();
 
 	}
 
-	return $Genesis_Simple_Share;
+	return $genesis_simple_share;
 
 }
 
@@ -739,8 +783,8 @@ genesis_simple_share();
  *
  * @since 0.1.0
  *
- * @param   string  $location   before or after location
- * @param   array   $icons      array of icons to use when building output
+ * @param   string  $position   before or after location.
+ * @param   array   $icons      array of icons to use when building output.
  * @param   boolean $force_show forces the output even if it is duplicate ID.
  * @param   string  $url        Alternate URL to be used instead of post permalink. This value will be shared and also be the URL checked for social shares.
  *
@@ -758,8 +802,8 @@ function genesis_share_get_icon_output( $position, $icons = array(), $force_show
  *
  * @since 0.1.0
  *
- * @param   string  $location   before or after location
- * @param   array   $icons      array of icons to use when building output
+ * @param   string  $position   before or after location.
+ * @param   array   $icons      array of icons to use when building output.
  * @param   boolean $force_show forces the output even if it is duplicate ID.
  * @param   string  $url        Alternate URL to be used instead of post permalink. This value will be shared and also be the URL checked for social shares.
  *
@@ -767,6 +811,6 @@ function genesis_share_get_icon_output( $position, $icons = array(), $force_show
  */
 function genesis_share_icon_output( $position, $icons = array(), $force_show = false, $url = '' ) {
 
-	echo genesis_share_get_icon_output( $position, $icons, $force_show, $url );
+	echo wp_kses( genesis_share_get_icon_output( $position, $icons, $force_show, $url ) );
 
 }

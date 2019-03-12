@@ -295,23 +295,36 @@ class Gensis_Simple_Share_Preview {
  * Global object.
  */
 function genesis_simple_share_preview() {
-	global $Genesis_Simple_Share;
+	global $genesis_simple_share;
 
-	$Genesis_Simple_Share = new Gensis_Simple_Share_Preview();
+	$genesis_simple_share = new Gensis_Simple_Share_Preview();
 
 }
 
 genesis_simple_share_preview();
 
-function genesis_share_get_icon_preview_output( $position, $icons = array() ) {
-	global $Genesis_Simple_Share;
 
-	return $Genesis_Simple_Share->get_icon_output( $position, $icons );
+/**
+ * Output the icons.
+ *
+ * @param string $position Before or after location.
+ * @param array  $icons    array of icons to use when building output.
+ */
+function genesis_share_get_icon_preview_output( $position, $icons = array() ) {
+	global $genesis_simple_share;
+
+	return $genesis_simple_share->get_icon_output( $position, $icons );
 
 }
 
+/**
+ * Output the icons.
+ *
+ * @param string $position Before or after location.
+ * @param array  $icons    array of icons to use when building output.
+ */
 function genesis_share_icon_preview_output( $position, $icons = array() ) {
 
-	echo genesis_share_get_icon_preview_output( $position, $icons );
+	echo wp_kses( genesis_share_get_icon_preview_output( $position, $icons ) );
 
 }
