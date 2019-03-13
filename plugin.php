@@ -34,7 +34,7 @@ add_action( 'genesis_init', 'genesis_simple_share_init', 99 );
  */
 function genesis_simple_share_init() {
 
-	load_plugin_textdomain( 'genesis-simple-share', false, basename( dirname( __FILE__ ) ) . '/languages/' );
+	load_plugin_textdomain( 'genesis-simple-share', false, GENESIS_SIMPLE_SHARE_PATH . '/languages/' );
 
 	if ( is_admin() && class_exists( 'Genesis_Admin_Boxes' ) ) {
 		require_once GENESIS_SIMPLE_SHARE_INC . 'class-genesis-simple-share-boxes.php';
