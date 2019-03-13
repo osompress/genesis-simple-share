@@ -51,12 +51,10 @@ class Genesis_Simple_Share_Boxes extends Genesis_Admin_Boxes {
 				'general_position'     => 'before_content',
 				'general_post'         => 1,
 				'general_disble_count' => 0,
-				'googlePlus'           => 1,
 				'facebook'             => 1,
 				'twitter'              => 1,
 				'pinterest'            => 1,
 				'linkedin'             => 1,
-				'stumbleupon'          => 1,
 			)
 		);
 
@@ -98,7 +96,6 @@ class Genesis_Simple_Share_Boxes extends Genesis_Admin_Boxes {
 			'twitter',
 			'pinterest',
 			'linkedin',
-			'stumbleupon',
 			'general_show_archive',
 		);
 
@@ -151,7 +148,7 @@ class Genesis_Simple_Share_Boxes extends Genesis_Admin_Boxes {
 		// Use wp_enqueue_script() and wp_enqueue_style() to load scripts and styles.
 		wp_enqueue_script(
 			'genesis-simple-share-plugin-js',
-			GENESIS_SIMPLE_SHARE_INC . 'assets/js/sharrre/jquery.sharrre.min.js',
+			GENESIS_SIMPLE_SHARE_URL . '/assets/js/sharrre/jquery.sharrre.min.js',
 			array( 'jquery' ),
 			GENESIS_SIMPLE_SHARE_VERSION,
 			false
@@ -159,21 +156,21 @@ class Genesis_Simple_Share_Boxes extends Genesis_Admin_Boxes {
 
 		wp_enqueue_style(
 			'genesis-simple-share-plugin-css',
-			GENESIS_SIMPLE_SHARE_INC . 'assets/css/share.min.css',
+			GENESIS_SIMPLE_SHARE_URL . '/assets/css/share.min.css',
 			array(),
 			GENESIS_SIMPLE_SHARE_VERSION
 		);
 
 		wp_enqueue_style(
 			'genesis-simple-share-genericons-css',
-			GENESIS_SIMPLE_SHARE_INC . 'assets/css/genericons.min.css',
+			GENESIS_SIMPLE_SHARE_URL . '/assets/css/genericons.min.css',
 			array(),
 			GENESIS_SIMPLE_SHARE_VERSION
 		);
 
 		wp_enqueue_script(
 			'genesis-simple-share-admin-js',
-			GENESIS_SIMPLE_SHARE_INC . 'assets/js/admin.min.js',
+			GENESIS_SIMPLE_SHARE_URL . '/assets/js/admin.min.js',
 			array( 'jquery' ),
 			GENESIS_SIMPLE_SHARE_VERSION,
 			false
@@ -181,14 +178,14 @@ class Genesis_Simple_Share_Boxes extends Genesis_Admin_Boxes {
 
 		wp_enqueue_style(
 			'genesis-simple-share-admin-css',
-			GENESIS_SIMPLE_SHARE_INC . 'assets/css/admin.min.css',
+			GENESIS_SIMPLE_SHARE_URL . '/assets/css/admin.min.css',
 			array(),
 			GENESIS_SIMPLE_SHARE_VERSION
 		);
 
 		wp_enqueue_style(
 			'genesis-simple-share-admin-css-ie',
-			GENESIS_SIMPLE_SHARE_INC . 'assets/css/admin-ie.min.css',
+			GENESIS_SIMPLE_SHARE_URL . '/assets/css/admin-ie.min.css',
 			array( 'genesis-simple-share-admin-css' ),
 			GENESIS_SIMPLE_SHARE_VERSION
 		);
@@ -230,7 +227,9 @@ class Genesis_Simple_Share_Boxes extends Genesis_Admin_Boxes {
 	 */
 	public function user_meta_return( $result ) {
 
-		if ( get_option( 'genesis_simple_share_sort' ) === $new_result ) {
+		$new_result = get_option( 'genesis_simple_share_sort' );
+
+		if ( $new_result ) {
 			return $new_result;
 		}
 
@@ -248,12 +247,10 @@ class Genesis_Simple_Share_Boxes extends Genesis_Admin_Boxes {
 		add_action( $this->pagehook . '_settings_page_boxes', array( $this, 'general_settings' ), 0 );
 		add_action( $this->pagehook . '_settings_page_boxes', array( $this, 'sort_text' ), 0 );
 
-		add_meta_box( 'genesis_simple_share_google_plus', __( 'Google+', 'genesis-simple-share' ), array( $this, 'google_plus' ), $this->pagehook, 'main' );
 		add_meta_box( 'genesis_simple_share_facebook', __( 'Facebook', 'genesis-simple-share' ), array( $this, 'facebook' ), $this->pagehook, 'main' );
 		add_meta_box( 'genesis_simple_share_twitter', __( 'Twitter', 'genesis-simple-share' ), array( $this, 'twitter' ), $this->pagehook, 'main' );
 		add_meta_box( 'genesis_simple_share_pinterest', __( 'Pinterest', 'genesis-simple-share' ), array( $this, 'pinterest' ), $this->pagehook, 'main' );
 		add_meta_box( 'genesis_simple_share_linkedin', __( 'Linkedin', 'genesis-simple-share' ), array( $this, 'linkedin' ), $this->pagehook, 'main' );
-		add_meta_box( 'genesis_simple_share_stumbleupon', __( 'StumbleUpon', 'genesis-simple-share' ), array( $this, 'stumbleupon' ), $this->pagehook, 'main' );
 	}
 
 	/**
@@ -313,7 +310,7 @@ class Genesis_Simple_Share_Boxes extends Genesis_Admin_Boxes {
 	/**
 	 * Live preview.
 	 */
-	public function live_preview() {
+	public static function live_preview() {
 		?>
 		<tr valign="top" class="share-preview-row">
 			<th scope="row">Live Preview</th>
@@ -334,18 +331,6 @@ class Genesis_Simple_Share_Boxes extends Genesis_Admin_Boxes {
 	 */
 	public static function sort_text() {
 		printf( '<br /><br /><h3>%s</h3>', esc_html( $this->sort_text ) );
-	}
-
-	/**
-	 * Create Google+ settings metabox output
-	 *
-	 * @since 0.1.0
-	 */
-	public function google_plus() {
-
-		$id = 'googlePlus';
-
-		$this->checkbox( $id, __( 'Use this button?', 'genesis-simple-share' ) );
 	}
 
 	/**
@@ -377,19 +362,6 @@ class Genesis_Simple_Share_Boxes extends Genesis_Admin_Boxes {
 			<input type="text" name="<?php echo esc_html( $this->get_field_name( 'twitter_id' ) ); ?>" id="<?php echo esc_html( $this->get_field_id( 'twitter_id' ) ); ?>" value="<?php echo esc_attr( str_replace( '@', '', $this->get_field_value( 'twitter_id' ) ) ); ?>" size="27" />
 		</p>
 		<?php
-	}
-
-	/**
-	 * Create StumbleUpon settings metabox output
-	 *
-	 * @since 0.1.0
-	 */
-	public function stumbleupon() {
-
-		$id = 'stumbleupon';
-
-		$this->checkbox( $id, __( 'Use this button?', 'genesis-simple-share' ) );
-
 	}
 
 	/**

@@ -19,7 +19,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 define( 'GENESIS_SIMPLE_SHARE_VERSION', '1.1.2' );
-define( 'GENESIS_SIMPLE_SHARE_INC', dirname( __FILE__ ) . '/includes/' );
+define( 'GENESIS_SIMPLE_SHARE_PATH', plugin_dir_path( __FILE__ ) );
+define( 'GENESIS_SIMPLE_SHARE_INC', plugin_dir_path( __FILE__ ) . '/includes/' );
+define( 'GENESIS_SIMPLE_SHARE_URL', plugins_url( '', __FILE__ ) );
 
 add_action( 'genesis_init', 'genesis_simple_share_init', 99 );
 
