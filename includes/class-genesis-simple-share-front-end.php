@@ -22,7 +22,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 0.1.0
  */
-class Gensis_Simple_Share_Front_End {
+class Genesis_Simple_Share_Front_End {
 
 	/**
 	 * Icons.
@@ -92,12 +92,12 @@ class Gensis_Simple_Share_Front_End {
 	 */
 	public function load_scripts() {
 
-		$url = preg_replace( '/^https?:/', '', plugins_url( '/', __FILE__ ) );
+		$url = GENESIS_SIMPLE_SHARE_URL;
 
 		// use wp_enqueue_script() and wp_enqueue_style() to load scripts and styles.
 		wp_register_script(
 			'genesis-simple-share-plugin-js',
-			$url . 'assets/js/sharrre/jquery.sharrre.min.js',
+			$url . '/assets/js/sharrre/jquery.sharrre.min.js',
 			array( 'jquery' ),
 			'0.1.0',
 			false
@@ -105,21 +105,21 @@ class Gensis_Simple_Share_Front_End {
 
 		wp_register_style(
 			'genesis-simple-share-plugin-css',
-			$url . 'assets/css/share.min.css',
+			$url . '/assets/css/share.min.css',
 			array(),
 			'0.1.0'
 		);
 
 		wp_register_style(
 			'genesis-simple-share-genericons-css',
-			$url . 'assets/css/genericons.min.css',
+			$url . '/assets/css/genericons.min.css',
 			array(),
 			'0.1.0'
 		);
 
 		wp_register_script(
 			'genesis-simple-share-waypoint-js',
-			$url . 'assets/js/waypoints.min.js',
+			$url . '/assets/js/waypoints.min.js',
 			array( 'jquery' ),
 			'0.1.0',
 			false
@@ -234,7 +234,7 @@ class Gensis_Simple_Share_Front_End {
 
 		if ( 'before_content' === $position || 'both' === $position ) {
 
-			echo wp_kses( $this->get_icon_output( 'before', $this->icons ) );
+			echo wp_kses_post( $this->get_icon_output( 'before', $this->icons ) );
 
 		}
 
@@ -260,7 +260,7 @@ class Gensis_Simple_Share_Front_End {
 
 		if ( 'after_content' === $position || 'both' === $position ) {
 
-			echo wp_kses( $this->get_icon_output( 'after', $this->icons ) );
+			echo wp_kses_post( $this->get_icon_output( 'after', $this->icons ) );
 
 		}
 
@@ -488,6 +488,9 @@ class Gensis_Simple_Share_Front_End {
 
 		$id = get_the_ID();
 
+		$opt = genesis_get_custom_field( '_gss_alternate_url' );
+		$url = ( empty( $url ) && $opt ) ? esc_url( $opt ) : $url;
+
 		$url = ( empty( $url ) && genesis_get_custom_field( '_gss_alternate_url' ) === $opt ) ? esc_url( $opt ) : $url;
 
 		$scripts = '';
@@ -558,7 +561,7 @@ class Gensis_Simple_Share_Front_End {
 									}%7$s',
 					$div_id,
 					$icon,
-					plugins_url( 'assets/js/sharrre/sharrre.php', __FILE__ ),
+					GENESIS_SIMPLE_SHARE_URL . '/assets/js/sharrre/sharrre.php',
 					$disable_count,
 					$button,
 					$icon,
@@ -584,7 +587,7 @@ class Gensis_Simple_Share_Front_End {
 										});\n",
 					$div_id,
 					$icon,
-					plugins_url( 'assets/js/sharrre/sharrre.php', __FILE__ ),
+					GENESIS_SIMPLE_SHARE_URL . '/assets/js/sharrre/sharrre.php',
 					$disable_count,
 					$button,
 					$icon
@@ -767,7 +770,7 @@ function genesis_simple_share() {
 
 	if ( empty( $genesis_simple_share ) ) {
 
-		$genesis_simple_share = new Gensis_Simple_Share_Front_End();
+		$genesis_simple_share = new Genesis_Simple_Share_Front_End();
 
 	}
 
@@ -811,6 +814,6 @@ function genesis_share_get_icon_output( $position, $icons = array(), $force_show
  */
 function genesis_share_icon_output( $position, $icons = array(), $force_show = false, $url = '' ) {
 
-	echo wp_kses( genesis_share_get_icon_output( $position, $icons, $force_show, $url ) );
+	echo wp_kses_post( genesis_share_get_icon_output( $position, $icons, $force_show, $url ) );
 
 }

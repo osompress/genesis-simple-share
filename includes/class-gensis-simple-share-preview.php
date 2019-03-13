@@ -171,7 +171,7 @@ class Gensis_Simple_Share_Preview {
 									});\n",
 				$div_id,
 				$icon,
-				plugins_url( 'assets/js/sharrre/sharrre.php', __FILE__ ),
+				GENESIS_SIMPLE_SHARE_URL . '/assets/js/sharrre/sharrre.php',
 				$button,
 				$icon
 			);
@@ -325,6 +325,6 @@ function genesis_share_get_icon_preview_output( $position, $icons = array() ) {
  */
 function genesis_share_icon_preview_output( $position, $icons = array() ) {
 
-	echo wp_kses( genesis_share_get_icon_preview_output( $position, $icons ) );
+	echo genesis_share_get_icon_preview_output( $position, $icons ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 
 }
