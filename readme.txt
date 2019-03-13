@@ -1,9 +1,9 @@
 === Genesis Simple Share ===
-Contributors: nathanrice, studiopress, wpmuguru, nick_thegeek, bgardner
+Contributors: nathanrice, studiopress, wpmuguru, nick_thegeek, bgardner, marksabbath
 Tags: genesis, share, share buttons, facebook, twitter, pinterest, stumbleupon, linkedin, social
 Requires at least: 3.7
-Tested up to: 4.8.3
-Stable tag: 1.1.1
+Tested up to: 5.1
+Stable tag: 1.1.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -11,9 +11,9 @@ Genesis Simple Share allows you to easily add beautiful share buttons to your si
 
 == Description ==
 
-Genesis Simple Share is created to be simple and easy to use within your Genesis child theme. We have tried to focus on making default options and initial setup a breeze. 
+Genesis Simple Share is created to be simple and easy to use within your Genesis child theme. We have tried to focus on making default options and initial setup a breeze.
 
-The default settings should automatically enable the share icons on posts. You may wish to make some changes so in your WordPress dashboard hover over the Genesis menu item and click the Simple Share menu item in that submenu. 
+The default settings should automatically enable the share icons on posts. You may wish to make some changes so in your WordPress dashboard hover over the Genesis menu item and click the Simple Share menu item in that submenu.
 
 Once there you can choose which post types Simple Share will be active on, if it should show on archives, and which icons to enable. You can also drag and drop the icons to change the order they will display in on your site. You may wish to add your Twitter user name to the twitter icon settings. This will add a via: @username after the share text on Twitter. You may also add a URL to an image to use as the default image.
 
@@ -30,6 +30,11 @@ https://github.com/copyblogger/genesis-simple-share/wiki/Usage-Tips
 
 
 == Changelog ==
+
+= 1.1.2 =
+* Dropped Google+ support.
+* Dropped StumbleUpon.
+* WordPress Coding Standards applied.
 
 = 1.1.1 =
 * Add missing asset files.
