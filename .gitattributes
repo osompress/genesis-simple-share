@@ -1,5 +1,6 @@
-# Default behavior
-* text=auto
+# Normalize text file line endings to LF on checkin
+# and prevent conversion to CRLF on checkout.
+* text=auto eol=lf
 
 # Text files
 *.php text
