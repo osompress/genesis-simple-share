@@ -329,7 +329,7 @@ class Genesis_Simple_Share_Boxes extends Genesis_Admin_Boxes {
 	/**
 	 * Sort text output.
 	 */
-	public static function sort_text() {
+	public function sort_text() {
 		printf( '<br /><br /><h3>%s</h3>', esc_html( $this->sort_text ) );
 	}
 
