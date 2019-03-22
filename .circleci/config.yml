@@ -1,0 +1,22 @@
+version: 2.1
+
+jobs:
+  test:
+    docker:
+      - image: circleci/php:7.3.3-stretch-node-browsers
+    steps:
+      - checkout
+      - prepare-environment
+      - run: composer phpcs
+
+commands:
+ prepare-environment:
+   description: "Install dependencies."
+   steps:
+     - run: composer install
+
+workflows:
+  version: 2
+  check-wp-cs:
+    jobs:
+      - test
