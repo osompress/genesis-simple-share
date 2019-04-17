@@ -234,7 +234,8 @@ class Genesis_Simple_Share_Front_End {
 
 		if ( 'before_content' === $position || 'both' === $position ) {
 
-			echo wp_kses_post( $this->get_icon_output( 'before', $this->icons ) );
+			// phpcs:ignore
+			echo $this->get_icon_output( 'before', $this->icons );
 
 		}
 
@@ -260,7 +261,8 @@ class Genesis_Simple_Share_Front_End {
 
 		if ( 'after_content' === $position || 'both' === $position ) {
 
-			echo wp_kses_post( $this->get_icon_output( 'after', $this->icons ) );
+			// phpcs:ignore
+			echo $this->get_icon_output( 'after', $this->icons );
 
 		}
 
@@ -814,6 +816,7 @@ function genesis_share_get_icon_output( $position, $icons = array(), $force_show
  */
 function genesis_share_icon_output( $position, $icons = array(), $force_show = false, $url = '' ) {
 
-	echo wp_kses_post( genesis_share_get_icon_output( $position, $icons, $force_show, $url ) );
+	// phpcs:ignore
+	echo genesis_share_get_icon_output( $position, $icons, $force_show, $url ) );
 
 }
