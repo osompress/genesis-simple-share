@@ -817,6 +817,6 @@ function genesis_share_get_icon_output( $position, $icons = array(), $force_show
 function genesis_share_icon_output( $position, $icons = array(), $force_show = false, $url = '' ) {
 
 	// phpcs:ignore
-	echo genesis_share_get_icon_output( $position, $icons, $force_show, $url ) );
+	echo genesis_share_get_icon_output( $position, $icons, $force_show, $url );
 
 }
