@@ -1,10 +1,9 @@
 <?php
 /**
- *
  * Plugin Name: Genesis Simple Share
  * Plugin URI: https://wordpress.org/plugins/genesis-simple-share/
  * Description: A simple sharing plugin using the Share script.
- * Version: 1.1.2
+ * Version: 1.1.3
  * Author: StudioPress
  * Author URI: https://www.studiopress.com
  *
