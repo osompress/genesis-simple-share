@@ -317,7 +317,7 @@ class Genesis_Simple_Share_Boxes extends Genesis_Admin_Boxes {
 			<td>
 			<?php
 
-			require_once GENESIS_SIMPLE_SHARE_INC . 'class-gensis-simple-share-preview.php';
+			require_once GENESIS_SIMPLE_SHARE_INC . 'class-genesis-simple-share-preview.php';
 			genesis_share_icon_preview_output( 'preview' );
 
 			?>
