@@ -21,7 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 0.1.0
  */
-class Gensis_Simple_Share_Preview {
+class Genesis_Simple_Share_Preview {
 
 	/**
 	 * Icons.
@@ -152,6 +152,9 @@ class Gensis_Simple_Share_Preview {
 
 			$div_id = strtolower( $icon . '-' . $location . '-' . $id );
 
+			// Disable the counter if the option is set or is the Facebook.
+			$disable_count = genesis_get_option( 'general_disable_count', 'genesis_simple_share' ) || ( 'facebook' === $icon ) ? 'disableCount: true,' : '';
+
 			// media.
 			$button = '';
 
@@ -163,6 +166,7 @@ class Gensis_Simple_Share_Preview {
 									  urlCurl: '%s',
 									  enableHover: false,
 									  enableTracking: true,
+										%s
 									  buttons: { %s },
 									  click: function(api, options){
 									    api.simulateClick();
@@ -172,6 +176,7 @@ class Gensis_Simple_Share_Preview {
 				$div_id,
 				$icon,
 				GENESIS_SIMPLE_SHARE_URL . '/assets/js/sharrre/sharrre.php',
+				$disable_count,
 				$button,
 				$icon
 			);
@@ -297,7 +302,7 @@ class Gensis_Simple_Share_Preview {
 function genesis_simple_share_preview() {
 	global $genesis_simple_share;
 
-	$genesis_simple_share = new Gensis_Simple_Share_Preview();
+	$genesis_simple_share = new Genesis_Simple_Share_Preview();
 
 }
 
@@ -311,9 +316,12 @@ genesis_simple_share_preview();
  * @param array  $icons    array of icons to use when building output.
  */
 function genesis_share_get_icon_preview_output( $position, $icons = array() ) {
-	global $genesis_simple_share;
+	// Backward compatibility.
+	// phpcs:disable WordPress.NamingConventions.ValidVariableName.NotSnakeCase
+	global $Genesis_Simple_Share;
 
-	return $genesis_simple_share->get_icon_output( $position, $icons );
+	return $Genesis_Simple_Share->get_icon_output( $position, $icons );
+	// phpcs:enable
 
 }
 
