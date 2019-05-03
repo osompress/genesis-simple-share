@@ -21,7 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 0.1.0
  */
-class Gensis_Simple_Share_Preview {
+class Genesis_Simple_Share_Preview {
 
 	/**
 	 * Icons.
@@ -302,7 +302,7 @@ class Gensis_Simple_Share_Preview {
 function genesis_simple_share_preview() {
 	global $genesis_simple_share;
 
-	$genesis_simple_share = new Gensis_Simple_Share_Preview();
+	$genesis_simple_share = new Genesis_Simple_Share_Preview();
 
 }
 
