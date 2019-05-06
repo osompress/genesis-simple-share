@@ -160,19 +160,19 @@ class Genesis_Simple_Share_Preview {
 
 			$scripts .= sprintf(
 				"$('#%s').sharrre({
-									  share: {
-									    %s: true
-									  },
-									  urlCurl: '%s',
-									  enableHover: false,
-									  enableTracking: true,
-										%s
-									  buttons: { %s },
-									  click: function(api, options){
-									    api.simulateClick();
-									    api.openPopup('%s');
-									  }
-									});\n",
+					share: {
+						%s: true
+					},
+					urlCurl: '%s',
+					enableHover: false,
+					enableTracking: true,
+					%s
+					buttons: { %s },
+					click: function(api, options){
+						api.simulateClick();
+						api.openPopup('%s');
+					}
+				});\n",
 				$div_id,
 				$icon,
 				GENESIS_SIMPLE_SHARE_URL . '/assets/js/sharrre/sharrre.php',
