@@ -300,9 +300,13 @@ class Genesis_Simple_Share_Preview {
  * Global object.
  */
 function genesis_simple_share_preview() {
-	global $genesis_simple_share;
+	// Backward compatibility.
+	// phpcs:disable WordPress.NamingConventions.ValidVariableName.NotSnakeCase
+	global $Genesis_Simple_Share;
 
-	$genesis_simple_share = new Genesis_Simple_Share_Preview();
+	$Genesis_Simple_Share = new Genesis_Simple_Share_Preview();
+
+	// phpcs:enable
 
 }
 

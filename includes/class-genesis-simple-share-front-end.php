@@ -768,15 +768,18 @@ class Genesis_Simple_Share_Front_End {
  * @since 0.1.0
  */
 function genesis_simple_share() {
-	global $genesis_simple_share;
+	// Backward compatibility.
+	// phpcs:disable WordPress.NamingConventions.ValidVariableName.NotSnakeCase
+	global $Genesis_Simple_Share;
 
-	if ( empty( $genesis_simple_share ) ) {
+	if ( empty( $Genesis_Simple_Share ) ) {
 
-		$genesis_simple_share = new Genesis_Simple_Share_Front_End();
+		$Genesis_Simple_Share = new Genesis_Simple_Share_Front_End();
 
 	}
 
-	return $genesis_simple_share;
+	return $Genesis_Simple_Share;
+	// phpcs:enable
 
 }
 
