@@ -31,7 +31,7 @@ https://github.com/copyblogger/genesis-simple-share/wiki/Usage-Tips
 
 == Changelog ==
 
-= 1.1.3 =
+= 1.1.4 =
 * Removed Facebook counter.
 
 = 1.1.3 =
