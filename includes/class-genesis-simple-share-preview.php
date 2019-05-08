@@ -21,7 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 0.1.0
  */
-class Gensis_Simple_Share_Preview {
+class Genesis_Simple_Share_Preview {
 
 	/**
 	 * Icons.
@@ -152,26 +152,31 @@ class Gensis_Simple_Share_Preview {
 
 			$div_id = strtolower( $icon . '-' . $location . '-' . $id );
 
+			// Disable the counter if the option is set or is the Facebook.
+			$disable_count = genesis_get_option( 'general_disable_count', 'genesis_simple_share' ) || ( 'facebook' === $icon ) ? 'disableCount: true,' : '';
+
 			// media.
 			$button = '';
 
 			$scripts .= sprintf(
 				"$('#%s').sharrre({
-									  share: {
-									    %s: true
-									  },
-									  urlCurl: '%s',
-									  enableHover: false,
-									  enableTracking: true,
-									  buttons: { %s },
-									  click: function(api, options){
-									    api.simulateClick();
-									    api.openPopup('%s');
-									  }
-									});\n",
+					share: {
+						%s: true
+					},
+					urlCurl: '%s',
+					enableHover: false,
+					enableTracking: true,
+					%s
+					buttons: { %s },
+					click: function(api, options){
+						api.simulateClick();
+						api.openPopup('%s');
+					}
+				});\n",
 				$div_id,
 				$icon,
 				GENESIS_SIMPLE_SHARE_URL . '/assets/js/sharrre/sharrre.php',
+				$disable_count,
 				$button,
 				$icon
 			);
@@ -297,7 +302,7 @@ class Gensis_Simple_Share_Preview {
 function genesis_simple_share_preview() {
 	global $genesis_simple_share;
 
-	$genesis_simple_share = new Gensis_Simple_Share_Preview();
+	$genesis_simple_share = new Genesis_Simple_Share_Preview();
 
 }
 

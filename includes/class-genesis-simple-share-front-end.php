@@ -522,7 +522,8 @@ class Genesis_Simple_Share_Front_End {
 			$button = ( 'twitter' === $icon && $via ) ? " twitter: { via: '" . str_replace( '@', '', $via ) . "' }" : '';
 			$button = 'pinterest' === $icon && $image ? " pinterest: { media: '$image', description: '$description' }" : $button;
 
-			$disable_count = genesis_get_option( 'general_disable_count', 'genesis_simple_share' ) ? 'disableCount: true,' : '';
+			// Disable the counter if the option is set or is the Facebook.
+			$disable_count = genesis_get_option( 'general_disable_count', 'genesis_simple_share' ) || ( 'facebook' === $icon ) ? 'disableCount: true,' : '';
 
 			if ( $this->is_archive() ) {
 
