@@ -3,7 +3,7 @@
  * Plugin Name: Genesis Simple Share
  * Plugin URI: https://wordpress.org/plugins/genesis-simple-share/
  * Description: A simple sharing plugin using the Share script.
- * Version: 1.1.3
+ * Version: 1.1.4
  * Author: StudioPress
  * Author URI: https://www.studiopress.com
  *
@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	die( esc_html__( 'Sorry, you are not allowed to access this page directly.', 'genesis-simple-share' ) );
 }
 
-define( 'GENESIS_SIMPLE_SHARE_VERSION', '1.1.2' );
+define( 'GENESIS_SIMPLE_SHARE_VERSION', '1.1.4' );
 define( 'GENESIS_SIMPLE_SHARE_PATH', plugin_dir_path( __FILE__ ) );
 define( 'GENESIS_SIMPLE_SHARE_INC', plugin_dir_path( __FILE__ ) . '/includes/' );
 define( 'GENESIS_SIMPLE_SHARE_URL', plugins_url( '', __FILE__ ) );
