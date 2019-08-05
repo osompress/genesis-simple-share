@@ -2,8 +2,8 @@
 Contributors: nathanrice, studiopress, wpmuguru, nick_thegeek, bgardner, marksabbath
 Tags: genesis, share, share buttons, facebook, twitter, pinterest, stumbleupon, linkedin, social
 Requires at least: 3.7
-Tested up to: 5.1.1
-Stable tag: 1.1.4
+Tested up to: 5.2.2
+Stable tag: 1.1.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -30,6 +30,9 @@ https://github.com/copyblogger/genesis-simple-share/wiki/Usage-Tips
 
 
 == Changelog ==
+
+= 1.1.5 =
+* Tested on WordPress 5.2.2
 
 = 1.1.4 =
 * Removed Facebook counter.
