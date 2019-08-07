@@ -39,7 +39,7 @@
     "description": "A simple sharing plugin using the Share script.",
     "author": "StudioPress",
     "authoruri": "http://www.studiopress.com/",
-    "version": "1.1.1",
+    "version": "1.1.5",
     "license": "GPL-2.0+",
     "licenseuri": "http://www.gnu.org/licenses/gpl-2.0.html",
     "textdomain": "genesis-simple-share"
