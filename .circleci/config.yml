@@ -5,7 +5,7 @@ orbs:
   wp-svn: studiopress/wp-svn@0.1
 
 workflows:
-  check-wp-cs:
+  test-deploy:
     jobs:
       - php/test:
           test-command: phpcs
