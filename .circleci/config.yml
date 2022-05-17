@@ -2,6 +2,7 @@ version: 2.1
 
 orbs:
   php: circleci/php@1.0
+  wp-svn: studiopress/wp-svn@0.1
 
 jobs:
   svn-test:
@@ -26,7 +27,7 @@ jobs:
 
             echo "The grep produces:"
             grep -i 'Version:' $CHECKOUT_PATH/*.php
-            VERSION=$(grep -i 'Version:' $CHECKOUT_PATH/*.php | awk -F: '{print $2}' | sed 's/^\s//')
+            VERSION=$(grep -i 'Version:' $CHECKOUT_PATH/*.php | awk -F: '{print $3}' | sed 's/^\s//')
             if [ ! $VERSION ]
               then
               echo "Didn't find a version of the plugin"
@@ -56,3 +57,7 @@ workflows:
               ignore: /.*/
             branches:
               only: /^bump-tested-up-to.*/
+      - wp-svn/deploy-tested-up-to-bump:
+          context: genesis-svn
+          requires:
+            - approval-for-deploy-tested-up-to-bump
