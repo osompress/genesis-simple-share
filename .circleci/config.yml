@@ -25,6 +25,8 @@ jobs:
 
             echo "The slug is $SLUG"
 
+            echo "The grep produces:"
+            grep -i 'Version:' $CHECKOUT_PATH/*.php
             VERSION=$(grep -i 'Version:' $CHECKOUT_PATH/*.php | awk -F: '{print $3}' | sed 's/^\s//')
             if [ ! $VERSION ]
               then
