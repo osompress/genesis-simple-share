@@ -9,8 +9,6 @@ jobs:
     docker:
       - image: cimg/base:current
     steps:
-      - checkout:
-          path: /tmp/src
       - run:
           name: Testing
           command: |
