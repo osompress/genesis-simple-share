@@ -4,7 +4,7 @@
  *
  * @category Genesis Simple Share
  * @package  Admin
- * @author   copyblogger
+ * @author   OsomPress
  * @license  http://www.opensource.org/licenses/gpl-license.php GPL-2.0+
  */
 

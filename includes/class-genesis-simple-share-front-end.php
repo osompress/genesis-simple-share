@@ -3,7 +3,7 @@
  * Creates the plugin front end output.
  *
  * @category Genesis Simple Share
- * @author   copyblogger
+ * @author   OsomPress
  * @license  http://www.opensource.org/licenses/gpl-license.php GPL-2.0+
  *
  * @package genesis-simple-share
