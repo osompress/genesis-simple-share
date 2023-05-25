@@ -1,9 +1,9 @@
 === Genesis Simple Share ===
-Contributors: nathanrice, studiopress, wpmuguru, nick_thegeek, bgardner, marksabbath
+Contributors: nathanrice, studiopress, wpmuguru, nick_thegeek, bgardner, marksabbath, osompress, esther_sola, nahuai
 Tags: genesis, share, share buttons, facebook, twitter, pinterest, stumbleupon, linkedin, social
 Requires at least: 3.7
 Tested up to: 6.2
-Stable tag: 1.1.5
+Stable tag: 1.1.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -35,6 +35,9 @@ https://github.com/copyblogger/genesis-simple-share/wiki/Usage-Tips
 
 
 == Changelog ==
+
+= 1.1.6 =
+* Changed ownership from StudioPress to OsomPress. You can read more details about it in https://osompress.com/4-new-plugins-join-osompress-family/.
 
 = 1.1.5 =
 * Tested on WordPress 5.2.2
