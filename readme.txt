@@ -9,11 +9,6 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 Genesis Simple Share allows you to easily add beautiful share buttons to your site using a Genesis child theme
 
-== DEPRECATION NOTICE ==
-This plugin is now deprecated and will no longer receive feature updates.
-
-See alternative <a href="https://wordpress.org/plugins/search/social+share/">Social Sharing plugins</a>.
-
 == Description ==
 
 Genesis Simple Share is created to be simple and easy to use within your Genesis child theme. We have tried to focus on making default options and initial setup a breeze.
