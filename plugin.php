@@ -5,7 +5,7 @@
  * Description: A simple sharing plugin using the Share script.
  * Version: 1.1.6
  * Author: OsomPress
- * Author URI: https://www.studiopress.com
+ * Author URI: https://www.osompress.com
  *
  * Text Domain: genesis-simple-share
  * Domain Path /languages/
