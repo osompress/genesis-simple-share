@@ -31,6 +31,9 @@ https://github.com/copyblogger/genesis-simple-share/wiki/Usage-Tips
 
 == Changelog ==
 
+= 1.2 =
+* Change Twitter/X icon.
+
 = 1.1.6 =
 * Changed ownership from StudioPress to OsomPress. You can read more details about it in https://osompress.com/4-new-plugins-join-osompress-family/.
 
@@ -72,7 +75,7 @@ https://github.com/copyblogger/genesis-simple-share/wiki/Usage-Tips
 * Fixed: styling tweeks for twitter button without count.
 
 = 1.0.5 =
-* Fixed: styling issues following removal of tweet count.
+* Fixed: styling issues following removal of share count.
 
 = 1.0.4 =
 * Include a force to show argument in icon output functions.

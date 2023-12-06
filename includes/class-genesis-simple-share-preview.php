@@ -186,7 +186,7 @@ class Genesis_Simple_Share_Preview {
 			switch ( $icon ) {
 
 				case 'twitter':
-					$data_title = __( 'Tweet', 'genesis-simple-share' );
+					$data_title = __( 'Share', 'genesis-simple-share' );
 					break;
 
 				case 'pinterest':

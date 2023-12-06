@@ -99,7 +99,7 @@ msgid "Use this button?"
 msgstr ""
 
 #: lib/admin.php:356
-msgid "Enter Twitter ID for @via to be added to default tweet text:"
+msgid "Enter Twitter ID for @via to be added to default share text:"
 msgstr ""
 
 #: lib/admin.php:392

@@ -294,9 +294,9 @@ class Genesis_Simple_Share_Front_End {
 				'count' => __( '%s shares on Facebook', 'genesis-simple-share' ),
 			),
 			'twitter'     => array(
-				'label' => __( 'Tweet this', 'genesis-simple-share' ),
+				'label' => __( 'Share this', 'genesis-simple-share' ),
 				// translators: Number of shares.
-				'count' => __( '%s Tweets', 'genesis-simple-share' ),
+				'count' => __( '%s Shares', 'genesis-simple-share' ),
 			),
 			'pinterest'   => array(
 				'label' => __( 'Pin this', 'genesis-simple-share' ),
@@ -603,7 +603,7 @@ class Genesis_Simple_Share_Front_End {
 			switch ( $icon ) {
 
 				case 'twitter':
-					$data_title = __( 'Tweet', 'genesis-simple-share' );
+					$data_title = __( 'Share', 'genesis-simple-share' );
 					break;
 
 				case 'pinterest':

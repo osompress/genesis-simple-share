@@ -358,7 +358,7 @@ class Genesis_Simple_Share_Boxes extends Genesis_Admin_Boxes {
 
 		?>
 		<p>
-			<label for="<?php echo esc_html( $this->get_field_id( 'twitter_id' ) ); ?>"><?php esc_html_e( 'Enter Twitter ID for @via to be added to default tweet text:', 'genesis-simple-share' ); ?></label>
+			<label for="<?php echo esc_html( $this->get_field_id( 'twitter_id' ) ); ?>"><?php esc_html_e( 'Enter Twitter ID for @via to be added to default share text:', 'genesis-simple-share' ); ?></label>
 			<input type="text" name="<?php echo esc_html( $this->get_field_name( 'twitter_id' ) ); ?>" id="<?php echo esc_html( $this->get_field_id( 'twitter_id' ) ); ?>" value="<?php echo esc_attr( str_replace( '@', '', $this->get_field_value( 'twitter_id' ) ) ); ?>" size="27" />
 		</p>
 		<?php
