@@ -248,7 +248,7 @@ class Genesis_Simple_Share_Boxes extends Genesis_Admin_Boxes {
 		add_action( $this->pagehook . '_settings_page_boxes', array( $this, 'sort_text' ), 0 );
 
 		add_meta_box( 'genesis_simple_share_facebook', __( 'Facebook', 'genesis-simple-share' ), array( $this, 'facebook' ), $this->pagehook, 'main' );
-		add_meta_box( 'genesis_simple_share_twitter', __( 'Twitter', 'genesis-simple-share' ), array( $this, 'twitter' ), $this->pagehook, 'main' );
+		add_meta_box( 'genesis_simple_share_twitter', __( 'X (formely Twitter)', 'genesis-simple-share' ), array( $this, 'twitter' ), $this->pagehook, 'main' );
 		add_meta_box( 'genesis_simple_share_pinterest', __( 'Pinterest', 'genesis-simple-share' ), array( $this, 'pinterest' ), $this->pagehook, 'main' );
 		add_meta_box( 'genesis_simple_share_linkedin', __( 'Linkedin', 'genesis-simple-share' ), array( $this, 'linkedin' ), $this->pagehook, 'main' );
 	}
